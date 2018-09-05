@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compileOnBuild": false,
+
+  "compilerOptions": {
+    "outDir": "./App_Js/VisualStudio-AutoCompile/",
+    "sourceMap": true,
+    "alwaysStrict": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "noEmitOnError": true,
+
+    "preserveConstEnums": true,
+    "removeComments": false,
+
+    "strict": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "target": "es5",
+    "typeRoots": [ "node_modules/@types" ]
+  },
+  "exclude": [
+    "node_modules",
+    "Content",
+    "wwwroot"
+  ]
+}
