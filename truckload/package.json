@@ -15,6 +15,7 @@
     "jquery": "^3.3.1",
     "jquery-validation": "^1.17.0",
     "jquery-validation-unobtrusive": "^3.2.10",
+    "kendo-ui-core": "^2018.2.822",
     "knockout": "^3.4.2"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
     "@types/jquery": "^3.3.6",
     "@types/jquery-validation-unobtrusive": "^3.2.32",
     "@types/jquery.validation": "^1.16.4",
+    "@types/kendo-ui": "^2018.2.4",
     "@types/knockout": "^3.4.58",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
