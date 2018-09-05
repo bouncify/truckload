@@ -297,6 +297,7 @@
     <Content Include="DbContext\truckload.edmx.diagram">
       <DependentUpon>truckload.edmx</DependentUpon>
     </Content>
+    <Content Include="node_modules\bootstrap\less\variables.less" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
