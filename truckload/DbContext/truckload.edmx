@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="truckloadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="truckloadModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -22,11 +22,391 @@
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverId" />
+          </Key>
+          <Property Name="DriverId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="125" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="IsEmployee" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="LicenseExpireDate" Type="datetime" Nullable="false" />
+          <Property Name="TdgTrainingDate" Type="datetime" Nullable="false" />
+          <Property Name="WhimsTrainingDate" Type="datetime" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CreatedByGlobalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByGlobalId" Type="varchar" MaxLength="10" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ExceptionId" />
+          </Key>
+          <Property Name="ExceptionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExceptionMsg" Type="varchar" MaxLength="4000" />
+          <Property Name="ExceptionType" Type="varchar" MaxLength="255" />
+          <Property Name="ExceptionSource" Type="nvarchar(max)" />
+          <Property Name="ExceptionURL" Type="varchar" MaxLength="255" />
+          <Property Name="utcLogdate" Type="datetime2" Precision="7" />
+          <Property Name="GlobalId" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Load">
+          <Key>
+            <PropertyRef Name="LoadId" />
+          </Key>
+          <Property Name="LoadId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="LoadDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UnitOfMeasureId" Type="int" />
+          <Property Name="TruckId" Type="int" />
+          <Property Name="TrailerId" Type="int" />
+          <Property Name="DriverId" Type="int" />
+          <Property Name="CurrentLoadWeightKg" Type="int" Nullable="false" />
+          <Property Name="LoadStatusId" Type="int" Nullable="false" />
+          <Property Name="PostalCodeGroupId" Type="int" />
+          <Property Name="CreatedByGlobalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByGlobalId" Type="varchar" MaxLength="10" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LoadStatus">
+          <Key>
+            <PropertyRef Name="LoadStatusId" />
+          </Key>
+          <Property Name="LoadStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descriprion" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="WarehouseId" Type="int" />
+          <Property Name="LoadId" Type="bigint" />
+          <Property Name="LoadSort" Type="int" />
+          <Property Name="OrderNumber" Type="varchar" MaxLength="100" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="100" />
+          <Property Name="CustAddress" Type="nvarchar" MaxLength="255" />
+          <Property Name="Destination" Type="varchar" MaxLength="100" />
+          <Property Name="Volume" Type="int" />
+          <Property Name="UnitOfMeasureId" Type="int" />
+          <Property Name="WeightKg" Type="int" Nullable="false" />
+          <Property Name="PickupDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="DeliveryDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="IsDangerousGoods" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="800" />
+          <Property Name="CreatedByGlobalId" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedByGlobalId" Type="varchar" MaxLength="10" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="IsCustomerPickup" Type="bit" Nullable="false" />
+          <Property Name="R4OrderLineId" Type="int" />
+          <Property Name="LineNo" Type="int" />
+        </EntityType>
+        <EntityType Name="ProvinceOrState">
+          <Key>
+            <PropertyRef Name="ProvinceCode" />
+          </Key>
+          <Property Name="ProvinceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProvinceCode" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GlobalId" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="TrailerId" />
+          </Key>
+          <Property Name="TrailerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrailerDescription" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="TrailerTypeId" Type="int" Nullable="false" />
+          <Property Name="Volume" Type="int" Nullable="false" />
+          <Property Name="UnitOfMeasureId" Type="int" Nullable="false" />
+          <Property Name="CapacityKg" Type="int" Nullable="false" />
+          <Property Name="AxlesDescription" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="CreatedByGlobalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByGlobalId" Type="varchar" MaxLength="10" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrailerType">
+          <Key>
+            <PropertyRef Name="TrailerTypeId" />
+          </Key>
+          <Property Name="TrailerTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckId" />
+          </Key>
+          <Property Name="TruckId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TruckDescription" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="NextMaintenanceDate" Type="datetime" />
+          <Property Name="NextInspectionDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="CreatedByGlobalId" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedByGlobalId" Type="varchar" MaxLength="10" />
+          <Property Name="LastModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitOfMeasure">
+          <Key>
+            <PropertyRef Name="UnitOfMeasureId" />
+          </Key>
+          <Property Name="UnitOfMeasureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="WarehouseId" />
+          </Key>
+          <Property Name="WarehouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionId" Type="int" Nullable="false" />
+          <Property Name="R4WarehouseCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Load__DriverId__3CCAB9A3">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__LoadStatus__7267B045">
+          <End Role="LoadStatus" Type="Self.LoadStatus" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadStatus">
+              <PropertyRef Name="LoadStatusId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="LoadStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__RegionId__0A3F39D6">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TrailerId__62BB5861">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TrailerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TruckId__3BD6956A">
+          <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__UnitOfMeas__6F212F46">
+          <End Role="UnitOfMeasure" Type="Self.UnitOfMeasure" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__LoadI__46FE2F53">
+          <End Role="Load" Type="Self.Load" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Load">
+              <PropertyRef Name="LoadId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="LoadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__Regio__48E677C5">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__UnitO__49DA9BFE">
+          <End Role="UnitOfMeasure" Type="Self.UnitOfMeasure" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__Wareh__4ACEC037">
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trailer__Trailer__4BD7F309">
+          <End Role="TrailerType" Type="Self.TrailerType" Multiplicity="1" />
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="TrailerTypeId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="TrailerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trailer__UnitOfM__4CCC1742">
+          <End Role="UnitOfMeasure" Type="Self.UnitOfMeasure" Multiplicity="1" />
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Regio__02C769E9">
+          <End Role="Region" Type="Self.Region" Multiplicity="1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="truckloadModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Load" EntityType="Self.Load" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadStatus" EntityType="Self.LoadStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProvinceOrState" EntityType="Self.ProvinceOrState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrailerType" EntityType="Self.TrailerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Truck" EntityType="Self.Truck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitOfMeasure" EntityType="Self.UnitOfMeasure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Load__DriverId__3CCAB9A3" Association="Self.FK__Load__DriverId__3CCAB9A3">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__LoadStatus__7267B045" Association="Self.FK__Load__LoadStatus__7267B045">
+            <End Role="LoadStatus" EntitySet="LoadStatus" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__RegionId__0A3F39D6" Association="Self.FK__Load__RegionId__0A3F39D6">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TrailerId__62BB5861" Association="Self.FK__Load__TrailerId__62BB5861">
+            <End Role="Trailer" EntitySet="Trailer" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TruckId__3BD6956A" Association="Self.FK__Load__TruckId__3BD6956A">
+            <End Role="Truck" EntitySet="Truck" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__UnitOfMeas__6F212F46" Association="Self.FK__Load__UnitOfMeas__6F212F46">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasure" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__LoadI__46FE2F53" Association="Self.FK__simple_Or__LoadI__46FE2F53">
+            <End Role="Load" EntitySet="Load" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__Regio__48E677C5" Association="Self.FK__simple_Or__Regio__48E677C5">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__UnitO__49DA9BFE" Association="Self.FK__simple_Or__UnitO__49DA9BFE">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasure" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__Wareh__4ACEC037" Association="Self.FK__simple_Or__Wareh__4ACEC037">
+            <End Role="Warehouse" EntitySet="Warehouse" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trailer__Trailer__4BD7F309" Association="Self.FK__Trailer__Trailer__4BD7F309">
+            <End Role="TrailerType" EntitySet="TrailerType" />
+            <End Role="Trailer" EntitySet="Trailer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trailer__UnitOfM__4CCC1742" Association="Self.FK__Trailer__UnitOfM__4CCC1742">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasure" />
+            <End Role="Trailer" EntitySet="Trailer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Regio__02C769E9" Association="Self.FK__Warehouse__Regio__02C769E9">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="truckloadModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -49,7 +429,414 @@
         </EntityType>
         <EntityContainer Name="truckloadEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Drivers" EntityType="truckloadModel.Driver" />
+          <EntitySet Name="ErrorLogs" EntityType="truckloadModel.ErrorLog" />
+          <EntitySet Name="Loads" EntityType="truckloadModel.Load" />
+          <EntitySet Name="LoadStatus" EntityType="truckloadModel.LoadStatu" />
+          <EntitySet Name="Orders" EntityType="truckloadModel.Order" />
+          <EntitySet Name="ProvinceOrStates" EntityType="truckloadModel.ProvinceOrState" />
+          <EntitySet Name="Regions" EntityType="truckloadModel.Region" />
+          <EntitySet Name="Trailers" EntityType="truckloadModel.Trailer" />
+          <EntitySet Name="TrailerTypes" EntityType="truckloadModel.TrailerType" />
+          <EntitySet Name="Trucks" EntityType="truckloadModel.Truck" />
+          <EntitySet Name="UnitOfMeasures" EntityType="truckloadModel.UnitOfMeasure" />
+          <EntitySet Name="Warehouses" EntityType="truckloadModel.Warehouse" />
+          <AssociationSet Name="FK__Load__DriverId__3CCAB9A3" Association="truckloadModel.FK__Load__DriverId__3CCAB9A3">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__LoadStatus__7267B045" Association="truckloadModel.FK__Load__LoadStatus__7267B045">
+            <End Role="LoadStatu" EntitySet="LoadStatus" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__RegionId__0A3F39D6" Association="truckloadModel.FK__Load__RegionId__0A3F39D6">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TrailerId__62BB5861" Association="truckloadModel.FK__Load__TrailerId__62BB5861">
+            <End Role="Trailer" EntitySet="Trailers" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TruckId__3BD6956A" Association="truckloadModel.FK__Load__TruckId__3BD6956A">
+            <End Role="Truck" EntitySet="Trucks" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__UnitOfMeas__6F212F46" Association="truckloadModel.FK__Load__UnitOfMeas__6F212F46">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasures" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__LoadI__46FE2F53" Association="truckloadModel.FK__simple_Or__LoadI__46FE2F53">
+            <End Role="Load" EntitySet="Loads" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__Regio__48E677C5" Association="truckloadModel.FK__simple_Or__Regio__48E677C5">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__UnitO__49DA9BFE" Association="truckloadModel.FK__simple_Or__UnitO__49DA9BFE">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasures" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__Wareh__4ACEC037" Association="truckloadModel.FK__simple_Or__Wareh__4ACEC037">
+            <End Role="Warehouse" EntitySet="Warehouses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warehouse__Regio__02C769E9" Association="truckloadModel.FK__Warehouse__Regio__02C769E9">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Warehouse" EntitySet="Warehouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trailer__Trailer__4BD7F309" Association="truckloadModel.FK__Trailer__Trailer__4BD7F309">
+            <End Role="TrailerType" EntitySet="TrailerTypes" />
+            <End Role="Trailer" EntitySet="Trailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trailer__UnitOfM__4CCC1742" Association="truckloadModel.FK__Trailer__UnitOfM__4CCC1742">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasures" />
+            <End Role="Trailer" EntitySet="Trailers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="DriverId" />
+          </Key>
+          <Property Name="DriverId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="125" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsEmployee" Type="Boolean" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="LicenseExpireDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TdgTrainingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WhimsTrainingDate" Type="DateTime" Precision="3" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByGlobalId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByGlobalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__DriverId__3CCAB9A3" FromRole="Driver" ToRole="Load" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="ExceptionId" />
+          </Key>
+          <Property Name="ExceptionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExceptionMsg" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="ExceptionType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ExceptionSource" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExceptionURL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="utcLogdate" Type="DateTime" Precision="7" />
+          <Property Name="GlobalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Load">
+          <Key>
+            <PropertyRef Name="LoadId" />
+          </Key>
+          <Property Name="LoadId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="LoadDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UnitOfMeasureId" Type="Int32" />
+          <Property Name="TruckId" Type="Int32" />
+          <Property Name="TrailerId" Type="Int32" />
+          <Property Name="DriverId" Type="Int32" />
+          <Property Name="CurrentLoadWeightKg" Type="Int32" Nullable="false" />
+          <Property Name="LoadStatusId" Type="Int32" Nullable="false" />
+          <Property Name="PostalCodeGroupId" Type="Int32" />
+          <Property Name="CreatedByGlobalId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByGlobalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Driver" Relationship="truckloadModel.FK__Load__DriverId__3CCAB9A3" FromRole="Load" ToRole="Driver" />
+          <NavigationProperty Name="LoadStatu" Relationship="truckloadModel.FK__Load__LoadStatus__7267B045" FromRole="Load" ToRole="LoadStatu" />
+          <NavigationProperty Name="Region" Relationship="truckloadModel.FK__Load__RegionId__0A3F39D6" FromRole="Load" ToRole="Region" />
+          <NavigationProperty Name="Trailer" Relationship="truckloadModel.FK__Load__TrailerId__62BB5861" FromRole="Load" ToRole="Trailer" />
+          <NavigationProperty Name="Truck" Relationship="truckloadModel.FK__Load__TruckId__3BD6956A" FromRole="Load" ToRole="Truck" />
+          <NavigationProperty Name="UnitOfMeasure" Relationship="truckloadModel.FK__Load__UnitOfMeas__6F212F46" FromRole="Load" ToRole="UnitOfMeasure" />
+          <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__simple_Or__LoadI__46FE2F53" FromRole="Load" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="LoadStatu">
+          <Key>
+            <PropertyRef Name="LoadStatusId" />
+          </Key>
+          <Property Name="LoadStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descriprion" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__LoadStatus__7267B045" FromRole="LoadStatu" ToRole="Load" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="WarehouseId" Type="Int32" />
+          <Property Name="LoadId" Type="Int64" />
+          <Property Name="LoadSort" Type="Int32" />
+          <Property Name="OrderNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CustAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Destination" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Volume" Type="Int32" />
+          <Property Name="UnitOfMeasureId" Type="Int32" />
+          <Property Name="WeightKg" Type="Int32" Nullable="false" />
+          <Property Name="PickupDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="DeliveryDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="IsDangerousGoods" Type="Boolean" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByGlobalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedByGlobalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="IsCustomerPickup" Type="Boolean" Nullable="false" />
+          <Property Name="R4OrderLineId" Type="Int32" />
+          <Property Name="LineNo" Type="Int32" />
+          <NavigationProperty Name="Load" Relationship="truckloadModel.FK__simple_Or__LoadI__46FE2F53" FromRole="Order" ToRole="Load" />
+          <NavigationProperty Name="Region" Relationship="truckloadModel.FK__simple_Or__Regio__48E677C5" FromRole="Order" ToRole="Region" />
+          <NavigationProperty Name="UnitOfMeasure" Relationship="truckloadModel.FK__simple_Or__UnitO__49DA9BFE" FromRole="Order" ToRole="UnitOfMeasure" />
+          <NavigationProperty Name="Warehouse" Relationship="truckloadModel.FK__simple_Or__Wareh__4ACEC037" FromRole="Order" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="ProvinceOrState">
+          <Key>
+            <PropertyRef Name="ProvinceCode" />
+          </Key>
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProvinceCode" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionId" />
+          </Key>
+          <Property Name="RegionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GlobalId" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__RegionId__0A3F39D6" FromRole="Region" ToRole="Load" />
+          <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__simple_Or__Regio__48E677C5" FromRole="Region" ToRole="Order" />
+          <NavigationProperty Name="Warehouses" Relationship="truckloadModel.FK__Warehouse__Regio__02C769E9" FromRole="Region" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="TrailerId" />
+          </Key>
+          <Property Name="TrailerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrailerDescription" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="TrailerTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Volume" Type="Int32" Nullable="false" />
+          <Property Name="UnitOfMeasureId" Type="Int32" Nullable="false" />
+          <Property Name="CapacityKg" Type="Int32" Nullable="false" />
+          <Property Name="AxlesDescription" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByGlobalId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByGlobalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__TrailerId__62BB5861" FromRole="Trailer" ToRole="Load" />
+          <NavigationProperty Name="TrailerType" Relationship="truckloadModel.FK__Trailer__Trailer__4BD7F309" FromRole="Trailer" ToRole="TrailerType" />
+          <NavigationProperty Name="UnitOfMeasure" Relationship="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" FromRole="Trailer" ToRole="UnitOfMeasure" />
+        </EntityType>
+        <EntityType Name="TrailerType">
+          <Key>
+            <PropertyRef Name="TrailerTypeId" />
+          </Key>
+          <Property Name="TrailerTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Trailers" Relationship="truckloadModel.FK__Trailer__Trailer__4BD7F309" FromRole="TrailerType" ToRole="Trailer" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckId" />
+          </Key>
+          <Property Name="TruckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TruckDescription" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="NextMaintenanceDate" Type="DateTime" Precision="3" />
+          <Property Name="NextInspectionDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByGlobalId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedByGlobalId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__TruckId__3BD6956A" FromRole="Truck" ToRole="Load" />
+        </EntityType>
+        <EntityType Name="UnitOfMeasure">
+          <Key>
+            <PropertyRef Name="UnitOfMeasureId" />
+          </Key>
+          <Property Name="UnitOfMeasureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__UnitOfMeas__6F212F46" FromRole="UnitOfMeasure" ToRole="Load" />
+          <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__simple_Or__UnitO__49DA9BFE" FromRole="UnitOfMeasure" ToRole="Order" />
+          <NavigationProperty Name="Trailers" Relationship="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" FromRole="UnitOfMeasure" ToRole="Trailer" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="WarehouseId" />
+          </Key>
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionId" Type="Int32" Nullable="false" />
+          <Property Name="R4WarehouseCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__simple_Or__Wareh__4ACEC037" FromRole="Warehouse" ToRole="Order" />
+          <NavigationProperty Name="Region" Relationship="truckloadModel.FK__Warehouse__Regio__02C769E9" FromRole="Warehouse" ToRole="Region" />
+        </EntityType>
+        <Association Name="FK__Load__DriverId__3CCAB9A3">
+          <End Type="truckloadModel.Driver" Role="Driver" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__LoadStatus__7267B045">
+          <End Type="truckloadModel.LoadStatu" Role="LoadStatu" Multiplicity="1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadStatu">
+              <PropertyRef Name="LoadStatusId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="LoadStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__RegionId__0A3F39D6">
+          <End Type="truckloadModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TrailerId__62BB5861">
+          <End Type="truckloadModel.Trailer" Role="Trailer" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TrailerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TruckId__3BD6956A">
+          <End Type="truckloadModel.Truck" Role="Truck" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__UnitOfMeas__6F212F46">
+          <End Type="truckloadModel.UnitOfMeasure" Role="UnitOfMeasure" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__LoadI__46FE2F53">
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="0..1" />
+          <End Type="truckloadModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Load">
+              <PropertyRef Name="LoadId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="LoadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__Regio__48E677C5">
+          <End Type="truckloadModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="truckloadModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__UnitO__49DA9BFE">
+          <End Type="truckloadModel.UnitOfMeasure" Role="UnitOfMeasure" Multiplicity="0..1" />
+          <End Type="truckloadModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__Wareh__4ACEC037">
+          <End Type="truckloadModel.Warehouse" Role="Warehouse" Multiplicity="0..1" />
+          <End Type="truckloadModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouse">
+              <PropertyRef Name="WarehouseId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="WarehouseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warehouse__Regio__02C769E9">
+          <End Type="truckloadModel.Region" Role="Region" Multiplicity="1" />
+          <End Type="truckloadModel.Warehouse" Role="Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="RegionId" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trailer__Trailer__4BD7F309">
+          <End Type="truckloadModel.TrailerType" Role="TrailerType" Multiplicity="1" />
+          <End Type="truckloadModel.Trailer" Role="Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="TrailerTypeId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="TrailerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trailer__UnitOfM__4CCC1742">
+          <End Type="truckloadModel.UnitOfMeasure" Role="UnitOfMeasure" Multiplicity="1" />
+          <End Type="truckloadModel.Trailer" Role="Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -71,6 +858,179 @@
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="truckloadModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByGlobalId" ColumnName="ModifiedByGlobalId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByGlobalId" ColumnName="CreatedByGlobalId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="WhimsTrainingDate" ColumnName="WhimsTrainingDate" />
+                <ScalarProperty Name="TdgTrainingDate" ColumnName="TdgTrainingDate" />
+                <ScalarProperty Name="LicenseExpireDate" ColumnName="LicenseExpireDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsEmployee" ColumnName="IsEmployee" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="truckloadModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+                <ScalarProperty Name="utcLogdate" ColumnName="utcLogdate" />
+                <ScalarProperty Name="ExceptionURL" ColumnName="ExceptionURL" />
+                <ScalarProperty Name="ExceptionSource" ColumnName="ExceptionSource" />
+                <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
+                <ScalarProperty Name="ExceptionMsg" ColumnName="ExceptionMsg" />
+                <ScalarProperty Name="ExceptionId" ColumnName="ExceptionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loads">
+            <EntityTypeMapping TypeName="truckloadModel.Load">
+              <MappingFragment StoreEntitySet="Load">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedByGlobalId" ColumnName="ModifiedByGlobalId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByGlobalId" ColumnName="CreatedByGlobalId" />
+                <ScalarProperty Name="PostalCodeGroupId" ColumnName="PostalCodeGroupId" />
+                <ScalarProperty Name="LoadStatusId" ColumnName="LoadStatusId" />
+                <ScalarProperty Name="CurrentLoadWeightKg" ColumnName="CurrentLoadWeightKg" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="TrailerId" ColumnName="TrailerId" />
+                <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+                <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+                <ScalarProperty Name="LoadDate" ColumnName="LoadDate" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="LoadId" ColumnName="LoadId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadStatus">
+            <EntityTypeMapping TypeName="truckloadModel.LoadStatu">
+              <MappingFragment StoreEntitySet="LoadStatus">
+                <ScalarProperty Name="Descriprion" ColumnName="Descriprion" />
+                <ScalarProperty Name="LoadStatusId" ColumnName="LoadStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="truckloadModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="LineNo" ColumnName="LineNo" />
+                <ScalarProperty Name="R4OrderLineId" ColumnName="R4OrderLineId" />
+                <ScalarProperty Name="IsCustomerPickup" ColumnName="IsCustomerPickup" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedByGlobalId" ColumnName="ModifiedByGlobalId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByGlobalId" ColumnName="CreatedByGlobalId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="IsDangerousGoods" ColumnName="IsDangerousGoods" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="PickupDate" ColumnName="PickupDate" />
+                <ScalarProperty Name="WeightKg" ColumnName="WeightKg" />
+                <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="CustAddress" ColumnName="CustAddress" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="LoadSort" ColumnName="LoadSort" />
+                <ScalarProperty Name="LoadId" ColumnName="LoadId" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProvinceOrStates">
+            <EntityTypeMapping TypeName="truckloadModel.ProvinceOrState">
+              <MappingFragment StoreEntitySet="ProvinceOrState">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="truckloadModel.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+                <ScalarProperty Name="RegionDescription" ColumnName="RegionDescription" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trailers">
+            <EntityTypeMapping TypeName="truckloadModel.Trailer">
+              <MappingFragment StoreEntitySet="Trailer">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByGlobalId" ColumnName="ModifiedByGlobalId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByGlobalId" ColumnName="CreatedByGlobalId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AxlesDescription" ColumnName="AxlesDescription" />
+                <ScalarProperty Name="CapacityKg" ColumnName="CapacityKg" />
+                <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="TrailerTypeId" ColumnName="TrailerTypeId" />
+                <ScalarProperty Name="TrailerDescription" ColumnName="TrailerDescription" />
+                <ScalarProperty Name="TrailerId" ColumnName="TrailerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrailerTypes">
+            <EntityTypeMapping TypeName="truckloadModel.TrailerType">
+              <MappingFragment StoreEntitySet="TrailerType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TrailerTypeId" ColumnName="TrailerTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trucks">
+            <EntityTypeMapping TypeName="truckloadModel.Truck">
+              <MappingFragment StoreEntitySet="Truck">
+                <ScalarProperty Name="LastModifiedDate" ColumnName="LastModifiedDate" />
+                <ScalarProperty Name="ModifiedByGlobalId" ColumnName="ModifiedByGlobalId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByGlobalId" ColumnName="CreatedByGlobalId" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NextInspectionDate" ColumnName="NextInspectionDate" />
+                <ScalarProperty Name="NextMaintenanceDate" ColumnName="NextMaintenanceDate" />
+                <ScalarProperty Name="TruckDescription" ColumnName="TruckDescription" />
+                <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitOfMeasures">
+            <EntityTypeMapping TypeName="truckloadModel.UnitOfMeasure">
+              <MappingFragment StoreEntitySet="UnitOfMeasure">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="truckloadModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="R4WarehouseCode" ColumnName="R4WarehouseCode" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

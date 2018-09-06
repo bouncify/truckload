@@ -197,6 +197,36 @@
     <Compile Include="DbContext\AspNetUser.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\Driver.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\ErrorLog.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Load.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\LoadStatu.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Order.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\ProvinceOrState.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Region.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Trailer.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\TrailerType.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Truck.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\truckload.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -212,6 +242,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>truckload.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\UnitOfMeasure.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Warehouse.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -224,6 +260,10 @@
   <ItemGroup>
     <Content Include="App\content\css\compiled-layout.css" />
     <Content Include="App\content\images\app_icon.png" />
+    <Content Include="App_Data\truckload.mdf" />
+    <Content Include="App_Data\truckload_log.ldf">
+      <DependentUpon>truckload.mdf</DependentUpon>
+    </Content>
     <Content Include="DbContext\truckload.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>truckload.edmx</DependentUpon>
@@ -280,7 +320,6 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="App_Dist\" />
   </ItemGroup>
   <ItemGroup>

@@ -26,5 +26,17 @@ namespace truckload.DbContext
         }
     
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
+        public virtual DbSet<Load> Loads { get; set; }
+        public virtual DbSet<LoadStatu> LoadStatus { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<ProvinceOrState> ProvinceOrStates { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
+        public virtual DbSet<Trailer> Trailers { get; set; }
+        public virtual DbSet<TrailerType> TrailerTypes { get; set; }
+        public virtual DbSet<Truck> Trucks { get; set; }
+        public virtual DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
     }
 }
