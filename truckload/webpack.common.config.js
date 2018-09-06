@@ -50,7 +50,7 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: "../../App/css/compiled-[name].css",
+            filename: "../../App/content/css/compiled-[name].css",
         }),
 
         new webpack.ProvidePlugin({

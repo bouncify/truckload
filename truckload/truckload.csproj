@@ -222,10 +222,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\css\compiled-layout.css" />
-    <Content Include="App_Dist\webpack\89889688147bd7575d6327160d64e760.svg" />
-    <Content Include="App_Dist\webpack\admin.bundle.js" />
-    <Content Include="App_Dist\webpack\layout.bundle.js" />
+    <Content Include="App\content\css\compiled-layout.css" />
+    <Content Include="App\content\images\app_icon.png" />
     <Content Include="DbContext\truckload.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>truckload.edmx</DependentUpon>
@@ -283,13 +281,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Dist\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\css\Site.less" />
-    <Content Include="App_Dist\webpack\448c34a56d699c29117adc64c43affeb.woff2" />
-    <Content Include="App_Dist\webpack\e18bbf611f2a2e43afc071aa2f4e1512.ttf" />
-    <Content Include="App_Dist\webpack\f4769f9bdb7466be65088239c12046d1.eot" />
-    <Content Include="App_Dist\webpack\fa2772327f55d8198301fdb8bcfc8158.woff" />
+    <Content Include="App\content\css\Site.less" />
     <EntityDeploy Include="DbContext\truckload.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>truckload.Designer.cs</LastGenOutput>
@@ -297,7 +292,6 @@
     <Content Include="DbContext\truckload.edmx.diagram">
       <DependentUpon>truckload.edmx</DependentUpon>
     </Content>
-    <Content Include="node_modules\bootstrap\less\variables.less" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
