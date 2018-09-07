@@ -1,6 +1,7 @@
 ﻿const webpack = require('webpack'); //to access built-in plugins
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const path = require('path');
+const devMode = process.env.NODE_ENV !== 'production';
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -33,7 +34,7 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: ["style-loader", MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
+                use: [ MiniCssExtractPlugin.loader, "css-loader", "less-loader"]
             }
         ]
     },
@@ -50,7 +51,7 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: "../../App/content/css/compiled-[name].css",
+            filename: "../../App/content/css/compiled-[name].css"
         }),
 
         new webpack.ProvidePlugin({
