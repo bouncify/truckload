@@ -1,1 +1,0 @@
-{"version":3,"file":"UserPermission.js","sourceRoot":"","sources":["../../../App/admin/UserPermission.ts"],"names":[],"mappings":";AAEA,IAAI,eAAe,GAAG,OAAO,CAAC;AAC9B,IAAI,gBAAgB,GAAG,MAAM,CAAC;AAE9B,SAAS,iBAAiB,CAAC,MAAW;IAClC,MAAM,CAAC,GAAG,CAAC,OAAO,EAAE,eAAe,CAAC,CAAC;IACrC,MAAM,CAAC,GAAG,CAAC,QAAQ,EAAE,gBAAgB,CAAC,CAAC;AAC3C,CAAC"}

@@ -332,6 +332,7 @@
       <DependentUpon>truckload.edmx</DependentUpon>
     </Content>
     <None Include="packages.config" />
+    <Content Include="Views\Shared\_topmenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\admin\UserPermission.ts" />
