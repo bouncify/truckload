@@ -39,7 +39,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            'kendo' : '@progress/kendo-ui/js'
+        },
     },
     output: {
         filename: '[name].bundle.js',
