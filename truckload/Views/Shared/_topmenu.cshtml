@@ -1,8 +1,14 @@
-﻿
+﻿@{
+    var isAdmin = (bool)ViewBag.IsAdmin;
+    var siteUrl = ViewBag.SiteUrl;
+}
+
 <ul id="menu">
     <li>Order Central</li>
-    <li>Home</li>
-    <li class="@(!ViewBag.IsAdmin? "k-state-disabled": "")">
+    <li>
+        <a href="@(siteUrl + "Home/Index")">Home</a>
+    </li>
+    <li class="@(!isAdmin? "k-state-disabled": "")">
         <img src="~/App/Content/images/admin_small.png" />
         Admin
         <div class="k-animation-container">

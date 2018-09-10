@@ -43,10 +43,30 @@ namespace truckload.Controllers
             {
                 _currentUser = currentUser;
 
+                ViewBag.SiteUrl = GetSiteUrl();
                 ViewBag.IsAdmin = currentUser.IsAdmin;
                 ViewData.Add("DisplayName",currentUser.DisplayName);
                 ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
             }
+        }
+
+        private string GetSiteUrl()
+        {
+            var appPath = "";
+            var siteUrl = "";
+
+            if (Request.ApplicationPath != null && Request.ApplicationPath.Length > 1)
+            {
+                appPath = Request.ApplicationPath;
+
+            }
+            if (Request.Url != null)
+            {
+                siteUrl = Request.Url.AbsoluteUri;
+                if (Request.Path.Length > 1) siteUrl = siteUrl.Replace(Request.Path, "") + "/";
+                if (appPath.Length > 1) siteUrl += appPath.Replace("/", "") + "/";
+            }
+            return siteUrl;
         }
 
     }
