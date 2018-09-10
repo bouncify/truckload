@@ -43,6 +43,7 @@ namespace truckload.Controllers
             {
                 _currentUser = currentUser;
 
+                ViewBag.IsAdmin = currentUser.IsAdmin;
                 ViewData.Add("DisplayName",currentUser.DisplayName);
                 ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
             }

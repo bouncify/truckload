@@ -2,14 +2,17 @@
 <ul id="menu">
     <li>Order Central</li>
     <li>Home</li>
-    <li>
+    <li class="@(!ViewBag.IsAdmin? "k-state-disabled": "")">
+        <img src="~/App/Content/images/admin_small.png" />
         Admin
-        <ul>
-            <li>User Logins</li>
-            <li>Drivers</li>
-            <li>Trucks</li>
-            <li>Trailers</li>
-        </ul>
+        <div class="k-animation-container">
+            <ul class="k-group k-menu-group k-popup k-reset">
+                <li>User Logins</li>
+                <li>Drivers</li>
+                <li>Trucks</li>
+                <li>Trailers</li>
+            </ul>
+        </div>
     </li>
 </ul>
 

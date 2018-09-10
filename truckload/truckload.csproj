@@ -228,6 +228,7 @@
   <ItemGroup>
     <Content Include="App\Content\css\compiled-home.css" />
     <Content Include="App\Content\css\custom-bootstrap.css" />
+    <Content Include="App\Content\images\admin_small.png" />
     <Content Include="App\Content\images\app_icon.png" />
     <Content Include="App\Content\images\truckload-home.jpg" />
     <Content Include="App_Data\truckload.mdf" />
