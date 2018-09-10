@@ -23,25 +23,28 @@ namespace truckload.Controllers
 
         public void InitViewData()
         {
+            string currentUserId = User.Identity.Name;
 
-            string currentUserId = User.Identity.GetUserId();
-            //var currentUser = _db.UserLogins
-            //    .Where(x => x.UserLoginId == currentUserId)
-            //    .Select(n => new VmUser()
-            //    {
-            //        DisplayName = n.Email,
-            //        EmailAddress = n.Email,
-            //        IsAdmin = n.AccessLevelId == 3,
-            //        UserLevel = n.AccessLevel.AccessLevelId,
-            //        UserLevelDescription = n.AccessLevel.Description
-            //    }).FirstOrDefault();
+            var currentUser = _db.UserLogins
+                .Where(x => x.UserId == currentUserId)
+                .Select(n => new VmUser()
+                {
+                    DisplayName = n.UserName,
+                    EmailAddress = n.Email,
+                    IsAdmin = n.AccessLevelId == 3,
+                    UserLevel = n.AccessLevel.AccessLevelId,
+                    UserLevelDescription = n.AccessLevel.Description
+                }).FirstOrDefault();
 
-            var isLoggedIn = true;//currentUser != null;
+            var isLoggedIn = currentUser != null;
             ViewBag.IsLoggedIn = isLoggedIn;
 
             if (isLoggedIn)
             {
-                //_currentUser = currentUser;
+                _currentUser = currentUser;
+
+                ViewData.Add("DisplayName",currentUser.DisplayName);
+                ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
             }
         }
 
