@@ -1,41 +1,19 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truckload</title>
-    <link href="~/App/content/images/app_icon.png" rel="shortcut icon" type="image/x-icon" />
-    
-    <link rel="stylesheet" href="~/node_modules/kendo-ui-core/css/web/kendo.common.core.min.css">
-    <link rel="stylesheet" href="~/node_modules/kendo-ui-core/css/web/kendo.default.min.css">
+    @Html.Partial("_Header")
 </head>
 <body>
-    <input type="hidden" id="SiteDirectory" value='@Url.Content("~/")' />
-    <script src="~/App_Dist/webpack/layout.bundle.js"></script>
-    <link href="~/App/content/css/compiled-layout.css" rel="stylesheet" />
-
-<span id="jqueryVersion"></span>
-
-
-    @Html.Partial("_topmenu")
-
-    <div class="container body-content">
-        <select id="sel">
-            <option>Foo</option>
-            <option>Bar</option>
-        </select>
-        <select id="dropDownList">
-            <option>Foo</option>
-            <option>Bar</option>
-        </select>
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Truckload</p>
-        </footer>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
+        </div>
     </div>
-
-
+</div>
+<div class="container body-content">
+    @RenderBody()
+</div>
 </body>
 </html>

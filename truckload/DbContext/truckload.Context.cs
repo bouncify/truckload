@@ -12,6 +12,8 @@ namespace truckload.DbContext
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class truckloadEntities : DbContext
     {
@@ -25,18 +27,20 @@ namespace truckload.DbContext
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
-        public virtual DbSet<Driver> Drivers { get; set; }
-        public virtual DbSet<ErrorLog> ErrorLogs { get; set; }
-        public virtual DbSet<Load> Loads { get; set; }
-        public virtual DbSet<LoadStatu> LoadStatus { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<ProvinceOrState> ProvinceOrStates { get; set; }
-        public virtual DbSet<Region> Regions { get; set; }
-        public virtual DbSet<Trailer> Trailers { get; set; }
-        public virtual DbSet<TrailerType> TrailerTypes { get; set; }
-        public virtual DbSet<Truck> Trucks { get; set; }
-        public virtual DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
-        public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<AccessLevel> AccessLevels { get; set; }
+        public virtual DbSet<UserLogin> UserLogins { get; set; }
+    
+        public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("username", username) :
+                new ObjectParameter("username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("password", password) :
+                new ObjectParameter("password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoginByUsernamePassword_Result>("LoginByUsernamePassword", usernameParameter, passwordParameter);
+        }
     }
 }

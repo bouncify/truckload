@@ -188,43 +188,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DbContext\AspNetUser.cs">
+    <Compile Include="DbContext\AccessLevel.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\Driver.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\ErrorLog.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\Load.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\LoadStatu.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\Order.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\ProvinceOrState.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\Region.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\Trailer.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\TrailerType.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\Truck.cs">
+    <Compile Include="DbContext\LoginByUsernamePassword_Result.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\truckload.Context.cs">
@@ -242,24 +214,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>truckload.edmx</DependentUpon>
     </Compile>
-    <Compile Include="DbContext\UnitOfMeasure.cs">
-      <DependentUpon>truckload.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbContext\Warehouse.cs">
+    <Compile Include="DbContext\UserLogin.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Helpers\Vm\VmLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Helpers\Vm\VmUser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\content\css\compiled-layout.css" />
-    <Content Include="App\content\images\app_icon.png" />
+    <Content Include="App\Content\css\compiled-layout.css" />
+    <Content Include="App\Content\css\custom-bootstrap.css" />
+    <Content Include="App\Content\images\app_icon.png" />
+    <Content Include="App\Content\images\truckload-home.jpg" />
     <Content Include="App_Data\truckload.mdf" />
     <Content Include="App_Data\truckload_log.ldf">
       <DependentUpon>truckload.mdf</DependentUpon>
@@ -291,39 +261,19 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Dist\" />
+    <Folder Include="Helpers\Admin\" />
+    <Folder Include="Helpers\OrderCentral\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\content\css\Site.less" />
+    <Content Include="App\Content\css\Site.less" />
     <EntityDeploy Include="DbContext\truckload.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>truckload.Designer.cs</LastGenOutput>
@@ -333,11 +283,15 @@
     </Content>
     <None Include="packages.config" />
     <Content Include="Views\Shared\_topmenu.cshtml" />
+    <Content Include="Views\Home\_truckload-home.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="App\admin\UserPermission.ts" />
-    <TypeScriptCompile Include="App\layout.ts" />
-    <TypeScriptCompile Include="App\shared\Global.ts" />
+    <TypeScriptCompile Include="App\Admin\Admin.ts" />
+    <TypeScriptCompile Include="App\Home.ts" />
+    <TypeScriptCompile Include="App\Shared\Global.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

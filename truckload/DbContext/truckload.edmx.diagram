@@ -4,33 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2e60ed5b9f434ad99d8bdb85dd3c41f8" Name="Diagram1">
-        <EntityTypeShape EntityType="truckloadModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="truckloadModel.Driver" Width="1.5" PointX="3.75" PointY="21.25" />
-        <EntityTypeShape EntityType="truckloadModel.ErrorLog" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="truckloadModel.Load" Width="1.5" PointX="6" PointY="4.375" />
-        <EntityTypeShape EntityType="truckloadModel.LoadStatu" Width="1.5" PointX="3.75" PointY="19" />
-        <EntityTypeShape EntityType="truckloadModel.Order" Width="1.5" PointX="11.25" PointY="3.75" />
-        <EntityTypeShape EntityType="truckloadModel.ProvinceOrState" Width="1.5" PointX="0.75" PointY="5.75" />
-        <EntityTypeShape EntityType="truckloadModel.Region" Width="1.5" PointX="3.75" PointY="15.625" />
-        <EntityTypeShape EntityType="truckloadModel.Trailer" Width="1.5" PointX="9" PointY="4.875" />
-        <EntityTypeShape EntityType="truckloadModel.TrailerType" Width="1.5" PointX="6.75" PointY="1.125" />
-        <EntityTypeShape EntityType="truckloadModel.Truck" Width="1.5" PointX="3.75" PointY="11.75" />
-        <EntityTypeShape EntityType="truckloadModel.UnitOfMeasure" Width="1.5" PointX="3.75" PointY="5.875" />
-        <EntityTypeShape EntityType="truckloadModel.Warehouse" Width="1.5" PointX="9" PointY="1.875" />
-        <AssociationConnector Association="truckloadModel.FK__Load__DriverId__3CCAB9A3" />
-        <AssociationConnector Association="truckloadModel.FK__Load__LoadStatus__7267B045" />
-        <AssociationConnector Association="truckloadModel.FK__Load__RegionId__0A3F39D6" />
-        <AssociationConnector Association="truckloadModel.FK__Load__TrailerId__62BB5861" />
-        <AssociationConnector Association="truckloadModel.FK__Load__TruckId__3BD6956A" />
-        <AssociationConnector Association="truckloadModel.FK__Load__UnitOfMeas__6F212F46" />
-        <AssociationConnector Association="truckloadModel.FK__simple_Or__LoadI__46FE2F53" />
-        <AssociationConnector Association="truckloadModel.FK__simple_Or__Regio__48E677C5" />
-        <AssociationConnector Association="truckloadModel.FK__simple_Or__UnitO__49DA9BFE" />
-        <AssociationConnector Association="truckloadModel.FK__simple_Or__Wareh__4ACEC037" />
-        <AssociationConnector Association="truckloadModel.FK__Warehouse__Regio__02C769E9" />
-        <AssociationConnector Association="truckloadModel.FK__Trailer__Trailer__4BD7F309" />
-        <AssociationConnector Association="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" />
+      <Diagram DiagramId="9339d2d57e70488c9a3bf1f750a3d1ff" Name="Diagram1">
+        <EntityTypeShape EntityType="truckloadModel.AccessLevel" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="3" PointY="3.375" />
+        <AssociationConnector Association="truckloadModel.FK__UserLogin__Acces__160F4887" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -6,8 +6,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
-        layout: './App/layout.ts',
-        admin: './App/admin/UserPermission.ts'//,
+        home: './App/Home.ts',
+        admin: './App/Admin/Admin.ts'//,
         //orderCentral: './App/OrderCentral/Main.ts'
     },
     module: {
@@ -51,7 +51,7 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: "../../App/content/css/compiled-[name].css"
+            filename: "../../App/Content/css/compiled-[name].css"
         }),
 
         new webpack.ProvidePlugin({

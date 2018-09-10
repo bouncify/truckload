@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@progress/kendo-ui": "^2018.2.822",
     "bootstrap": "^3.3.7",
     "jquery": "3.3.1",
     "jquery-validation": "^1.17.0",
     "jquery-validation-unobtrusive": "^3.2.10",
-    "kendo-ui-core": "^2018.2.822",
     "knockout": "^3.4.2"
   },
   "devDependencies": {
