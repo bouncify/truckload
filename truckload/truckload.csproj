@@ -226,7 +226,7 @@
     <Compile Include="Helpers\Vm\VmUser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\Content\css\compiled-layout.css" />
+    <Content Include="App\Content\css\compiled-home.css" />
     <Content Include="App\Content\css\custom-bootstrap.css" />
     <Content Include="App\Content\images\app_icon.png" />
     <Content Include="App\Content\images\truckload-home.jpg" />
