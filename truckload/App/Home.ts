@@ -1,7 +1,7 @@
 ﻿import "./content/css/Site.less";
 
 //import "@progress/kendo-ui/js/kendo.dropdownlist.js"
-import "kendo/kendo.menu.js"
+import "kendo/js/kendo.menu.js"
 
 //import "@progress/kendo-ui/css/web/kendo.common.core.min.css"
 //import "@progress/kendo-ui/css/web/kendo.default.min.css"

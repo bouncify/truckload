@@ -3,6 +3,7 @@
   "compileOnBuild": false,
 
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./App_Js/VisualStudio-AutoCompile/",
     "sourceMap": true,
     "alwaysStrict": true,
@@ -17,7 +18,12 @@
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5",
-    "typeRoots": [ "node_modules/@types" ]
+    "typeRoots": [ "node_modules/@types" ],
+    "paths": {
+      "knockout": [
+        "node_modules/knockout/build/output/knockout-latest.js"
+      ]
+    }
   },
   "exclude": [
     "node_modules",

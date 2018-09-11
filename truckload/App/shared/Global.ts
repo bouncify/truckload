@@ -2,7 +2,7 @@
 
 export module Globals {
     export var dateFormat = "MM/DD/YYYY";
-    export var baseUrl: string;
+    //export var baseUrl: string;
 
 }
 

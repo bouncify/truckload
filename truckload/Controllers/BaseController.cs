@@ -12,20 +12,20 @@ namespace truckload.Controllers
 {
     public class BaseController : Controller
     {
-        readonly truckloadEntities _db;
+        public readonly truckloadEntities Db;
         VmUser _currentUser;
 
         public BaseController()
         {
             Database.SetInitializer<truckloadEntities>(null);
-            _db = new truckloadEntities();
+            Db = new truckloadEntities();
         }
 
         public void InitViewData()
         {
             string currentUserId = User.Identity.Name;
 
-            var currentUser = _db.UserLogins
+            var currentUser = Db.UserLogins
                 .Where(x => x.UserId == currentUserId)
                 .Select(n => new VmUser()
                 {

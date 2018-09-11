@@ -41,8 +41,9 @@ module.exports = {
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
         alias: {
-            'kendo' : '@progress/kendo-ui/js'
-        },
+            'knockout': path.join(__dirname, 'node_modules/knockout/build/output/knockout-latest.js'),
+            'kendo' : '@progress/kendo-ui'
+        }
     },
     output: {
         filename: '[name].bundle.js',

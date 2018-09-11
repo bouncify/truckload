@@ -5,15 +5,16 @@
     @Html.Partial("_Header")
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-collapse collapse">
-            @Html.Partial("_LoginPartial")
+    <div id="baseUrl" style="visibility: hidden">@ViewBag.SiteUrl</div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
-</div>
-<div class="container body-content">
-    @RenderBody()
-</div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
 </body>
 </html>
