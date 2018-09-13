@@ -1,4 +1,5 @@
 ﻿
+import "kendo/js/kendo.menu.js"
 import "kendo/js/kendo.grid.js"
 
 import * as ko from 'knockout';
@@ -19,12 +20,12 @@ var viewModelUserLogins = new KoUserLoginsModel(ajaxHelper);
 $(() => {
     $("#menu").kendoMenu();
 
-    $("#koUserLoginsGrid").kendoGrid({
+   $("#koUserLoginsGrid").kendoGrid({
         columns: [
-            { field: "userLoginId",title: "x" },
-            { title: "x" },
-            { title: "x" },
-            { title: "x" }
+            { field: "userLoginId",title: "Id" },
+            { field: "userId", title: "Login Id" },
+            { field: "userName", title: "User Name" },
+            { field: "email", title: "Email" }
         ],
 
         height: 550,
