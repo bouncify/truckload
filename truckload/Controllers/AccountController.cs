@@ -14,14 +14,13 @@ using truckload.Helpers.Vm;
 
 namespace truckload.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
-        #region Private Properties    
-        /// <summary>  
-        /// Database Store property.    
-        /// </summary>
-        private truckloadEntities _db = new truckloadEntities();
-        #endregion
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            InitViewData();
+        }
+
         #region Default Constructor    
         /// <summary>  
         /// Initializes a new instance of the <see cref="AccountController" /> class.    
@@ -73,7 +72,7 @@ namespace truckload.Controllers
                 if (ModelState.IsValid)
                 {
                     // Initialization.    
-                    var loginInfo = this._db.LoginByUsernamePassword(model.Username, model.Password).ToList();
+                    var loginInfo = Db.LoginByUsernamePassword(model.Username, model.Password).ToList();
                     // Verification.    
                     if (loginInfo != null && loginInfo.Count() > 0)
                     {

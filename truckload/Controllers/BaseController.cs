@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using truckload.DbContext;
+using truckload.Helpers;
 using truckload.Vm;
 
 namespace truckload.Controllers
@@ -17,37 +18,41 @@ namespace truckload.Controllers
 
         public BaseController()
         {
-            Database.SetInitializer<truckloadEntities>(null);
+            //Database.SetInitializer<truckloadEntities>(null);
             Db = new truckloadEntities();
         }
 
         public void InitViewData()
         {
-            string currentUserId = User.Identity.Name;
+            var currentUserId = User.Identity.Name;
+            var isLoggedIn = false;
 
-            var currentUser = Db.UserLogins
-                .Where(x => x.UserId == currentUserId)
-                .Select(n => new VmUser()
-                {
-                    DisplayName = n.UserName,
-                    EmailAddress = n.Email,
-                    IsAdmin = n.AccessLevelId == 3,
-                    UserLevel = n.AccessLevel.AccessLevelId,
-                    UserLevelDescription = n.AccessLevel.Description
-                }).FirstOrDefault();
-
-            var isLoggedIn = currentUser != null;
-            ViewBag.IsLoggedIn = isLoggedIn;
-
-            if (isLoggedIn)
+            if (!currentUserId.IsNullOrEmpty())
             {
-                _currentUser = currentUser;
+                var currentUser = Db.UserLogins
+                    .Where(x => x.UserId == currentUserId)
+                    .Select(n => new VmUser()
+                    {
+                        DisplayName = n.UserName,
+                        EmailAddress = n.Email,
+                        IsAdmin = n.AccessLevelId == 3,
+                        UserLevel = n.AccessLevel.AccessLevelId,
+                        UserLevelDescription = n.AccessLevel.Description
+                    }).FirstOrDefault();
 
-                ViewBag.SiteUrl = GetSiteUrl();
-                ViewBag.IsAdmin = currentUser.IsAdmin;
-                ViewData.Add("DisplayName",currentUser.DisplayName);
-                ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
+                isLoggedIn = currentUser != null;
+
+                if (isLoggedIn)
+                {
+                    _currentUser = currentUser;
+
+                    ViewBag.SiteUrl = GetSiteUrl();
+                    ViewBag.IsAdmin = currentUser.IsAdmin;
+                    ViewData.Add("DisplayName", currentUser.DisplayName);
+                    ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
+                }
             }
+            ViewBag.IsLoggedIn = isLoggedIn;
         }
 
         private string GetSiteUrl()
