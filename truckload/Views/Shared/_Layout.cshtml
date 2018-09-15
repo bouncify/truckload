@@ -14,6 +14,10 @@
         </div>
     </div>
     <div class="container body-content">
+        @if ((bool)ViewBag.IsLoggedIn)
+        {
+            Html.RenderPartial("_topmenu");
+        }
         @RenderBody()
     </div>
 </body>

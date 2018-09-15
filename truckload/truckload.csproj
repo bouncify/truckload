@@ -274,7 +274,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\OrderCentral\" />
-    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Content\css\Site.less" />
