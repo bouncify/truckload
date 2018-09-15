@@ -10,6 +10,9 @@ module.exports = {
         admin: './App/Admin/Admin.ts'//,
         //orderCentral: './App/OrderCentral/Main.ts'
     },
+    externals: {
+        jquery: 'jQuery'
+    },
     module: {
         rules: [
             {

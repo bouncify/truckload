@@ -15,14 +15,15 @@ var ajaxHelper = new AjaxHelper();
 var accessLevels: SelectListItem[];
 var viewModelUserLogins = new KoUserLoginsModel(ajaxHelper);
 
+$("#menu").kendoMenu();
+
+
 
 
 $(() => {
-    $("#menu").kendoMenu();
-
-   $("#koUserLoginsGrid").kendoGrid({
+    $("#koUserLoginsGrid").kendoGrid({
         columns: [
-            { field: "userLoginId",title: "Id" },
+            { field: "userLoginId", title: "Id" },
             { field: "userId", title: "Login Id" },
             { field: "userName", title: "User Name" },
             { field: "email", title: "Email" }
@@ -31,7 +32,7 @@ $(() => {
         height: 550,
 
     });
-
+    
     ko.applyBindings(viewModelUserLogins, $("#koUserLoginsGrid")[0]);
 });
 

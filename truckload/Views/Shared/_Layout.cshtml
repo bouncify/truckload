@@ -5,29 +5,37 @@
     @Html.Partial("_Header")
 </head>
 <body>
-    <div id="baseUrl" style="visibility: hidden">@ViewBag.SiteUrl</div>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-collapse collapse">
-                @Html.Partial("_LoginPartial")
-            </div>
+
+<div id="preLoad">
+    <div>
+        <img src="~/node_modules/@Html.Raw("@")progress/kendo-ui/css/web/Silver/loading-image.gif" 
+             alt="Loading Image" style="width: 48px;"/>
+        <br/>Loading...
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#preLoad").fadeOut();
+    });
+</script>
+
+<div id="baseUrl" style="visibility: hidden">@ViewBag.SiteUrl</div>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            @Html.Partial("_LoginPartial")
         </div>
     </div>
-    <div class="container body-content">
-        @if ((bool)ViewBag.IsLoggedIn)
-        {
-            Html.RenderPartial("_topmenu");
-        }
-        @*<div id="preLoad">
-                <div>
-                    <img src="~/node_modules/@Html.Raw("@")progress/kendo-ui/css/web/Silver/loading-image.gif" alt="Loading Image" style="width:48px;" />
-                    <br />Loading...
-                </div>
-            </div>*@
+</div>
+<div class="container body-content">
+    @if ((bool) ViewBag.IsLoggedIn)
+    {
+        Html.RenderPartial("_topmenu");
+    }
+
+    @RenderBody()
+</div>
 
 
-        @RenderBody()
-
-    </div>
 </body>
 </html>

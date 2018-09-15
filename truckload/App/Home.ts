@@ -12,7 +12,7 @@ import "kendo/js/kendo.menu.js"
 //import "kendo-ui-core/js/kendo.dropdownlist.js"
 //import "kendo-ui-core/js/kendo.menu.js"
 
-
+$("#menu").kendoMenu();
 
 // on document ready
 $(() => {
@@ -30,7 +30,6 @@ $(() => {
     //    ]
     //});
     
-    $("#menu").kendoMenu();
 
 });
 
