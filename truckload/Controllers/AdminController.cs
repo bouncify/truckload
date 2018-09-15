@@ -9,6 +9,7 @@ using truckload.Helpers.Vm;
 
 namespace truckload.Controllers
 {
+    [Authorize]
     public class AdminController : BaseController
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
