@@ -6,18 +6,7 @@
 </head>
 <body>
 
-<div id="preLoad">
-    <div>
-        <img src="~/node_modules/@Html.Raw("@")progress/kendo-ui/css/web/Silver/loading-image.gif" 
-             alt="Loading Image" style="width: 48px;"/>
-        <br/>Loading...
-    </div>
-</div>
-<script>
-    $(document).ready(function () {
-        $("#preLoad").fadeOut();
-    });
-</script>
+@Html.Partial("_LoadingPage")
 
 <div id="baseUrl" style="visibility: hidden">@ViewBag.SiteUrl</div>
 <div class="navbar navbar-inverse navbar-fixed-top">
