@@ -45,13 +45,12 @@ namespace truckload.Controllers
                 if (isLoggedIn)
                 {
                     _currentUser = currentUser;
-
-                    ViewBag.SiteUrl = GetSiteUrl();
                     ViewBag.IsAdmin = currentUser.IsAdmin;
                     ViewData.Add("DisplayName", currentUser.DisplayName);
                     ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
                 }
             }
+            ViewBag.SiteUrl = GetSiteUrl();
             ViewBag.IsLoggedIn = isLoggedIn;
         }
 
