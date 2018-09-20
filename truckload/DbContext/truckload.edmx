@@ -19,12 +19,13 @@
           <Property Name="UserLoginId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="AccessLevelId" Type="int" />
+          <Property Name="AccessLevelId" Type="int" Nullable="false" />
+          <Property Name="HashPassword" Type="binary" MaxLength="64" Nullable="false" />
+          <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <Association Name="FK__UserLogin__Acces__160F4887">
-          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="0..1" />
+          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
           <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccessLevel">
@@ -61,16 +62,20 @@
         </EntityType>
         <EntityContainer Name="truckloadEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccessLevels" EntityType="Self.AccessLevel" />
+          <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(truckloadModel.LoginByUsernamePassword_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
           <EntitySet Name="UserLogins" EntityType="truckloadModel.UserLogin" />
           <AssociationSet Name="FK__UserLogin__Acces__160F4887" Association="truckloadModel.FK__UserLogin__Acces__160F4887">
             <End Role="AccessLevel" EntitySet="AccessLevels" />
             <End Role="UserLogin" EntitySet="UserLogins" />
           </AssociationSet>
-          <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(truckloadModel.LoginByUsernamePassword_Result)">
-            <Parameter Name="username" Mode="In" Type="String" />
-            <Parameter Name="password" Mode="In" Type="String" />
-          </FunctionImport>
           </EntityContainer>
+        <ComplexType Name="LoginByUsernamePassword_Result">
+          <Property Type="Int32" Name="UserLoginId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+        </ComplexType>
         <EntityType Name="UserLogin">
           <Key>
             <PropertyRef Name="UserLoginId" />
@@ -78,13 +83,14 @@
           <Property Name="UserLoginId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="AccessLevelId" Type="Int32" />
+          <Property Name="AccessLevelId" Type="Int32" Nullable="false" />
+          <Property Name="HashPassword" Type="Binary" Nullable="false" MaxLength="64" FixedLength="true" />
+          <Property Name="Salt" Type="Guid" Nullable="false" />
           <NavigationProperty Name="AccessLevel" Relationship="truckloadModel.FK__UserLogin__Acces__160F4887" FromRole="UserLogin" ToRole="AccessLevel" />
         </EntityType>
         <Association Name="FK__UserLogin__Acces__160F4887">
-          <End Type="truckloadModel.AccessLevel" Role="AccessLevel" Multiplicity="0..1" />
+          <End Type="truckloadModel.AccessLevel" Role="AccessLevel" Multiplicity="1" />
           <End Type="truckloadModel.UserLogin" Role="UserLogin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccessLevel">
@@ -95,11 +101,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="LoginByUsernamePassword_Result">
-          <Property Type="Int32" Name="UserLoginId" Nullable="false" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
-        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -114,27 +115,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="truckloadModel.Store.LoginByUsernamePassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="truckloadModel.LoginByUsernamePassword_Result">
+                <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="UserLogins">
             <EntityTypeMapping TypeName="truckloadModel.UserLogin">
               <MappingFragment StoreEntitySet="UserLogin">
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="HashPassword" ColumnName="HashPassword" />
                 <ScalarProperty Name="AccessLevelId" ColumnName="AccessLevelId" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="truckloadModel.Store.LoginByUsernamePassword">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="truckloadModel.LoginByUsernamePassword_Result">
-                <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

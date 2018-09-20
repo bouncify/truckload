@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9339d2d57e70488c9a3bf1f750a3d1ff" Name="Diagram1">
+      <Diagram DiagramId="9339d2d57e70488c9a3bf1f750a3d1ff" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="truckloadModel.AccessLevel" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="3" PointY="3.375" />
+        <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="3" PointY="3.25" />
         <AssociationConnector Association="truckloadModel.FK__UserLogin__Acces__160F4887" />
       </Diagram>
     </edmx:Diagrams>

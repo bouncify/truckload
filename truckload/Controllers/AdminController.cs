@@ -41,7 +41,7 @@ namespace truckload.Controllers
         {
             var accessLevels = Db.UserLogins.Select(a => new VmUserLogin()
             {
-                AccessLevelId = a.AccessLevelId??0,
+                AccessLevelId = a.AccessLevelId,
                 Email = a.Email,
                 UserName = a.UserName,
                 UserId = a.UserId,

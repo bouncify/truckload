@@ -17,9 +17,10 @@ namespace truckload.DbContext
         public int UserLoginId { get; set; }
         public string UserName { get; set; }
         public string UserId { get; set; }
-        public string Password { get; set; }
         public string Email { get; set; }
-        public Nullable<int> AccessLevelId { get; set; }
+        public int AccessLevelId { get; set; }
+        public byte[] HashPassword { get; set; }
+        public System.Guid Salt { get; set; }
     
         public virtual AccessLevel AccessLevel { get; set; }
     }

@@ -74,7 +74,7 @@ namespace truckload.Controllers
                     // Initialization.    
                     var loginInfo = Db.LoginByUsernamePassword(model.Username, model.Password).ToList();
                     // Verification.    
-                    if (loginInfo != null && loginInfo.Count() > 0)
+                    if (loginInfo.Count() > 0)
                     {
                         // Initialization.    
                         var logindetails = loginInfo.First();
