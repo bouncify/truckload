@@ -57,6 +57,8 @@ ko.bindingHandlers.kendoGrid.options = {
 
 ko.applyBindings(viewModel, $("#koTestGrid")[0]);
 
+export var wibblewobble = "hello";// exporting library to be visible by the dom
+
 
 
 

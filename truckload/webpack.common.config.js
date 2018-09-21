@@ -51,7 +51,9 @@ module.exports = {
     },
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'App_Dist/webpack')
+        path: path.resolve(__dirname, 'App_Dist/webpack'),
+        libraryTarget: 'var',
+        library: 'app'
     },
     plugins: [
         new CleanWebpackPlugin(["./App_Dist"], {
