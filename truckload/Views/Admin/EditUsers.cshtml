@@ -1,25 +1,32 @@
 ﻿
-<script src="~/App_Dist/webpack/admin.bundle.js"></script>
 
 <h2>EditUsers</h2>
 
 <div id="gridSample" data-bind="kendoGrid: items"> </div>
 
-<div id="koUserLoginsGrid" data-bind="kendoGrid: { data: userLogins, rowTemplate: 'rowUserLogin', useKOTemplates: true }"> </div>
+<div id="koUserLoginsGrid" data-bind="kendoGrid: { data: userLogins, scrollable: true, sortable: true, pageable: { pageSize: 10 } }"> </div>
 
-<script id="rowUserLogin" type="text/html">
-    <tr role="row">
-        <td role="gridcell" style="width: 100%">
-            <label data-bind="text: userLoginId" ></label>
-        </td>
-        <td role="gridcell" style="width: 100%">
-            <label data-bind="text: userId" ></label>
-        </td>
-        <td role="gridcell" style="width: 100%">
-            <input data-bind="value: userName" />
-        </td>
-        <td role="gridcell" style="width: 100%">
-            <input data-bind="value: email" />
-        </td>
-    </tr>
-</script>
+<br />
+<br />
+<div id="koTestGrid" data-bind="kendoGrid: { data: items, groupable: true, scrollable: true, sortable: true, pageable: { pageSize: 10 } }"> </div>
+<button data-bind="click: addItem">Add Item</button>
+
+<script src="~/App_Dist/webpack/admin.bundle.js"></script>
+
+
+@*<script id="rowUserLogin" type="text/html">
+        <tr role="row">
+            <td role="gridcell" style="width: 100%">
+                <label data-bind="text: userLoginId" ></label>
+            </td>
+            <td role="gridcell" style="width: 100%">
+                <label data-bind="text: userId" ></label>
+            </td>
+            <td role="gridcell" style="width: 100%">
+                <input data-bind="value: userName" />
+            </td>
+            <td role="gridcell" style="width: 100%">
+                <input data-bind="value: email" />
+            </td>
+        </tr>
+    </script>*@

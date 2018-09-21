@@ -1,0 +1,28 @@
+﻿
+
+
+<br/>
+
+<div data-bind="kendoGrid: { data: items, groupable: true, scrollable: true, sortable: true, pageable: { pageSize: 10 } }"> </div>
+<button data-bind="click: addItem">Add Item</button>
+
+<script src="~/App_Dist/webpack/testGrid.bundle.js"></script>
+
+
+@*<script>
+    var ViewModel = function() {
+        this.items = ko.observableArray([
+            { id: "1", name: "apple"},
+            { id: "2", name: "orange"},
+            { id: "3", name: "banana"}
+        ]);
+
+        this.addItem = function() {
+            var num = this.items().length + 1;
+            this.items.push({ id: num, name: "new" + num});
+        };
+    };
+
+    ko.applyBindings(new ViewModel());
+
+</script>*@

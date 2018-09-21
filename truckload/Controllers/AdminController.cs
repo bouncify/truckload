@@ -22,6 +22,11 @@ namespace truckload.Controllers
             return View();
         }
 
+        public ActionResult TestGrid()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult GetAccessLevels()
         {

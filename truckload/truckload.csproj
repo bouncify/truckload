@@ -292,11 +292,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Admin\EditUsers.cshtml" />
     <Content Include="Views\Shared\_LoadingPage.cshtml" />
+    <Content Include="Views\Admin\TestGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLoginsModel.ts" />
+    <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\SelectListItem.ts" />
