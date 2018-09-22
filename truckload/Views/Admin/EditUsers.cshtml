@@ -4,12 +4,16 @@
 
 <div id="gridSample" data-bind="kendoGrid: items"> </div>
 
-<div id="koUserLoginsGrid" data-bind="kendoGrid: { data: userLogins, scrollable: true, sortable: true, pageable: { pageSize: 10 } }"> </div>
+<div id="koUserLoginsGrid" data-bind="kendoGrid: { data: userLogins, scrollable: true, sortable: true, pageable: { pageSize: 10 } }">
+    <div class="k-header k-grid-toolbar k-grid-top">
+        <a class="k-button k-button-icontext k-grid-AddUserLogin" href="/">
+            <span class="k-icon k-i-plus">
+            </span>Add User
+        </a>
+    </div>
+</div>
 
-<br />
-<br />
-<div id="koTestGrid" data-bind="kendoGrid: { data: items, groupable: true, scrollable: true, sortable: true, pageable: { pageSize: 10 } }"> </div>
-<button data-bind="click: addItem">Add Item</button>
+
 
 <script src="~/App_Dist/webpack/admin.bundle.js"></script>
 

@@ -29,6 +29,8 @@ namespace truckload.DbContext
     
         public virtual DbSet<AccessLevel> AccessLevels { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
+        public virtual DbSet<Error> Errors { get; set; }
+        public virtual DbSet<Driver> Drivers { get; set; }
     
         public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
         {

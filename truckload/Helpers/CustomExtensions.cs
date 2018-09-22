@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Kendo.Mvc.UI;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -45,5 +47,36 @@ namespace truckload.Helpers
 
             return ex.InnerException.GetOriginalException();
         }
+    }
+
+    public static class MyHtmlHelperExtensions
+    {
+        public static Kendo.Mvc.UI.Fluent.GridBuilder<T> ViewGrid<T>(this HtmlHelper helper, string viewName, int height = 550, string templateName = "", string action = "View_Read", string controller = "AgViews", string area = "AgRecon")
+            where T : class
+        {
+
+            var grid = helper.Kendo().Grid<T>()
+                .Name("grid")
+                .Events(e => e.DataBound("onDataBound"))
+                .Resizable(r => r.Columns(true))
+                .Pageable()
+                .Selectable(s => s.Enabled(false))
+                .Sortable()
+                .Scrollable()
+                .Filterable()
+                .HtmlAttributes(new { style = "height:" + height + "px;cursor: pointer;" })
+                .DataSource(dataSource => dataSource.Ajax()
+                    .Events(events => { events.Error("Shared.gridErrorHandler"); }).PageSize(20)
+                    .Read(read => read.Action(action, controller, new { Area = area, ViewName = viewName })));
+
+            if (!templateName.IsNullOrEmpty())
+            {
+                grid.ClientDetailTemplateId(templateName);
+            }
+
+            return grid;
+
+        }
+
     }
 }

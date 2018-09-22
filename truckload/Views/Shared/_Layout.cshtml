@@ -5,25 +5,27 @@
     @Html.Partial("_Header")
 </head>
 <body>
+    @Html.Partial("_LoadingPage")
+    <div id="customAlert"></div>
+    <div id="customConfirm"></div>
+    <div id="customPrompt" style="overflow: unset;"></div>
 
-@Html.Partial("_LoadingPage")
-
-<div id="baseUrl" style="visibility: hidden">@ViewBag.SiteUrl</div>
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-collapse collapse">
-            @Html.Partial("_LoginPartial")
+    <div id="baseUrl" style="visibility: hidden">@ViewBag.SiteUrl</div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
-</div>
-<div class="container body-content">
-    @if ((bool) ViewBag.IsLoggedIn)
-    {
-        Html.RenderPartial("_topmenu");
-    }
+    <div class="container body-content">
+        @if ((bool)ViewBag.IsLoggedIn)
+        {
+            Html.RenderPartial("_topmenu");
+        }
 
-    @RenderBody()
-</div>
+        @RenderBody()
+    </div>
 
 
 </body>

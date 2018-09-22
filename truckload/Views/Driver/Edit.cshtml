@@ -1,0 +1,85 @@
+﻿@using Kendo.Mvc.UI
+@using truckload.Helpers.Vm
+
+
+<script src="~/App_Dist/webpack/admin.bundle.js"></script>
+
+<p></p>
+@(Html.Kendo().Grid<VmDriver>()
+              .Name("grid")
+              .Columns(columns =>
+              {
+                  columns.Bound(r => r.DriverId).Title("Id").Width(50);
+
+                  columns.Template(e => { }).Title("Active?").Width(60)
+                      .ClientTemplate("<input type='checkbox' #= IsActive ? checked='checked' : '' # class='chkbxIsActive' />");
+
+                  columns.Bound(r => r.FirstName).Title("Name").Width(100);
+                  columns.Bound(r => r.LastName).Title("L Name").Width(100);
+
+
+                  columns.Template(e => { }).Title("Employee?").Width(60)
+                      .ClientTemplate("<input type='checkbox' #= IsEmployee ? checked='checked' : '' # class='chkbxIsEmployee' />");
+
+                  columns.Bound(r => r.LicenseExpireDate).Width(120);
+                  columns.Bound(r => r.TdgTrainingDate).Width(120);
+                  columns.Bound(r => r.WhmisTrainingDate).Width(120);
+                  columns.Bound(r => r.PhoneNumber).Width(100);
+                  columns.Bound(r => r.Email).Width(150);
+
+
+                  columns.Template(e => { }).Title("Delete").Width(40)
+                      .ClientTemplate("<button type='button' title='Delete Driver' class='k-button k-button-icontext' style='min-width: auto;' onclick='app.module.btnDeleteClick(this)' ><span class='k-icon k-i-close'></span></button>")
+                      .HtmlAttributes(new { @style = "padding: 0" });
+
+              })
+              .ToolBar(toolbar =>
+              {
+      //toolbar.Create();
+      toolbar.Custom().Text("Add Driver").Name("AddDriver");
+              })
+
+              .Editable(editable =>
+              {
+                  editable.Mode(GridEditMode.InCell);
+                  editable.DisplayDeleteConfirmation(false);
+              })
+              .Events(e => e.Edit("app.module.onEdit"))
+              .Pageable()
+              .Navigatable()
+              .Resizable(r => r.Columns(true))
+              .Selectable(s => s.Enabled(false))
+              .Sortable()
+              .Scrollable()
+              .Filterable()
+              .HtmlAttributes(new { style = "height:620px;cursor: pointer;" })
+              .DataSource(dataSource => dataSource
+                                      .Ajax()
+
+                                      .Events(events => events.Error("app.module.onDataSourceError"))
+                                      .Model(model =>
+                                      {
+                                          model.Id(p => p.DriverId);
+                                          model.Field(p => p.DriverId).Editable(false);
+                                      })
+                          .PageSize(15)
+                          .AutoSync(true)
+                          .Read(read => read.Action("Read", "Driver"))
+                      .Update(update => update.Action("Update", "Driver"))
+              .Create(create => create.Action("Create", "Driver").Data("app.module.additionalInfo"))
+              ))
+
+<script>
+
+
+    app.initDriverModule();
+</script>
+
+@*<script>
+
+        console.log("wibble");
+
+        function onEdit(e) {
+            drivers.onEdit(e);
+        }
+    </script>*@

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using truckload.DbContext;
+using truckload.Helpers;
 
 namespace truckload
 {
@@ -28,7 +29,7 @@ namespace truckload
             var userName = User.Identity.Name;
             var url = HttpContext.Current.Request.Url.ToString();
 
-            //ServerError.LogException(raisedException, url, userName);
+            ServerError.LogException(raisedException, url, userName);
         }
     }
 }

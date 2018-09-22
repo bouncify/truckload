@@ -47,6 +47,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\Kendo.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Kendo.Mvc.Export">
+      <HintPath>..\lib\KENDOUIMVC\2018.2.620.545\export\binaries\net40\Kendo.Mvc.Export.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.7.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.7.2\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
     </Reference>
@@ -193,8 +199,15 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DbContext\AccessLevel.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Driver.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Error.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\LoginByUsernamePassword_Result.cs">
@@ -223,7 +236,9 @@
     </Compile>
     <Compile Include="Helpers\Admin\VmUserLogin.cs" />
     <Compile Include="Helpers\CustomExtensions.cs" />
+    <Compile Include="Helpers\ServerError.cs" />
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
+    <Compile Include="Helpers\Vm\VmDriver.cs" />
     <Compile Include="Helpers\Vm\VmLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -293,16 +308,22 @@
     <Content Include="Views\Admin\EditUsers.cshtml" />
     <Content Include="Views\Shared\_LoadingPage.cshtml" />
     <Content Include="Views\Admin\TestGrid.cshtml" />
+    <Content Include="Views\Driver\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLoginsModel.ts" />
+    <TypeScriptCompile Include="App\Admin\Modules\Driver.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />
+    <TypeScriptCompile Include="App\Shared\Classes\CrudScreenAutoSave.ts" />
+    <TypeScriptCompile Include="App\Shared\Classes\CrudScreenDetail.ts" />
+    <TypeScriptCompile Include="App\Shared\ControlHelper.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\SelectListItem.ts" />
     <TypeScriptCompile Include="App\Shared\Global.ts" />
+    <TypeScriptCompile Include="App\Shared\String.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

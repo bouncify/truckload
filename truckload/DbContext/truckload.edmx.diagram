@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="truckloadModel.AccessLevel" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="3" PointY="3.25" />
         <AssociationConnector Association="truckloadModel.FK__UserLogin__Acces__160F4887" />
+        <EntityTypeShape EntityType="truckloadModel.Error" Width="1.5" PointX="5.875" PointY="3.625" />
+        <EntityTypeShape EntityType="truckloadModel.Driver" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
