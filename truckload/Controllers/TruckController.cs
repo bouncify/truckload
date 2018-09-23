@@ -29,17 +29,7 @@ namespace truckload.Controllers
             DataSourceResult trucks;
             try
             {
-                var query = from h in Db.Trucks select h;
-
-                trucks = query.Select(d => new VmTruck()
-                {
-                    TruckId = d.TruckId,
-                    TruckDescription = d.TruckDescription,
-                    NextInspectionDate = d.NextInspectionDate,
-                    NextMaintenanceDate = d.NextMaintenanceDate,
-                    IsActive = d.IsActive,
-                }).ToDataSourceResult(request);
-
+                trucks = GetDataSourceResults.GetTrucks(request);
             }
             catch (Exception e)
             {

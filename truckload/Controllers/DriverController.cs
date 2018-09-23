@@ -30,22 +30,7 @@ namespace truckload.Controllers
             DataSourceResult drivers;
             try
             {
-                var query = from h in Db.Drivers select h;
-
-                drivers = query.Select(d => new VmDriver()
-                {
-                    DriverId = d.DriverId,
-                    Email = d.Email,
-                    FirstName = d.FirstName,
-                    LastName = d.LastName,
-                    IsActive = d.IsActive,
-                    IsEmployee = d.IsEmployee,
-                    PhoneNumber = d.PhoneNumber,
-                    TdgTrainingDate = d.TdgTrainingDate,
-                    WhmisTrainingDate = d.WhmisTrainingDate,
-                    LicenseExpireDate = d.LicenseExpireDate,
-                }).ToDataSourceResult(request);
-
+                drivers = GetDataSourceResults.GetDrivers(request);
             }
             catch (Exception e)
             {

@@ -1,0 +1,39 @@
+﻿@using truckload.DbContext
+@using truckload.Helpers
+@using truckload.Helpers.Vm
+
+@{
+    ViewBag.Title = "DcsView";
+    var viewName = (string)ViewData["ViewName"];
+    var displayName = viewName;
+}
+<h3 id="headerName"></h3>
+
+<script src="~/App_Dist/webpack/tlviews.bundle.js"></script>
+@{
+    switch (viewName)
+    {
+        case "Drivers":
+            @(Html.ViewGrid<VmDriver>(viewName))
+            displayName = "Drivers";
+            break;
+        case "Trucks":
+            @(Html.ViewGrid<VmTruck>(viewName))
+            displayName = "Trucks";
+            break;
+        case "Trailers":
+            @(Html.ViewGrid<VmTrailer>(viewName))
+            displayName = "Trailers";
+            break;
+    }
+}
+<script>
+    $("#headerName").text("@displayName");
+
+    function onDataBound(e) {
+        var grid = $("#grid").data("kendoGrid");
+        for (var i = 0; i < grid.columns.length; i++) {
+            grid.autoFitColumn(i);
+        }
+    }
+</script>

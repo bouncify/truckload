@@ -8,6 +8,16 @@
     <li>
         <a href="@(siteUrl + "Home/Index")">Home</a>
     </li>
+    <li>
+        Views
+        <div class="k-animation-container">
+            <ul class="k-group k-menu-group k-popup k-reset">
+                <li><a a href="@(siteUrl + "TlViews/Index?viewName=Drivers")">Drivers</a></li>
+                <li><a a href="@(siteUrl + "TlViews/Index?viewName=Trucks")">Trucks</a></li>
+                <li><a a href="@(siteUrl + "TlViews/Index?viewName=Trailers")">Trailers</a></li>
+            </ul>
+        </div>
+    </li>
     <li class="@(!isAdmin? "k-state-disabled": "")">
         <img src="~/App/Content/images/admin_small.png" />
         Admin
@@ -23,5 +33,7 @@
         </div>
     </li>
 </ul>
+
+@*@Html.ActionLink("Drivers", "Index","TlViews",new { viewName = "Drivers" },null)*@
 
 

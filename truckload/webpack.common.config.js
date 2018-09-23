@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     entry: {
         home: './App/Home.ts',
+        tlviews: './App/TlViews.ts',
         admin: './App/Admin/Admin.ts',
         testGrid: './App/Admin/TestGrid.ts'//,
         //orderCentral: './App/OrderCentral/Main.ts'

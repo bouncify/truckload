@@ -28,7 +28,6 @@ namespace truckload.Helpers.Vm
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayName("WHMIS Training")]
         public DateTime? WhmisTrainingDate { get; set; }
-        public int RegionId { get; set; }
         public string PhoneNumber { get; set; }
         [Display(Name = "Email address")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]

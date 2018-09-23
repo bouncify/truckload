@@ -30,21 +30,7 @@ namespace truckload.Controllers
             DataSourceResult trailers;
             try
             {
-                var query = from h in Db.Trailers select h;
-
-
-                trailers = query.Select(d => new VmTrailer()
-                {
-                    TrailerId = d.TrailerId,
-                    TrailerDescription = d.TrailerDescription,
-                    AxlesDescription = d.AxlesDescription,
-                    CapacityKg = d.CapacityKg,
-                    TrailerTypeId = d.TrailerTypeId,
-                    UnitOfMeasureId = d.UnitOfMeasureId,
-                    Volume = d.Volume,
-                    IsActive = d.IsActive,
-                }).ToDataSourceResult(request);
-
+                trailers = GetDataSourceResults.GetTrailers(request);
             }
             catch (Exception e)
             {

@@ -51,7 +51,7 @@ namespace truckload.Helpers
 
     public static class MyHtmlHelperExtensions
     {
-        public static Kendo.Mvc.UI.Fluent.GridBuilder<T> ViewGrid<T>(this HtmlHelper helper, string viewName, int height = 550, string templateName = "", string action = "View_Read", string controller = "AgViews", string area = "AgRecon")
+        public static Kendo.Mvc.UI.Fluent.GridBuilder<T> ViewGrid<T>(this HtmlHelper helper, string viewName, int height = 550, string templateName = "", string action = "View_Read", string controller = "TlViews")
             where T : class
         {
 
@@ -66,8 +66,8 @@ namespace truckload.Helpers
                 .Filterable()
                 .HtmlAttributes(new { style = "height:" + height + "px;cursor: pointer;" })
                 .DataSource(dataSource => dataSource.Ajax()
-                    .Events(events => { events.Error("Shared.gridErrorHandler"); }).PageSize(20)
-                    .Read(read => read.Action(action, controller, new { Area = area, ViewName = viewName })));
+                    .Events(events => { events.Error("app.onDataSourceError"); }).PageSize(20)
+                    .Read(read => read.Action(action, controller, new {ViewName = viewName })));
 
             if (!templateName.IsNullOrEmpty())
             {

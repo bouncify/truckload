@@ -201,6 +201,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TlViewsController.cs" />
     <Compile Include="Controllers\TrailerController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
@@ -251,6 +252,7 @@
     </Compile>
     <Compile Include="Helpers\Admin\VmUserLogin.cs" />
     <Compile Include="Helpers\CustomExtensions.cs" />
+    <Compile Include="Helpers\GetDataSourceResults.cs" />
     <Compile Include="Helpers\ServerError.cs" />
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
     <Compile Include="Helpers\Vm\VmDriver.cs" />
@@ -346,6 +348,7 @@
     <Content Include="Views\UserLogin\Edit.cshtml" />
     <Content Include="Views\Truck\Edit.cshtml" />
     <Content Include="Views\Trailer\Edit.cshtml" />
+    <Content Include="Views\TlViews\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
@@ -364,6 +367,7 @@
     <TypeScriptCompile Include="App\Shared\Classes\SelectListItem.ts" />
     <TypeScriptCompile Include="App\Shared\Global.ts" />
     <TypeScriptCompile Include="App\Shared\String.ts" />
+    <TypeScriptCompile Include="App\TlViews.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
