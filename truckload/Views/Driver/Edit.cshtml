@@ -51,7 +51,11 @@
                   editable.Mode(GridEditMode.InCell);
                   editable.DisplayDeleteConfirmation(false);
               })
-              .Events(e => e.Edit("app.module.onEdit"))
+              .Events(e =>
+              {
+                  e.Edit("app.module.onEdit");
+                  e.DataBound("app.module.onDataBound");
+              })
               .Pageable()
               .Navigatable()
               .Resizable(r => r.Columns(true))
@@ -63,7 +67,8 @@
               .DataSource(dataSource => dataSource
                                       .Ajax()
 
-                                      .Events(events => events.Error("app.module.onDataSourceError"))
+                                      .Events(events => 
+                                          events.Error("app.module.onDataSourceError"))
                                       .Model(model =>
                                       {
                                           model.Id(p => p.DriverId);
@@ -78,5 +83,6 @@
 
 <script>    
     app.initUserLoginModule();
+
 </script>
 

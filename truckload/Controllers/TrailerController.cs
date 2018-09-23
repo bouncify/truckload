@@ -11,6 +11,7 @@ using truckload.Helpers.Vm;
 
 namespace truckload.Controllers
 {
+    [Authorize]
     public class TrailerController : BaseController
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)

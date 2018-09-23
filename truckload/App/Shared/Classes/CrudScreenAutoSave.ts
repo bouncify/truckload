@@ -46,6 +46,10 @@ export class CrudScreenAutoSave {
         ControlHelper.gridErrorHandler(e);
     }
 
+    public onDataBound(e: any) {
+
+    }
+
     public onEdit(e: any) {
         const inputName = e.container.find("input").attr("name");
         const myInput = e.container.find(`input[name="${inputName}"]`);

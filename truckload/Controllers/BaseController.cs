@@ -50,6 +50,7 @@ namespace truckload.Controllers
                     ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
                 }
             }
+
             ViewBag.SiteUrl = GetSiteUrl();
             ViewBag.IsLoggedIn = isLoggedIn;
         }
