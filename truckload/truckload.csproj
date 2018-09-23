@@ -334,6 +334,7 @@
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLoginsModel.ts" />
     <TypeScriptCompile Include="App\Admin\Modules\Driver.ts" />
+    <TypeScriptCompile Include="App\Admin\Modules\Trucks.ts" />
     <TypeScriptCompile Include="App\Admin\Modules\UserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />

@@ -17,9 +17,11 @@
       .Name("grid")
       .Columns(columns =>
       {
-          columns.Bound(u => u.UserLoginId);
+          columns.Bound(u => u.UserLoginId).Title("Id");
           columns.Bound(u => u.UserId);
           columns.Bound(u => u.UserName);
+          columns.ForeignKey(r => r.AccessLevelId, (System.Collections.IEnumerable)ViewData["accessLevels"], "AccessLevelId", "Description").Title("Access Level");
+
           columns.Bound(r => r.Email);
 
           columns.Template(e => { }).Title("Delete").Width(40)

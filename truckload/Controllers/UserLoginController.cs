@@ -23,6 +23,7 @@ namespace truckload.Controllers
         // GET: Drivers
         public ActionResult Edit()
         {
+            ViewData["accessLevels"] = Db.AccessLevels;
             return View();
         }
 
