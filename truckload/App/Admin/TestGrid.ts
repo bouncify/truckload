@@ -15,9 +15,9 @@ $("#menu").kendoMenu();
 
 class KoTest {
     items = ko.observableArray([
-        { id: "1", name: "apple" },
-        { id: "2", name: "orange" },
-        { id: "3", name: "banana" }
+        { id: "1", name: "apple", theDay: Date() },
+        { id: "2", name: "orange", theDay: Date() },
+        { id: "3", name: "banana", theDay: Date() }
     ]);
 
     addItem() {
@@ -27,5 +27,22 @@ class KoTest {
 }
 
 var viewModel = new KoTest();
+
+
+ko.bindingHandlers.kendoGrid.options = {
+    columns: [
+        { field: "id", title: "theId"},
+        { field: "name", title: "fruit"},
+        {
+            field: "theDay", title: "date",
+            template: "#= kendo.toString(kendo.parseDate(theDay, 'yyyy-MM-dd'), 'MM/dd/yyyy') #"
+        }
+
+        ],
+    scrollable: true,
+    sortable: true,
+    height: 550,
+    editable: true
+};
 
 ko.applyBindings(viewModel);

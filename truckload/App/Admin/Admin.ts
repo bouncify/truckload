@@ -1,4 +1,5 @@
 ﻿import "kendo/js/kendo.grid.js"
+//import "kendo/js/kendo.datepicker.js"
 import "kendo/js/kendo.dialog.js"
 import "kendo/js/kendo.aspnetmvc.js"
 

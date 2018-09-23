@@ -17,7 +17,7 @@ namespace truckload.Helpers.Vm
         public bool IsEmployee { get; set; }
         public bool IsActive { get; set; }
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [DisplayName("License Expire")]
         public DateTime? LicenseExpireDate { get; set; }
         [DataType(DataType.Date)]
