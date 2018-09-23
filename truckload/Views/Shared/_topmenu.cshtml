@@ -6,15 +6,15 @@
 <ul id="menu">
     <li>Order Central</li>
     <li>
-        <a href="@(siteUrl + "Home/Index")">Home</a>
+        <a onclick="onClickMenuItem('@(siteUrl + "Home/Index")')">Home</a>
     </li>
     <li>
         Views
         <div class="k-animation-container">
             <ul class="k-group k-menu-group k-popup k-reset">
-                <li><a a href="@(siteUrl + "TlViews/Index?viewName=Drivers")">Drivers</a></li>
-                <li><a a href="@(siteUrl + "TlViews/Index?viewName=Trucks")">Trucks</a></li>
-                <li><a a href="@(siteUrl + "TlViews/Index?viewName=Trailers")">Trailers</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Drivers")')">Drivers</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trucks")')">Trucks</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trailers")')">Trailers</a></li>
             </ul>
         </div>
     </li>
@@ -23,17 +23,21 @@
         Admin
         <div class="k-animation-container">
             <ul class="k-group k-menu-group k-popup k-reset">
-                <li><a href="@(siteUrl + "Admin/EditUsers")">Old User Logins</a></li>
-                <li><a href="@(siteUrl + "UserLogin/Edit")">User Logins</a></li>
-                <li><a href="@(siteUrl + "Admin/TestGrid")">Test Grid</a></li>
-                <li><a href="@(siteUrl + "Driver/Edit")">Drivers</a></li>
-                <li><a href="@(siteUrl + "Truck/Edit")">Trucks</a></li>
-                <li><a href="@(siteUrl + "Trailer/Edit")">Trailers</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "Admin/EditUsers")')">Old User Logins</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "UserLogin/Edit")')">User Logins</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "Admin/TestGrid")')">Test Grid</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "Driver/Edit")')">Drivers</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "Truck/Edit")')">Trucks</a></li>
+                <li><a onclick="onClickMenuItem('@(siteUrl + "Trailer/Edit")')">Trailers</a></li>
             </ul>
         </div>
     </li>
 </ul>
 
-@*@Html.ActionLink("Drivers", "Index","TlViews",new { viewName = "Drivers" },null)*@
-
-
+<script>
+    function onClickMenuItem(url) {
+        $("#containerBody").hide();
+        $("#preLoad").show();
+        location.assign(url);
+    }
+</script>

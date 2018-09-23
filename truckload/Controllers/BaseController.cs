@@ -67,6 +67,11 @@ namespace truckload.Controllers
             if (Request.Url != null)
             {
                 siteUrl = Request.Url.AbsoluteUri;
+                if (siteUrl.Contains("?"))
+                {
+                    siteUrl = siteUrl.Split('?')[0];
+                }
+
                 if (Request.Path.Length > 1) siteUrl = siteUrl.Replace(Request.Path, "") + "/";
                 if (appPath.Length > 1) siteUrl += appPath.Replace("/", "") + "/";
             }
