@@ -78,5 +78,24 @@ namespace truckload.Helpers
 
             return trailers;
         }
+
+        public static DataSourceResult GetWarehouses([DataSourceRequest] DataSourceRequest request)
+        {
+            DataSourceResult warehouses;
+            using (var db = new truckloadEntities())
+            {
+                var query = from h in db.Warehouses select h;
+
+                warehouses = query.Select(d => new VmWarehouse()
+                {
+                    WarehouseId = d.WarehouseId,
+                    IsActive = d.IsActive,
+                    WarehouseCode = d.WarehouseCode,
+                    Description = d.Description
+                }).ToDataSourceResult(request);
+            }
+
+            return warehouses;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace truckload.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            InitViewData();
+            InitViewData(TabMenu.Views);
         }
 
         public ActionResult Index(string viewName)
@@ -39,6 +39,9 @@ namespace truckload.Controllers
                         break;
                     case "Trailers":
                         result = GetDataSourceResults.GetTrailers(request);
+                        break;
+                    case "Warehouses":
+                        result = GetDataSourceResults.GetWarehouses(request);
                         break;
                 }
             }

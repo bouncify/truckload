@@ -22,7 +22,15 @@ namespace truckload.Controllers
             Db = new truckloadEntities();
         }
 
-        public void InitViewData()
+        public enum TabMenu
+        {
+            Default,
+            OrderCentral,
+            Views,
+            Admin
+        }
+
+        public void InitViewData(TabMenu tabMenu = TabMenu.Default)
         {
             var currentUserId = User.Identity.Name;
             var isLoggedIn = false;
@@ -50,6 +58,10 @@ namespace truckload.Controllers
                     ViewData.Add("AccessLevel", currentUser.UserLevelDescription);
                 }
             }
+
+            ViewBag.MenuOrderCentral = tabMenu == TabMenu.OrderCentral ? "active" : "";
+            ViewBag.MenuViews = tabMenu == TabMenu.Views ? "active" : "";
+            ViewBag.MenuAdmin = tabMenu == TabMenu.Admin ? "active" : "";
 
             ViewBag.SiteUrl = GetSiteUrl();
             ViewBag.IsLoggedIn = isLoggedIn;

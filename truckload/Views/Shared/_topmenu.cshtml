@@ -19,23 +19,23 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Order Central <span class="sr-only">(current)</span></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" 
+                <li class="@ViewBag.MenuOrderCentral"><a href="#">Order Central <span class="sr-only">(current)</span></a></li>
+                <li class="dropdown @ViewBag.MenuViews">
+                    <a  href="#" class="dropdown-toggle" 
                        data-toggle="dropdown" role="button" 
                        aria-haspopup="true" aria-expanded="false">Views <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Drivers")')">Drivers</a></li>
                         <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trucks")')">Trucks</a></li>
                         <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trailers")')">Trailers</a></li>
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Warehouses")')">Warehouses</a></li>
                     </ul>
                 </li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-
-                <li class="dropdown">
-                    <a href="#" class="@(!isAdmin? "disabled": "") dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <li class="dropdown @ViewBag.MenuAdmin">
+                    <a   href="#" class="@(!isAdmin? "disabled": "") dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <img src="~/App/Content/images/admin_small.png"/>
                         Admin <span class="caret"></span>
                     </a>
@@ -43,6 +43,7 @@
                         <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "Driver/Edit")')">Drivers</a></li>
                         <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "Truck/Edit")')">Trucks</a></li>
                         <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "Trailer/Edit")')">Trailers</a></li>
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "Warehouse/Edit")')">Warehouses</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "UserLogin/Edit")')">User Logins</a></li>
                     </ul>
@@ -53,6 +54,34 @@
 </nav>
 
 <script>
+    //alert("hello");
+    //var tabName = "@ViewBag.TabName";
+
+    //if (tabName === "Truckload") {
+    //    $("#mnuTruckload").addClass("active");
+    //} else {
+    //    $("#mnuTruckload").removeClass("active");
+    //}
+
+    //if (tabName === "OrderCentral") {
+    //    $("#mnuOrderCentral").addClass("active");
+    //} else {
+    //    $("#mnuOrderCentral").removeClass("active");
+    //}
+
+    //if (tabName === "Views") {
+    //    $("#mnuViews").addClass("active");
+    //} else {
+    //    $("#mnuViews").removeClass("active");
+    //}
+
+    //if (tabName === "Admin") {
+    //    $("#mnuAdmin").addClass("active");
+    //} else {
+    //    $("#mnuAdmin").removeClass("active");
+    //}
+
+
     function onClickMenuItem(url) {
         $("#containerBody").hide();
         $("#preLoad").show();

@@ -88,6 +88,15 @@
           <Property Name="HashPassword" Type="binary" MaxLength="64" Nullable="false" />
           <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="WarehouseId" />
+          </Key>
+          <Property Name="WarehouseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WarehouseCode" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <Association Name="FK__Trailer__Trailer__4BD7F309">
           <End Role="TrailerType" Type="Self.TrailerType" Multiplicity="1" />
           <End Role="Trailer" Type="Self.Trailer" Multiplicity="*" />
@@ -145,6 +154,7 @@
           <EntitySet Name="Truck" EntityType="Self.Truck" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitOfMeasure" EntityType="Self.UnitOfMeasure" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Trailer__Trailer__4BD7F309" Association="Self.FK__Trailer__Trailer__4BD7F309">
             <End Role="TrailerType" EntitySet="TrailerType" />
             <End Role="Trailer" EntitySet="Trailer" />
@@ -203,6 +213,7 @@
             <End Role="UnitOfMeasure" EntitySet="UnitOfMeasures" />
             <End Role="Trailer" EntitySet="Trailers" />
           </AssociationSet>
+          <EntitySet Name="Warehouses" EntityType="truckloadModel.Warehouse" />
           </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
           <Property Type="Int32" Name="UserLoginId" Nullable="false" />
@@ -325,6 +336,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="WarehouseId" />
+          </Key>
+          <Property Name="WarehouseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WarehouseCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -428,6 +448,16 @@
               <MappingFragment StoreEntitySet="UnitOfMeasure">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="truckloadModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="WarehouseCode" ColumnName="WarehouseCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="WarehouseId" ColumnName="WarehouseId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

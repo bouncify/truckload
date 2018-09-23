@@ -15,7 +15,7 @@ namespace truckload.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            InitViewData();
+            InitViewData(TabMenu.Admin);
         }
 
         public ActionResult Index()

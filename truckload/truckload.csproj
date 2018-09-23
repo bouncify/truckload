@@ -205,6 +205,7 @@
     <Compile Include="Controllers\TrailerController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="DbContext\AccessLevel.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
@@ -247,6 +248,9 @@
     <Compile Include="DbContext\UserLogin.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\Warehouse.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -259,6 +263,7 @@
     <Compile Include="Helpers\Vm\VmLogin.cs" />
     <Compile Include="Helpers\Vm\VmTrailer.cs" />
     <Compile Include="Helpers\Vm\VmTruck.cs" />
+    <Compile Include="Helpers\Vm\VmWarehouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Helpers\Vm\VmUser.cs" />
@@ -273,6 +278,7 @@
     <Content Include="App\Content\images\siluet-truck.png" />
     <Content Include="App\Content\images\truckload-home.jpg" />
     <Content Include="App\Content\images\user-permission.png" />
+    <Content Include="App\Content\images\warehouse.png" />
     <Content Include="App_Data\truckload.mdf" />
     <Content Include="App_Data\truckload_log.ldf">
       <DependentUpon>truckload.mdf</DependentUpon>
@@ -349,6 +355,7 @@
     <Content Include="Views\Truck\Edit.cshtml" />
     <Content Include="Views\Trailer\Edit.cshtml" />
     <Content Include="Views\TlViews\Index.cshtml" />
+    <Content Include="Views\Warehouse\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
@@ -358,6 +365,7 @@
     <TypeScriptCompile Include="App\Admin\Modules\Trailer.ts" />
     <TypeScriptCompile Include="App\Admin\Modules\Truck.ts" />
     <TypeScriptCompile Include="App\Admin\Modules\UserLogin.ts" />
+    <TypeScriptCompile Include="App\Admin\Modules\Warehouse.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />
