@@ -3,36 +3,54 @@
     var siteUrl = ViewBag.SiteUrl;
 }
 
-<ul id="menu">
-    <li>Order Central</li>
-    <li>
-        <a onclick="onClickMenuItem('@(siteUrl + "Home/Index")')">Home</a>
-    </li>
-    <li>
-        Views
-        <div class="k-animation-container">
-            <ul class="k-group k-menu-group k-popup k-reset">
-                <li><a onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Drivers")')">Drivers</a></li>
-                <li><a onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trucks")')">Trucks</a></li>
-                <li><a onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trailers")')">Trailers</a></li>
-            </ul>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@(siteUrl + "Home/Index")">Truckload</a>
         </div>
-    </li>
-    <li class="@(!isAdmin? "k-state-disabled": "")">
-        <img src="~/App/Content/images/admin_small.png" />
-        Admin
-        <div class="k-animation-container">
-            <ul class="k-group k-menu-group k-popup k-reset">
-                <li><a onclick="onClickMenuItem('@(siteUrl + "Admin/EditUsers")')">Old User Logins</a></li>
-                <li><a onclick="onClickMenuItem('@(siteUrl + "UserLogin/Edit")')">User Logins</a></li>
-                <li><a onclick="onClickMenuItem('@(siteUrl + "Admin/TestGrid")')">Test Grid</a></li>
-                <li><a onclick="onClickMenuItem('@(siteUrl + "Driver/Edit")')">Drivers</a></li>
-                <li><a onclick="onClickMenuItem('@(siteUrl + "Truck/Edit")')">Trucks</a></li>
-                <li><a onclick="onClickMenuItem('@(siteUrl + "Trailer/Edit")')">Trailers</a></li>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Order Central <span class="sr-only">(current)</span></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" 
+                       data-toggle="dropdown" role="button" 
+                       aria-haspopup="true" aria-expanded="false">Views <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Drivers")')">Drivers</a></li>
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trucks")')">Trucks</a></li>
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "TlViews/Index?viewName=Trailers")')">Trailers</a></li>
+                    </ul>
+                </li>
             </ul>
-        </div>
-    </li>
-</ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown">
+                    <a href="#" class="@(!isAdmin? "disabled": "") dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <img src="~/App/Content/images/admin_small.png"/>
+                        Admin <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "Driver/Edit")')">Drivers</a></li>
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "Truck/Edit")')">Trucks</a></li>
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "Trailer/Edit")')">Trailers</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a style="cursor: pointer" onclick="onClickMenuItem('@(siteUrl + "UserLogin/Edit")')">User Logins</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
 <script>
     function onClickMenuItem(url) {

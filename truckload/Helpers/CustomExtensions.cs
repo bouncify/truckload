@@ -51,7 +51,7 @@ namespace truckload.Helpers
 
     public static class MyHtmlHelperExtensions
     {
-        public static Kendo.Mvc.UI.Fluent.GridBuilder<T> ViewGrid<T>(this HtmlHelper helper, string viewName, int height = 550, string templateName = "", string action = "View_Read", string controller = "TlViews")
+        public static Kendo.Mvc.UI.Fluent.GridBuilder<T> ViewGrid<T>(this HtmlHelper helper, string viewName, int height = 650, string templateName = "", string action = "View_Read", string controller = "TlViews")
             where T : class
         {
 

@@ -1,7 +1,7 @@
 ﻿import "./content/css/Site.less";
 
 //import "@progress/kendo-ui/js/kendo.dropdownlist.js"
-import "kendo/js/kendo.menu.js"
+//import "kendo/js/kendo.menu.js"
 
 //import "@progress/kendo-ui/css/web/kendo.common.core.min.css"
 //import "@progress/kendo-ui/css/web/kendo.default.min.css"
@@ -12,7 +12,7 @@ import "kendo/js/kendo.menu.js"
 //import "kendo-ui-core/js/kendo.dropdownlist.js"
 //import "kendo-ui-core/js/kendo.menu.js"
 
-$("#menu").kendoMenu();
+//$("#menu").kendoMenu();
 
 // on document ready
 $(() => {
