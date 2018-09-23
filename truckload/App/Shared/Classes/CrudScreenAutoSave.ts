@@ -99,5 +99,9 @@ export class CrudScreenAutoSave {
 
     constructor(scrDetail: CrudScreenDetail) {
         this.scrDetail = scrDetail;
+
+        $(() => {//document ready
+            this.updateDomObjects();
+        });
     }
 }
