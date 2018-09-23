@@ -67,6 +67,14 @@
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="uspAddUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pUserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="pUserId" Type="nvarchar" Mode="In" />
+          <Parameter Name="pPassword" Type="nvarchar" Mode="In" />
+          <Parameter Name="pEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="responseMessage" Type="nvarchar" Mode="InOut" />
+          <Parameter Name="newId" Type="int" Mode="InOut" />
+        </Function>
         <EntityContainer Name="truckloadModelStoreContainer">
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
@@ -102,6 +110,14 @@
           </AssociationSet>
           <EntitySet Name="Errors" EntityType="truckloadModel.Error" />
           <EntitySet Name="Drivers" EntityType="truckloadModel.Driver" />
+          <FunctionImport Name="uspAddUser">
+            <Parameter Name="pUserName" Mode="In" Type="String" />
+            <Parameter Name="pUserId" Mode="In" Type="String" />
+            <Parameter Name="pPassword" Mode="In" Type="String" />
+            <Parameter Name="pEmail" Mode="In" Type="String" />
+            <Parameter Name="responseMessage" Mode="InOut" Type="String" />
+            <Parameter Name="newId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
           <Property Type="Int32" Name="UserLoginId" Nullable="false" />
@@ -223,6 +239,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspAddUser" FunctionName="truckloadModel.Store.uspAddUser" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

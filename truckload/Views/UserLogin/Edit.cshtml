@@ -1,0 +1,72 @@
+﻿@using Kendo.Mvc.UI
+@using truckload.Helpers.Admin
+@using truckload.Helpers.Vm
+
+
+<div class="row">
+    <div class="col-xs-4" style="margin-top: 9px; font-size: 30px;font-weight: 500;">
+        <img style="height: 60px; padding-bottom: 5px" src="~/App/Content/Images/user-permission.png" />
+        <span>User Logins</span>
+    </div>
+</div>
+
+<script src="~/App_Dist/webpack/admin.bundle.js"></script>
+
+<p></p>
+@(Html.Kendo().Grid<VmUserLogin>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(u => u.UserLoginId);
+          columns.Bound(u => u.UserId);
+          columns.Bound(u => u.UserName);
+          columns.Bound(r => r.Email);
+
+          columns.Template(e => { }).Title("Delete").Width(40)
+              .ClientTemplate("<button type='button' title='Delete User' class='k-button k-button-icontext' style='min-width: auto;' onclick='app.module.btnDeleteClick(this)' ><span class='k-icon k-i-close'></span></button>")
+              .HtmlAttributes(new { @style = "padding: 0" });
+
+      })
+      .ToolBar(toolbar =>
+      {
+          //toolbar.Create();
+          toolbar.Custom().Text("Add User").Name("AddUserLogin");
+      })
+
+      .Editable(editable =>
+      {
+          editable.Mode(GridEditMode.InCell);
+          editable.DisplayDeleteConfirmation(false);
+      })
+      .Events(e => e.Edit("app.module.onEdit"))
+      .Pageable()
+      .Navigatable()
+      .Resizable(r => r.Columns(true))
+      .Selectable(s => s.Enabled(false))
+      .Sortable()
+      .Scrollable()
+      .Filterable()
+      .HtmlAttributes(new { style = "height:620px;cursor: pointer;" })
+      .DataSource(dataSource => dataSource
+                                          .Ajax()
+
+                                          .Events(events => events.Error("app.module.onDataSourceError"))
+                                          .Model(model =>
+                                          {
+                                              model.Id(p => p.UserLoginId);
+                                              model.Field(p => p.UserLoginId).Editable(false);
+                                              model.Field(p => p.UserId).Editable(false);
+                                          })
+                              .PageSize(15)
+                              .AutoSync(true)
+                              .Read(read => read.Action("Read", "UserLogin"))
+                          .Update(update => update.Action("Update", "UserLogin"))
+          .Create(create => create.Action("Create", "UserLogin").Data("app.module.additionalInfo"))
+      ))
+
+<script>
+
+
+    app.initUserLoginModule();
+</script>
+

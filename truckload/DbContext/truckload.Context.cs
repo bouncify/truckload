@@ -44,5 +44,26 @@ namespace truckload.DbContext
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<LoginByUsernamePassword_Result>("LoginByUsernamePassword", usernameParameter, passwordParameter);
         }
+    
+        public virtual int uspAddUser(string pUserName, string pUserId, string pPassword, string pEmail, ObjectParameter responseMessage, ObjectParameter newId)
+        {
+            var pUserNameParameter = pUserName != null ?
+                new ObjectParameter("pUserName", pUserName) :
+                new ObjectParameter("pUserName", typeof(string));
+    
+            var pUserIdParameter = pUserId != null ?
+                new ObjectParameter("pUserId", pUserId) :
+                new ObjectParameter("pUserId", typeof(string));
+    
+            var pPasswordParameter = pPassword != null ?
+                new ObjectParameter("pPassword", pPassword) :
+                new ObjectParameter("pPassword", typeof(string));
+    
+            var pEmailParameter = pEmail != null ?
+                new ObjectParameter("pEmail", pEmail) :
+                new ObjectParameter("pEmail", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspAddUser", pUserNameParameter, pUserIdParameter, pPasswordParameter, pEmailParameter, responseMessage, newId);
+        }
     }
 }

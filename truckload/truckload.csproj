@@ -201,6 +201,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="DbContext\AccessLevel.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
@@ -249,7 +250,11 @@
     <Content Include="App\Content\css\custom-bootstrap.css" />
     <Content Include="App\Content\images\admin_small.png" />
     <Content Include="App\Content\images\app_icon.png" />
+    <Content Include="App\Content\images\siluet-driver_sm.png" />
+    <Content Include="App\Content\images\siluet-trailer.png" />
+    <Content Include="App\Content\images\siluet-truck.png" />
     <Content Include="App\Content\images\truckload-home.jpg" />
+    <Content Include="App\Content\images\user-permission.png" />
     <Content Include="App_Data\truckload.mdf" />
     <Content Include="App_Data\truckload_log.ldf">
       <DependentUpon>truckload.mdf</DependentUpon>
@@ -322,12 +327,14 @@
     <Content Include="Views\Shared\EditorTemplates\String.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
+    <Content Include="Views\UserLogin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLoginsModel.ts" />
     <TypeScriptCompile Include="App\Admin\Modules\Driver.ts" />
+    <TypeScriptCompile Include="App\Admin\Modules\UserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />

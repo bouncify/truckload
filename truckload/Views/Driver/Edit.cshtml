@@ -2,6 +2,13 @@
 @using truckload.Helpers.Vm
 
 
+<div class="row">
+    <div class="col-xs-4" style="margin-top: 9px; font-size: 30px;font-weight: 500;">
+        <img style="height: 60px; padding-bottom: 5px" src="~/App/Content/Images/siluet-driver_sm.png" />
+        <span>Drivers</span>
+    </div>
+</div>
+
 <script src="~/App_Dist/webpack/admin.bundle.js"></script>
 
 <p></p>
@@ -69,17 +76,7 @@
               .Create(create => create.Action("Create", "Driver").Data("app.module.additionalInfo"))
               ))
 
-<script>
-
-
-    app.initDriverModule();
+<script>    
+    app.initUserLoginModule();
 </script>
 
-@*<script>
-
-        console.log("wibble");
-
-        function onEdit(e) {
-            drivers.onEdit(e);
-        }
-    </script>*@
