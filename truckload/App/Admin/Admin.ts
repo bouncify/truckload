@@ -4,24 +4,21 @@ import "kendo/js/kendo.dialog.js"
 import "kendo/js/kendo.aspnetmvc.js"
 
 import "kendo/js/kendo.menu.js"
-import {Driver} from "./Modules/Driver"
-import {Truck} from "./Modules/Truck"
-import {UserLogin} from "./Modules/UserLogin"
-import {CrudScreenAutoSave} from "../Shared/Classes/CrudScreenAutoSave"
+import { Driver } from "./Modules/Driver"
+import { Truck } from "./Modules/Truck"
+import { Trailer } from "./Modules/Trailer"
+import { UserLogin } from "./Modules/UserLogin"
+import { CrudScreenAutoSave } from "../Shared/Classes/CrudScreenAutoSave"
 
 
 $("#menu").kendoMenu();
 
 export var module: CrudScreenAutoSave;
 
-export function initDriverModule() {
-    module = Driver.init();
-}
+export function initDriverModule() { module = Driver.init(); }
 
-export function initTruckModule() {
-    module = Truck.init();
-}
+export function initTruckModule() { module = Truck.init(); }
 
-export function initUserLoginModule() {
-    module = UserLogin.init();
-}
+export function initTrailerModule() { module = Trailer.init(); }
+
+export function initUserLoginModule() { module = UserLogin.init(); }

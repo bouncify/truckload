@@ -1,0 +1,79 @@
+﻿
+@using Kendo.Mvc.UI
+@using truckload.Helpers.Vm
+
+
+<div class="row">
+    <div class="col-xs-4" style="margin-top: 9px; font-size: 30px;font-weight: 500;">
+        <img style="height: 60px; padding-bottom: 5px" src="~/App/Content/Images/siluet-trailer.png" />
+        <span>Trailers</span>
+    </div>
+</div>
+
+<script src="~/App_Dist/webpack/admin.bundle.js"></script>
+
+<p></p>
+@(Html.Kendo().Grid<VmTrailer>()
+          .Name("grid")
+          .Columns(columns =>
+          {
+              columns.Bound(r => r.TrailerId).Title("Id").Width(50);
+
+              columns.Template(e => { }).Title("Active?").Width(60)
+                  .ClientTemplate("<input type='checkbox' #= IsActive ? checked='checked' : '' # class='chkbxIsActive' />");
+
+              columns.Bound(r => r.TrailerDescription).Title("Description").Width(150);
+
+              columns.Bound(r => r.AxlesDescription).Width(150);
+              columns.Bound(r => r.CapacityKg).Width(100);
+              columns.Bound(r => r.Volume).Width(100);
+
+              columns.ForeignKey(r => r.TrailerTypeId, (System.Collections.IEnumerable)ViewData["trailerTypes"], "TrailerTypeId", "Description").Title("Type");
+              columns.ForeignKey(r => r.UnitOfMeasureId, (System.Collections.IEnumerable)ViewData["unitsOfMeasure"], "UnitOfMeasureId", "Description").Title("Unit Of Measure");
+
+              columns.Template(e => { }).Title("Delete").Width(40)
+                  .ClientTemplate("<button type='button' title='Delete Trailer' class='k-button k-button-icontext' style='min-width: auto;' onclick='app.module.btnDeleteClick(this)' ><span class='k-icon k-i-close'></span></button>")
+                  .HtmlAttributes(new { @style = "padding: 0" });
+
+          })
+          .ToolBar(toolbar =>
+          {
+  //toolbar.Create();
+  toolbar.Custom().Text("Add Trailer").Name("AddTrailer");
+          })
+
+          .Editable(editable =>
+          {
+              editable.Mode(GridEditMode.InCell);
+              editable.DisplayDeleteConfirmation(false);
+          })
+          .Events(e => e.Edit("app.module.onEdit"))
+          .Pageable()
+          .Navigatable()
+          .Resizable(r => r.Columns(true))
+          .Selectable(s => s.Enabled(false))
+          .Sortable()
+          .Scrollable()
+          .Filterable()
+          .HtmlAttributes(new { style = "height:620px;cursor: pointer;" })
+          .DataSource(dataSource => dataSource
+                                              .Ajax()
+
+                                              .Events(events => events.Error("app.module.onDataSourceError"))
+                                              .Model(model =>
+                                              {
+                                                  model.Id(p => p.TrailerId);
+                                                  model.Field(p => p.TrailerId).Editable(false);
+                                              })
+                                  .PageSize(15)
+                                  .AutoSync(true)
+                                  .Read(read => read.Action("Read", "Trailer"))
+                              .Update(update => update.Action("Update", "Trailer"))
+              .Create(create => create.Action("Create", "Trailer").Data("app.module.additionalInfo"))
+          ))
+
+<script>
+
+    app.initTrailerModule();
+</script>
+
