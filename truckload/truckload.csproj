@@ -201,6 +201,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TruckController.cs" />
     <Compile Include="Controllers\UserLoginController.cs" />
     <Compile Include="DbContext\AccessLevel.cs">
       <DependentUpon>truckload.tt</DependentUpon>
@@ -212,6 +213,15 @@
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\LoginByUsernamePassword_Result.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Trailer.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\TrailerType.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Truck.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\truckload.Context.cs">
@@ -229,6 +239,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>truckload.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\UnitOfMeasure.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\UserLogin.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
@@ -241,6 +254,7 @@
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
     <Compile Include="Helpers\Vm\VmDriver.cs" />
     <Compile Include="Helpers\Vm\VmLogin.cs" />
+    <Compile Include="Helpers\Vm\VmTruck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Helpers\Vm\VmUser.cs" />
@@ -328,13 +342,14 @@
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Url.cshtml" />
     <Content Include="Views\UserLogin\Edit.cshtml" />
+    <Content Include="Views\Truck\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\Classes\KoUserLoginsModel.ts" />
     <TypeScriptCompile Include="App\Admin\Modules\Driver.ts" />
-    <TypeScriptCompile Include="App\Admin\Modules\Trucks.ts" />
+    <TypeScriptCompile Include="App\Admin\Modules\Truck.ts" />
     <TypeScriptCompile Include="App\Admin\Modules\UserLogin.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />

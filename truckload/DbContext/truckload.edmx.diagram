@@ -10,6 +10,12 @@
         <AssociationConnector Association="truckloadModel.FK__UserLogin__Acces__160F4887" />
         <EntityTypeShape EntityType="truckloadModel.Error" Width="1.5" PointX="5.875" PointY="3.625" />
         <EntityTypeShape EntityType="truckloadModel.Driver" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="truckloadModel.Trailer" Width="1.5" PointX="5.625" PointY="7" />
+        <EntityTypeShape EntityType="truckloadModel.TrailerType" Width="1.5" PointX="3.375" PointY="7.625" />
+        <EntityTypeShape EntityType="truckloadModel.Truck" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="truckloadModel.UnitOfMeasure" Width="1.5" PointX="3.375" PointY="10.625" />
+        <AssociationConnector Association="truckloadModel.FK__Trailer__Trailer__4BD7F309" />
+        <AssociationConnector Association="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

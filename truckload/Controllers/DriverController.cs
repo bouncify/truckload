@@ -58,6 +58,8 @@ namespace truckload.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Update([DataSourceRequest] DataSourceRequest request, VmDriver driver)
         {
+            var isEditable = CurrentUser.UserLevel == 3;
+            if (!isEditable) ModelState.AddModelError("Update", "Current user does not have permission to update drivers.");
 
             if (ModelState.IsValid)
             {
@@ -95,6 +97,9 @@ namespace truckload.Controllers
         {
             var rtnString = "";
 
+            var isEditable = CurrentUser.IsAdmin;
+            if (!isEditable) rtnString += "Current user does not have permission to delete a driver.";
+
             if (rtnString.IsNullOrEmpty())
             {
                 var dbDriver = Db.Drivers.Find(id);
@@ -124,6 +129,8 @@ namespace truckload.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create([DataSourceRequest] DataSourceRequest request, VmDriver driver)
         {
+            var isEditable = CurrentUser.IsAdmin;
+            if (!isEditable) ModelState.AddModelError("Create", "Current user does not have permission to create a driver.");
 
             if (ModelState.IsValid)
             {

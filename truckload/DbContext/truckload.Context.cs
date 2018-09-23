@@ -31,6 +31,10 @@ namespace truckload.DbContext
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<Error> Errors { get; set; }
         public virtual DbSet<Driver> Drivers { get; set; }
+        public virtual DbSet<Trailer> Trailers { get; set; }
+        public virtual DbSet<TrailerType> TrailerTypes { get; set; }
+        public virtual DbSet<Truck> Trucks { get; set; }
+        public virtual DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
     
         public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
         {

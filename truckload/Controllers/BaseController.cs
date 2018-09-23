@@ -7,14 +7,14 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using truckload.DbContext;
 using truckload.Helpers;
-using truckload.Vm;
+using truckload.Helpers.Vm;
 
 namespace truckload.Controllers
 {
     public class BaseController : Controller
     {
         public readonly truckloadEntities Db;
-        VmUser _currentUser;
+        public VmUser CurrentUser;
 
         public BaseController()
         {
@@ -44,7 +44,7 @@ namespace truckload.Controllers
 
                 if (isLoggedIn)
                 {
-                    _currentUser = currentUser;
+                    CurrentUser = currentUser;
                     ViewBag.IsAdmin = currentUser.IsAdmin;
                     ViewData.Add("DisplayName", currentUser.DisplayName);
                     ViewData.Add("AccessLevel", currentUser.UserLevelDescription);

@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using truckload.DbContext;
-using truckload.Vm;
+using truckload.Helpers.Vm;
 
 namespace truckload.Controllers
 {

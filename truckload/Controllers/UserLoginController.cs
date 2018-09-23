@@ -20,7 +20,6 @@ namespace truckload.Controllers
             InitViewData();
         }
 
-        // GET: Drivers
         public ActionResult Edit()
         {
             ViewData["accessLevels"] = Db.AccessLevels;
@@ -56,6 +55,9 @@ namespace truckload.Controllers
         public ActionResult Update([DataSourceRequest] DataSourceRequest request, VmUserLogin userLogin)
         {
 
+            var isEditable = CurrentUser.IsAdmin;
+            if (!isEditable) ModelState.AddModelError("Create", "Current user does not have permission to update a user.");
+
             if (ModelState.IsValid)
             {
                 var dbUserLogin = Db.UserLogins.Find(userLogin.UserLoginId);
@@ -84,6 +86,8 @@ namespace truckload.Controllers
         public ActionResult Delete(int id)
         {
             var rtnString = "";
+            var isEditable = CurrentUser.IsAdmin;
+            if (!isEditable) rtnString += "Current user does not have permission to delete a user.";
 
             if (rtnString.IsNullOrEmpty())
             {
@@ -114,12 +118,15 @@ namespace truckload.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create([DataSourceRequest] DataSourceRequest request, VmUserLogin userLogin)
         {
+            var isEditable = CurrentUser.IsAdmin;
+            if (!isEditable) ModelState.AddModelError("Create", "Current user does not have permission to create a user.");
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ObjectParameter returnMsgObj = new ObjectParameter("responseMessage", typeof(string));
-                    ObjectParameter returnIntObj = new ObjectParameter("newId", typeof(int));
+                    var returnMsgObj = new ObjectParameter("responseMessage", typeof(string));
+                    var returnIntObj = new ObjectParameter("newId", typeof(int));
                     Db.uspAddUser(userLogin.UserId, userLogin.UserId, "TempPassword9", userLogin.Email, returnMsgObj, returnIntObj);
                     var outMsg = returnMsgObj.Value.ToString();
 

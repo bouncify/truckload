@@ -39,6 +39,43 @@
           <Property Name="utcLogdate" Type="datetime2" Precision="7" />
           <Property Name="GlobalId" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="TrailerId" />
+          </Key>
+          <Property Name="TrailerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrailerDescription" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="TrailerTypeId" Type="int" Nullable="false" />
+          <Property Name="Volume" Type="int" Nullable="false" />
+          <Property Name="UnitOfMeasureId" Type="int" Nullable="false" />
+          <Property Name="CapacityKg" Type="int" Nullable="false" />
+          <Property Name="AxlesDescription" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TrailerType">
+          <Key>
+            <PropertyRef Name="TrailerTypeId" />
+          </Key>
+          <Property Name="TrailerTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckId" />
+          </Key>
+          <Property Name="TruckId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TruckDescription" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="NextMaintenanceDate" Type="datetime" />
+          <Property Name="NextInspectionDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitOfMeasure">
+          <Key>
+            <PropertyRef Name="UnitOfMeasureId" />
+          </Key>
+          <Property Name="UnitOfMeasureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserLogin">
           <Key>
             <PropertyRef Name="UserLoginId" />
@@ -51,6 +88,30 @@
           <Property Name="HashPassword" Type="binary" MaxLength="64" Nullable="false" />
           <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Trailer__Trailer__4BD7F309">
+          <End Role="TrailerType" Type="Self.TrailerType" Multiplicity="1" />
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="TrailerTypeId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="TrailerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trailer__UnitOfM__4CCC1742">
+          <End Role="UnitOfMeasure" Type="Self.UnitOfMeasure" Multiplicity="1" />
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserLogin__Acces__160F4887">
           <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
           <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="*" />
@@ -79,7 +140,19 @@
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrailerType" EntityType="Self.TrailerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Truck" EntityType="Self.Truck" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UnitOfMeasure" EntityType="Self.UnitOfMeasure" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Trailer__Trailer__4BD7F309" Association="Self.FK__Trailer__Trailer__4BD7F309">
+            <End Role="TrailerType" EntitySet="TrailerType" />
+            <End Role="Trailer" EntitySet="Trailer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trailer__UnitOfM__4CCC1742" Association="Self.FK__Trailer__UnitOfM__4CCC1742">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasure" />
+            <End Role="Trailer" EntitySet="Trailer" />
+          </AssociationSet>
           <AssociationSet Name="FK__UserLogin__Acces__160F4887" Association="Self.FK__UserLogin__Acces__160F4887">
             <End Role="AccessLevel" EntitySet="AccessLevel" />
             <End Role="UserLogin" EntitySet="UserLogin" />
@@ -118,6 +191,18 @@
             <Parameter Name="responseMessage" Mode="InOut" Type="String" />
             <Parameter Name="newId" Mode="InOut" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Trailers" EntityType="truckloadModel.Trailer" />
+          <EntitySet Name="TrailerTypes" EntityType="truckloadModel.TrailerType" />
+          <EntitySet Name="Trucks" EntityType="truckloadModel.Truck" />
+          <EntitySet Name="UnitOfMeasures" EntityType="truckloadModel.UnitOfMeasure" />
+          <AssociationSet Name="FK__Trailer__Trailer__4BD7F309" Association="truckloadModel.FK__Trailer__Trailer__4BD7F309">
+            <End Role="TrailerType" EntitySet="TrailerTypes" />
+            <End Role="Trailer" EntitySet="Trailers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trailer__UnitOfM__4CCC1742" Association="truckloadModel.FK__Trailer__UnitOfM__4CCC1742">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasures" />
+            <End Role="Trailer" EntitySet="Trailers" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
           <Property Type="Int32" Name="UserLoginId" Nullable="false" />
@@ -175,6 +260,71 @@
           <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="Trailer">
+          <Key>
+            <PropertyRef Name="TrailerId" />
+          </Key>
+          <Property Name="TrailerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrailerDescription" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="TrailerTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Volume" Type="Int32" Nullable="false" />
+          <Property Name="UnitOfMeasureId" Type="Int32" Nullable="false" />
+          <Property Name="CapacityKg" Type="Int32" Nullable="false" />
+          <Property Name="AxlesDescription" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="TrailerType" Relationship="truckloadModel.FK__Trailer__Trailer__4BD7F309" FromRole="Trailer" ToRole="TrailerType" />
+          <NavigationProperty Name="UnitOfMeasure" Relationship="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" FromRole="Trailer" ToRole="UnitOfMeasure" />
+        </EntityType>
+        <EntityType Name="TrailerType">
+          <Key>
+            <PropertyRef Name="TrailerTypeId" />
+          </Key>
+          <Property Name="TrailerTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Trailers" Relationship="truckloadModel.FK__Trailer__Trailer__4BD7F309" FromRole="TrailerType" ToRole="Trailer" />
+        </EntityType>
+        <EntityType Name="Truck">
+          <Key>
+            <PropertyRef Name="TruckId" />
+          </Key>
+          <Property Name="TruckId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TruckDescription" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="NextMaintenanceDate" Type="DateTime" Precision="3" />
+          <Property Name="NextInspectionDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitOfMeasure">
+          <Key>
+            <PropertyRef Name="UnitOfMeasureId" />
+          </Key>
+          <Property Name="UnitOfMeasureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Trailers" Relationship="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" FromRole="UnitOfMeasure" ToRole="Trailer" />
+        </EntityType>
+        <Association Name="FK__Trailer__Trailer__4BD7F309">
+          <End Type="truckloadModel.TrailerType" Role="TrailerType" Multiplicity="1" />
+          <End Type="truckloadModel.Trailer" Role="Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TrailerType">
+              <PropertyRef Name="TrailerTypeId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="TrailerTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trailer__UnitOfM__4CCC1742">
+          <End Type="truckloadModel.UnitOfMeasure" Role="UnitOfMeasure" Multiplicity="1" />
+          <End Type="truckloadModel.Trailer" Role="Trailer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Trailer">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -240,6 +390,47 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="uspAddUser" FunctionName="truckloadModel.Store.uspAddUser" />
+          <EntitySetMapping Name="Trailers">
+            <EntityTypeMapping TypeName="truckloadModel.Trailer">
+              <MappingFragment StoreEntitySet="Trailer">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AxlesDescription" ColumnName="AxlesDescription" />
+                <ScalarProperty Name="CapacityKg" ColumnName="CapacityKg" />
+                <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="TrailerTypeId" ColumnName="TrailerTypeId" />
+                <ScalarProperty Name="TrailerDescription" ColumnName="TrailerDescription" />
+                <ScalarProperty Name="TrailerId" ColumnName="TrailerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrailerTypes">
+            <EntityTypeMapping TypeName="truckloadModel.TrailerType">
+              <MappingFragment StoreEntitySet="TrailerType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TrailerTypeId" ColumnName="TrailerTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trucks">
+            <EntityTypeMapping TypeName="truckloadModel.Truck">
+              <MappingFragment StoreEntitySet="Truck">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NextInspectionDate" ColumnName="NextInspectionDate" />
+                <ScalarProperty Name="NextMaintenanceDate" ColumnName="NextMaintenanceDate" />
+                <ScalarProperty Name="TruckDescription" ColumnName="TruckDescription" />
+                <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UnitOfMeasures">
+            <EntityTypeMapping TypeName="truckloadModel.UnitOfMeasure">
+              <MappingFragment StoreEntitySet="UnitOfMeasure">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
