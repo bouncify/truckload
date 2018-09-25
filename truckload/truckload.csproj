@@ -317,6 +317,7 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\OrderCentral\" />
     <Folder Include="Helpers\OrderCentral\" />
   </ItemGroup>
   <ItemGroup>
