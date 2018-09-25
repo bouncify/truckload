@@ -1,2 +1,18 @@
 ﻿
-some stuff
+
+<script src="~/App_Dist/webpack/orderCentral.bundle.js"></script>
+
+<div style="width: 100%; display: table;margin-top: 20px">
+    <div style="display: table-row">
+
+        @Html.Partial("../Orders/_Orders")
+
+        @*@Html.Partial("../Load/_Days")*@
+
+    </div>
+</div>
+
+<script>
+    app.initMainModule();
+
+</script>

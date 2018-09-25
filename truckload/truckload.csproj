@@ -202,6 +202,7 @@
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderCentralController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\TlViewsController.cs" />
     <Compile Include="Controllers\TrailerController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
@@ -318,7 +319,6 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App\OrderCentral\" />
     <Folder Include="Helpers\OrderCentral\" />
   </ItemGroup>
   <ItemGroup>
@@ -359,6 +359,7 @@
     <Content Include="Views\TlViews\Index.cshtml" />
     <Content Include="Views\Warehouse\Edit.cshtml" />
     <Content Include="Views\OrderCentral\Index.cshtml" />
+    <Content Include="Views\Orders\_Orders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
@@ -371,6 +372,9 @@
     <TypeScriptCompile Include="App\Admin\Modules\Warehouse.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Modules\Startup.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\OrderCentral.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\CrudScreenAutoSave.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\CrudScreenDetail.ts" />

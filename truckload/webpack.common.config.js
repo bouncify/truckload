@@ -9,8 +9,8 @@ module.exports = {
         home: './App/Home.ts',
         tlviews: './App/TlViews.ts',
         admin: './App/Admin/Admin.ts',
-        testGrid: './App/Admin/TestGrid.ts'//,
-        //orderCentral: './App/OrderCentral/Main.ts'
+        testGrid: './App/Admin/TestGrid.ts',
+        orderCentral: './App/OrderCentral/OrderCentral.ts'
     },
     externals: {
         jquery: 'jQuery'
