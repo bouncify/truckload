@@ -201,6 +201,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderCentralController.cs" />
     <Compile Include="Controllers\TlViewsController.cs" />
     <Compile Include="Controllers\TrailerController.cs" />
     <Compile Include="Controllers\TruckController.cs" />
@@ -357,6 +358,7 @@
     <Content Include="Views\Trailer\Edit.cshtml" />
     <Content Include="Views\TlViews\Index.cshtml" />
     <Content Include="Views\Warehouse\Edit.cshtml" />
+    <Content Include="Views\OrderCentral\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
