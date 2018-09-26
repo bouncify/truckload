@@ -17,12 +17,18 @@
       .Name("grid")
       .Columns(columns =>
       {
-          columns.Bound(u => u.UserLoginId).Title("Id");
-          columns.Bound(u => u.UserId);
+          columns.Bound(u => u.UserLoginId).Title("Id").Width(80);
+          columns.Bound(u => u.UserId).Width(100);
           columns.Bound(u => u.UserName);
-          columns.ForeignKey(r => r.AccessLevelId, (System.Collections.IEnumerable)ViewData["accessLevels"], "AccessLevelId", "Description").Title("Access Level");
+          columns.Template(e => { }).Title("Active?").Width(60)
+              .ClientTemplate("<input type='checkbox' #= IsActive ? checked='checked' : '' # class='chkbxIsActive' />");
+
+          columns.ForeignKey(r => r.AccessLevelId, (System.Collections.IEnumerable)ViewData["accessLevels"], "AccessLevelId", "Description").Title("Access Level").Width(130);
 
           columns.Bound(r => r.Email);
+
+          columns.Bound(r => r.OrderRowsVisible).Title("Visible Rows").Width(150);
+          columns.Bound(r => r.LoadDaysVisible).Title("Visible Days").Width(150);
 
           columns.Template(e => { }).Title("Delete").Width(40)
               .ClientTemplate("<button type='button' title='Delete User' class='k-button k-button-icontext' style='min-width: auto;' onclick='app.module.btnDeleteClick(this)' ><span class='k-icon k-i-close'></span></button>")

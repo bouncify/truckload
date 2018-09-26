@@ -40,7 +40,10 @@ namespace truckload.Controllers
                     Email = l.Email,
                     UserName = l.UserName,
                     UserId = l.UserId,
-                    UserLoginId = l.UserLoginId
+                    UserLoginId = l.UserLoginId,
+                    IsActive = l.IsActive,
+                    LoadDaysVisible = l.LoadDaysVisible,
+                    OrderRowsVisible = l.OrderRowsVisible
                 }).ToDataSourceResult(request);
 
             }
@@ -68,6 +71,9 @@ namespace truckload.Controllers
                     dbUserLogin.Email = userLogin.Email;
                     dbUserLogin.AccessLevelId = userLogin.AccessLevelId;
                     dbUserLogin.UserName = userLogin.UserName;
+                    dbUserLogin.IsActive = userLogin.IsActive;
+                    dbUserLogin.OrderRowsVisible = userLogin.OrderRowsVisible;
+                    dbUserLogin.LoadDaysVisible = userLogin.LoadDaysVisible;
                     try
                     {
                         Db.SaveChanges();

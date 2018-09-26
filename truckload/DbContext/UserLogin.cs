@@ -28,6 +28,9 @@ namespace truckload.DbContext
         public int AccessLevelId { get; set; }
         public byte[] HashPassword { get; set; }
         public System.Guid Salt { get; set; }
+        public bool IsActive { get; set; }
+        public int OrderRowsVisible { get; set; }
+        public int LoadDaysVisible { get; set; }
     
         public virtual AccessLevel AccessLevel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

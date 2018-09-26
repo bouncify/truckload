@@ -7,7 +7,7 @@ export module UserLogin {
         var crudScreenDetail = new CrudScreenDetail();
         crudScreenDetail.entityName = "UserLogin";
         crudScreenDetail.gridName = "#grid";
-        crudScreenDetail.checkBoxList = [];
+        crudScreenDetail.checkBoxList = ["IsActive"];
         crudScreenDetail.primaryKeyFieldName = "UserLoginId";
         crudScreenDetail.deleteConformFieldList = ["UserId", "UserName"];
         crudScreenDetail.deleteConfirmText = "Are you sure you want to delete this user login?";
@@ -20,7 +20,7 @@ export module UserLogin {
 
             return rtnVal;
         };
-
+        
         var crudScreenModule = new CrudScreenAutoSave(crudScreenDetail);
 
         return crudScreenModule;

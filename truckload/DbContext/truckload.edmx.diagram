@@ -6,8 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9339d2d57e70488c9a3bf1f750a3d1ff" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="truckloadModel.AccessLevel" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="3" PointY="3.25" />
-        <AssociationConnector Association="truckloadModel.FK__UserLogin__Acces__160F4887" />
         <EntityTypeShape EntityType="truckloadModel.Error" Width="1.5" PointX="5.875" PointY="3.625" />
         <EntityTypeShape EntityType="truckloadModel.Driver" Width="1.5" PointX="0.75" PointY="6.75" />
         <EntityTypeShape EntityType="truckloadModel.Trailer" Width="1.5" PointX="5.625" PointY="7" />
@@ -18,10 +16,12 @@
         <AssociationConnector Association="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" />
         <EntityTypeShape EntityType="truckloadModel.Warehouse" Width="1.5" PointX="1.375" PointY="0.875" />
         <EntityTypeShape EntityType="truckloadModel.Order" Width="1.5" PointX="8.625" PointY="3.875" />
-        <AssociationConnector Association="truckloadModel.FK__Order__CreatedBy__0697FACD" />
-        <AssociationConnector Association="truckloadModel.FK__Order__ModifiedB__078C1F06" />
         <AssociationConnector Association="truckloadModel.FK__simple_Or__UnitO__49DA9BFE" />
         <AssociationConnector Association="truckloadModel.FK__simple_Or__Wareh__4ACEC037" />
+        <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="3" PointY="13.75" />
+        <AssociationConnector Association="truckloadModel.FK__UserLogin__Acces__160F4887" />
+        <AssociationConnector Association="truckloadModel.FK__Order__CreatedBy__0697FACD" />
+        <AssociationConnector Association="truckloadModel.FK__Order__ModifiedB__078C1F06" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

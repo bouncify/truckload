@@ -13,6 +13,8 @@ namespace truckload.Helpers.Admin
         public string UserId { get; set; }
         public string Email { get; set; }
         public int AccessLevelId { get; set; }
-
+        public bool IsActive { get; set; }
+        public int OrderRowsVisible { get; set; }
+        public int LoadDaysVisible { get; set; }
     }
 }

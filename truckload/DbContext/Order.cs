@@ -35,9 +35,9 @@ namespace truckload.DbContext
         public Nullable<int> ModifiedByUserLoginId { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
     
-        public virtual UserLogin UserLogin { get; set; }
-        public virtual UserLogin UserLogin1 { get; set; }
         public virtual UnitOfMeasure UnitOfMeasure { get; set; }
         public virtual Warehouse Warehouse { get; set; }
+        public virtual UserLogin UserLogin { get; set; }
+        public virtual UserLogin UserLogin1 { get; set; }
     }
 }
