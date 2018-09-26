@@ -18,7 +18,8 @@
     "jquery-validation-unobtrusive": "^3.2.10",
     "knockout": "^3.4.2",
     "knockout-kendo": "^0.9.8",
-    "knockout-mapping": "^2.6.0"
+    "knockout-mapping": "^2.6.0",
+    "moment": "^2.22.2"
   },
   "devDependencies": {
     "@types/bootstrap": "^4.1.2",

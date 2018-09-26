@@ -18,6 +18,7 @@ namespace truckload.DbContext
         public UnitOfMeasure()
         {
             this.Trailers = new HashSet<Trailer>();
+            this.Orders = new HashSet<Order>();
         }
     
         public int UnitOfMeasureId { get; set; }
@@ -25,5 +26,7 @@ namespace truckload.DbContext
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trailer> Trailers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

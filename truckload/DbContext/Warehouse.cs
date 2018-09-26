@@ -14,9 +14,18 @@ namespace truckload.DbContext
     
     public partial class Warehouse
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Warehouse()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int WarehouseId { get; set; }
         public bool IsActive { get; set; }
         public string Description { get; set; }
         public string WarehouseCode { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -1,25 +1,49 @@
 ﻿import { ControlHelper } from "../../Shared/ControlHelper"
+import { Globals } from "../../Shared/Global"
+import { OrderModel } from "../Models/OrderModel"
+
+
+import 'knockout-kendo/build/knockout-kendo';
 
 export class Main {
+    viewModelOrders: OrderModel;
+    
+    gridArray: boolean[] = [false, false, false, false];
 
-    orderNumberFilterText = "";
+    setWaitSpinner = (isLoading: boolean, gridName: string) => {
+        switch (gridName) {
+            case Globals.orderGridName:
+                this.gridArray[0] = isLoading;
+                break;
+            case Globals.load1GridName:
+                this.gridArray[1] = isLoading;
+                break;
+            case Globals.load2GridName:
+                this.gridArray[2] = isLoading;
+                break;
+            case Globals.load3GridName:
+                this.gridArray[3] = isLoading;
+                break;
+        }
 
-    public setOrderFilter() {
+        var isSetSpinning = false;
+        for (let entry of this.gridArray) {
+            if (entry) isSetSpinning = true;
+        }
 
-        ControlHelper.lbPrompt("Enter Order Number:", (result: boolean, resultString: string) => {
-            if (result) {
-                this.orderNumberFilterText = resultString;
+        var orderGrid = $(Globals.orderGridName).data("kendoGrid");
+        if (orderGrid) {
+            kendo.ui.progress(orderGrid.element, isSetSpinning);
+        }
+        var loadGrid1 = $(Globals.load1GridName).data("kendoGrid");
+        if (loadGrid1) {
+            kendo.ui.progress(loadGrid1.element, isSetSpinning);
+            kendo.ui.progress($(Globals.load2GridName).data("kendoGrid").element, isSetSpinning);
+            kendo.ui.progress($(Globals.load3GridName).data("kendoGrid").element, isSetSpinning);
+        }
+    };
 
-                //viewModelOrders.loadAll(orderNumberFilterText);
-
-                var filterIcon = $("#orderFilterIcon");
-
-                if (this.orderNumberFilterText) {
-                    filterIcon.css("color", "red");
-                } else {
-                    filterIcon.css("color", "black");
-                }
-            }
-        }, "Order Filter", this.orderNumberFilterText);
+    constructor() {
+        this.viewModelOrders = new OrderModel(this.setWaitSpinner, Globals.orderGridName);
     }
 }

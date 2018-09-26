@@ -1,6 +1,5 @@
 ﻿import { CrudScreenDetail } from "../../Shared/Classes/CrudScreenDetail"
 import { CrudScreenAutoSave } from "../../Shared/Classes/CrudScreenAutoSave"
-import { splitNameFirstLast } from "../../Shared/String"
 
 
 export module Warehouse {

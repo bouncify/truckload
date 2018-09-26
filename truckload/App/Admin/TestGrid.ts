@@ -46,3 +46,7 @@ ko.bindingHandlers.kendoGrid.options = {
 };
 
 ko.applyBindings(viewModel);
+
+export class wibble {
+
+}

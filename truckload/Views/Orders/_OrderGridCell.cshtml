@@ -1,0 +1,52 @@
+﻿
+
+<script id="rowTmpl" type="text/html">
+    <tr role="row">
+        <td role="gridcell" style="width: 100%;">
+            <div class="order rounded"
+                 style="background-color:#0169a1;display: table;"
+                 ondragstart="OrderCentral.dragOrder(event)"
+                 data-bind="attr: {id: 'orderDrag_' + orderId(), draggable: isDraggable()},
+                                   style: {cursor: isDraggable() ? 'pointer' : 'default', background: orderColor }
+                 ">
+
+                <div style="display: table-row; font-size: 11.8125px;">
+                    <img id="imgDangerousGoods"
+                         title="Dangerous Goods" data-bind="visible: isDangerousGoods"
+                         src="@ViewBag.SiteUrl/App/Content/Images/poison_small.png" />
+                    <img id="imgCustPickup"
+                         title="Customer Pickup" data-bind="visible: isCustomerPickup"
+                         src="@ViewBag.SiteUrl/App/Content/Images/customer_pickup3_small.png" />
+
+                    <div style="display: table-cell; width: 25px;">
+                        <ul>
+                            <li>
+                                <button type="button" title="Edit Order" class="k-button k-button-icontext order-button" data-bind="click: $parent.editOrder">
+                                    <span class="k-icon k-i-edit"></span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="order-col" style="width: 175px;">
+                        <ul style="margin-bottom: 0;">
+                            <li class="order-col-item order-col-topline" data-bind="text: orderNumber" />
+                            <li class="order-col-item" data-bind="text: customerName" />
+                            <li class="order-col-item" data-bind="attr: { title: custAddress } "><span data-bind="text: custAddress"></span></li>
+                            <li class="order-col-item-italic" data-bind="text: lastChangeDetail"></li>
+                        </ul>
+                    </div>
+                    <div class="order-col" style="width: 175px;">
+                        <ul style="margin-bottom: 0;">
+                            <li class="order-col-item order-col-topline"><span data-bind="text: unitDescription"></span></li>
+                            <li class="order-col-item">P/U DATE: <span data-bind="text: pickupDateText"></span></li>
+                            <li class="order-col-item">DELIVERY: <span data-bind="text: deliveryDateText"></span></li>
+
+                            <li class="order-col-item">whouse: <span data-bind="attr: { title: warehouseDescription } "><span data-bind="text: warehouseDescription"></span></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+</script>

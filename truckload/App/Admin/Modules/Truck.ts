@@ -1,6 +1,6 @@
 ﻿import { CrudScreenDetail } from "../../Shared/Classes/CrudScreenDetail"
 import { CrudScreenAutoSave } from "../../Shared/Classes/CrudScreenAutoSave"
-import { splitNameFirstLast } from "../../Shared/String"
+import { StringFunctions } from "../../Shared/StringFunctions"
 
 
 export module Truck {
@@ -15,7 +15,7 @@ export module Truck {
         crudScreenDetail.deleteUrl = "/Truck/Delete";
         crudScreenDetail.addPromptString = "Enter Truck Name";
         crudScreenDetail.additionalInfoFunction = (addNewResultString: string) => {
-            var names = splitNameFirstLast(addNewResultString);
+            var names = StringFunctions.splitNameFirstLast(addNewResultString);
 
             var rtnVal = {
                 truckDescription: addNewResultString

@@ -14,6 +14,13 @@ namespace truckload.DbContext
     
     public partial class UserLogin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserLogin()
+        {
+            this.Orders = new HashSet<Order>();
+            this.Orders1 = new HashSet<Order>();
+        }
+    
         public int UserLoginId { get; set; }
         public string UserName { get; set; }
         public string UserId { get; set; }
@@ -23,5 +30,9 @@ namespace truckload.DbContext
         public System.Guid Salt { get; set; }
     
         public virtual AccessLevel AccessLevel { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders1 { get; set; }
     }
 }

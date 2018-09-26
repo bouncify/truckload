@@ -201,6 +201,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DriverController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoadsController.cs" />
     <Compile Include="Controllers\OrderCentralController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\TlViewsController.cs" />
@@ -218,6 +219,9 @@
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\LoginByUsernamePassword_Result.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbContext\Order.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
     <Compile Include="DbContext\Trailer.cs">
@@ -259,9 +263,11 @@
     <Compile Include="Helpers\Admin\VmUserLogin.cs" />
     <Compile Include="Helpers\CustomExtensions.cs" />
     <Compile Include="Helpers\GetDataSourceResults.cs" />
+    <Compile Include="Helpers\OrderCentral\OrderHelper.cs" />
     <Compile Include="Helpers\ServerError.cs" />
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
     <Compile Include="Helpers\Vm\VmDriver.cs" />
+    <Compile Include="Helpers\Vm\VmKoOrder.cs" />
     <Compile Include="Helpers\Vm\VmLogin.cs" />
     <Compile Include="Helpers\Vm\VmTrailer.cs" />
     <Compile Include="Helpers\Vm\VmTruck.cs" />
@@ -275,6 +281,8 @@
     <Content Include="App\Content\css\custom-bootstrap.css" />
     <Content Include="App\Content\images\admin_small.png" />
     <Content Include="App\Content\images\app_icon.png" />
+    <Content Include="App\Content\images\customer_pickup3_small.png" />
+    <Content Include="App\Content\images\poison_small.png" />
     <Content Include="App\Content\images\siluet-driver_sm.png" />
     <Content Include="App\Content\images\siluet-trailer.png" />
     <Content Include="App\Content\images\siluet-truck.png" />
@@ -319,7 +327,7 @@
     <Content Include="tsconfig.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\OrderCentral\" />
+    <Folder Include="Views\Loads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\Content\css\Site.less" />
@@ -360,6 +368,7 @@
     <Content Include="Views\Warehouse\Edit.cshtml" />
     <Content Include="Views\OrderCentral\Index.cshtml" />
     <Content Include="Views\Orders\_Orders.cshtml" />
+    <Content Include="Views\Orders\_OrderGridCell.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
@@ -373,6 +382,13 @@
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDays.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDropDownData.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoad.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoOrder.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Models\DayModel.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Models\LoadModel.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Models\OrderModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Modules\Startup.ts" />
     <TypeScriptCompile Include="App\OrderCentral\OrderCentral.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />
@@ -380,8 +396,9 @@
     <TypeScriptCompile Include="App\Shared\Classes\CrudScreenDetail.ts" />
     <TypeScriptCompile Include="App\Shared\ControlHelper.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\SelectListItem.ts" />
+    <TypeScriptCompile Include="App\Shared\DateFunctions.ts" />
     <TypeScriptCompile Include="App\Shared\Global.ts" />
-    <TypeScriptCompile Include="App\Shared\String.ts" />
+    <TypeScriptCompile Include="App\Shared\StringFunctions.ts" />
     <TypeScriptCompile Include="App\TlViews.ts" />
   </ItemGroup>
   <ItemGroup>

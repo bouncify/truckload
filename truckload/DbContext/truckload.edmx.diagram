@@ -17,6 +17,11 @@
         <AssociationConnector Association="truckloadModel.FK__Trailer__Trailer__4BD7F309" />
         <AssociationConnector Association="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" />
         <EntityTypeShape EntityType="truckloadModel.Warehouse" Width="1.5" PointX="1.375" PointY="0.875" />
+        <EntityTypeShape EntityType="truckloadModel.Order" Width="1.5" PointX="8.625" PointY="3.875" />
+        <AssociationConnector Association="truckloadModel.FK__Order__CreatedBy__0697FACD" />
+        <AssociationConnector Association="truckloadModel.FK__Order__ModifiedB__078C1F06" />
+        <AssociationConnector Association="truckloadModel.FK__simple_Or__UnitO__49DA9BFE" />
+        <AssociationConnector Association="truckloadModel.FK__simple_Or__Wareh__4ACEC037" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
