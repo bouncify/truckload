@@ -4,7 +4,7 @@
     <tr role="row">
         <td role="gridcell" style="width: 100%;">
             <div class="order rounded"
-                 style="background-color:#0169a1;display: table;"
+                 style="background-color:#0169a1;display: table;padding-top: 4px;"
                  ondragstart="OrderCentral.dragOrder(event)"
                  data-bind="attr: {id: 'orderDrag_' + orderId(), draggable: isDraggable()},
                                    style: {cursor: isDraggable() ? 'pointer' : 'default', background: orderColor }
@@ -28,7 +28,7 @@
                         </ul>
                     </div>
 
-                    <div class="order-col" style="width: 150px;">
+                    <div class="order-col" style="width: 153px;">
                         <ul style="margin-bottom: 0;">
                             <li class="order-col-item order-col-topline" data-bind="text: orderNumber" />
                             <li class="order-col-item" data-bind="text: customerName" />
@@ -36,7 +36,7 @@
                             <li class="order-col-item-italic" data-bind="text: lastChangeDetail"></li>
                         </ul>
                     </div>
-                    <div class="order-col" style="width: 145px;">
+                    <div class="order-col" style="width: 148px;">
                         <ul style="margin-bottom: 0;">
                             <li class="order-col-item order-col-topline"><span data-bind="text: unitDescription"></span></li>
                             <li class="order-col-item">P/U DATE: <span data-bind="text: pickupDateText"></span></li>
