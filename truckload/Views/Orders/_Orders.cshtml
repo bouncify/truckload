@@ -1,39 +1,22 @@
 ﻿
-<div id="koOrderModel" style="width: 25%;">
+<div id="koOrderModel" style="width: 363px">
+    <button type="button" title="Filter Orders" class="btn btn-default day-nav-button" style="float: left"
+            data-bind="click: setOrderFilter">
+        <span id="orderFilterIcon" class="k-icon k-i-filter"></span>
+    </button>
+    <span>
+        <strong>Order Central</strong>
+    </span>
 
-    <div class="row">
-        <button type="button" title="Filter Orders" class="btn btn-default day-nav-button" style="float: left"
-                data-bind="click: setOrderFilter">
-            <span id="orderFilterIcon" class="k-icon k-i-filter"></span>
-        </button>
-        <span >
-            <strong>Order Central</strong>
-        </span>
-    </div>
-    @*<table style="">
-            <tr>
-                <td style="width: 25%">
-                    <button type="button" title="Filter Orders" class="btn btn-default day-nav-button" style="float: left"
-                            data-bind="click: setOrderFilter">
-                        <span id="orderFilterIcon" class="k-icon k-i-filter"></span>
-                    </button>
-                </td>
-                <td style="text-align: center">
-                    <strong>Order Central</strong>
-                </td>
-                <td style="width: 25%"></td>
-            </tr>
-        </table>*@
-    <div class="row">
-        <div id="koOrderGrid" style="background: rgb(236, 255, 251)"
-             ondragover="OrderCentral.allowDropOrder(event)"
-             ondrop="OrderCentral.dropOrderOnOrders(event)"
-             data-bind="kendoGrid: { data: orders, rowTemplate: 'rowTmpl', useKOTemplates: true }"></div>
+    <div id="koOrderGrid" style="background: rgb(236, 255, 251)"
+         ondragover="OrderCentral.allowDropOrder(event)"
+         ondrop="OrderCentral.dropOrderOnOrders(event)"
+         data-bind="kendoGrid: { data: orders, rowTemplate: 'rowTmpl', useKOTemplates: true }"></div>
 
-        <div name="gridCountInfo" class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
-            <a href="#" class="k-pager-refresh k-link" title="Refresh">
-            </a><span class="pager-info k-label"><span data-bind="text: orders().length"></span> Orders Waiting</span>
-        </div>
+    <div name="gridCountInfo" class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
+        <a href="#" class="k-pager-refresh k-link" title="Refresh">
+        </a><span class="pager-info k-label"><span data-bind="text: orders().length"></span> Orders Waiting</span>
     </div>
+
     @Html.Partial("../Orders/_OrderGridCell")
 </div>

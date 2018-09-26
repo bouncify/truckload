@@ -26,11 +26,8 @@
 
 
 
-    <div class="container body-content" style="@(ViewBag.IsCustomContainer ? "min-width: 1452px; " : "")">
-
-        <div id="containerBody">
-            @RenderBody()
-        </div>
+    <div id="containerBody" class="container body-content" style="@(ViewBag.IsCustomContainer ? "min-width: 1452px; " : "")">
+        @RenderBody()
     </div>
 
 

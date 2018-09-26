@@ -2,15 +2,10 @@
 
 <script src="~/App_Dist/webpack/orderCentral.bundle.js"></script>
 
-@*<div style="width: 100%; display: table;margin-top: 20px">*@
-@*<div style="display: table-row;width: 363px;">*@
 
 @Html.Partial("../Orders/_Orders")
 
 @*@Html.Partial("../Load/_Days")*@
-
-@*</div>*@
-@*</div>*@
 
 <script>
     app.initMainModule();
@@ -22,9 +17,11 @@
         list-style: none;
         padding-left: 5px;
     }
+
     .k-grid {
         font-size: 10px;
     }
+
         .k-grid td {
             line-height: 1.5em;
         }
@@ -33,6 +30,7 @@
         position: relative;
         color: #fff;
     }
+
     .rounded {
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
