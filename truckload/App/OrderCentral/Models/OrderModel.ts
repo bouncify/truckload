@@ -51,12 +51,11 @@ export class OrderModel {
     }
 
     public setOrderFilter() {
-
         ControlHelper.lbPrompt("Enter Order Number:", (result: boolean, resultString: string) => {
             if (result) {
                 this.orderNumberFilterText = resultString;
 
-                //viewModelOrders.loadAll(orderNumberFilterText);
+                this.loadAll(this.orderNumberFilterText);
 
                 var filterIcon = $("#orderFilterIcon");
 

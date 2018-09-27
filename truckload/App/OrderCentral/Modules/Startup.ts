@@ -8,7 +8,7 @@ export module Startup {
 
         ko.bindingHandlers.kendoGrid.options = {
             height: Globals.gridHeight,
-            scrollable: true,
+            scrollable: false,
             columns: [{
                     field: "OrderID",
                     title: "Orders", headerAttributes: {
@@ -16,7 +16,7 @@ export module Startup {
                     }
                 }
             ],
-            pageable: { alwaysVisible: false, pageSize: 8 }
+            pageable: { alwaysVisible: false, pageSize: Globals.ordersPageSize }
         };
         
         ko.applyBindings(orderCentral.viewModelOrders, $("koOrderModel")[0]);
