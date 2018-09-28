@@ -1,5 +1,5 @@
 ﻿import { KoOrder } from "../KoClasses/KoOrder"
-import { AjaxHelper } from "../../Shared/Classes/AjaxHelper"
+import { SharedModel } from "./SharedModel"
 import { StringFunctions } from "../../Shared/StringFunctions"
 import { DateFunctions } from "../../Shared/DateFunctions"
 import { ControlHelper } from "../../Shared/ControlHelper"
@@ -8,17 +8,18 @@ import * as moment from 'moment';
 import * as ko from 'knockout';
 
 export class OrderModel {
-    private setWaitSpinner: Function;
-    private orderGridName: string;
+    //private setWaitSpinner: Function;
+    //private orderGridName: string;
+    private sharedModel:SharedModel;
     private orders = ko.observableArray([] as KoOrder[]);
-    private ajaxHelper = new AjaxHelper();
+
     private orderNumberFilterText = "";
 
     public loadAll(orderNumberFilter: string = "") {
-        this.setWaitSpinner(true, this.orderGridName);
+        this.sharedModel.setWaitSpinner(true, this.sharedModel.orderGridName);
         this.orders.removeAll();
         var dataToSend = JSON.parse("{ \"orderNumberFilter\" : \"" + orderNumberFilter + "\"}");
-        this.ajaxHelper.get("/Orders/GetOrders", (data: any) => {
+        this.sharedModel.ajaxHelper.get("/Orders/GetOrders", (data: any) => {
             ko.mapping.fromJSON(data, {}, this.orders);
 
             $.each(this.orders(), (index, order) => {
@@ -26,7 +27,7 @@ export class OrderModel {
             });
 
             //this.sortOrders();
-            this.setWaitSpinner(false, this.orderGridName);
+            this.sharedModel.setWaitSpinner(false, this.sharedModel.orderGridName);
         }, dataToSend);
     }
 
@@ -68,9 +69,9 @@ export class OrderModel {
         }, "Order Filter", this.orderNumberFilterText);
     }
 
-    constructor(setWaitSpinner: Function, orderGridName: string) {
-        this.setWaitSpinner = setWaitSpinner;
-        this.orderGridName = orderGridName;
+    constructor(sharedModel:SharedModel) {
+        this.sharedModel = sharedModel;
+
         this.loadAll();
     }
 }

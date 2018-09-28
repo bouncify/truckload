@@ -36,7 +36,9 @@ namespace truckload.DbContext
         public virtual DbSet<UnitOfMeasure> UnitOfMeasures { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
         public virtual DbSet<UserLogin> UserLogins { get; set; }
+        public virtual DbSet<UserSetting> UserSettings { get; set; }
     
         public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
         {
@@ -70,6 +72,15 @@ namespace truckload.DbContext
                 new ObjectParameter("pEmail", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspAddUser", pUserNameParameter, pUserIdParameter, pPasswordParameter, pEmailParameter, responseMessage, newId);
+        }
+    
+        public virtual ObjectResult<uspGetSettings_Result> uspGetSettings(Nullable<int> userLoginId)
+        {
+            var userLoginIdParameter = userLoginId.HasValue ?
+                new ObjectParameter("UserLoginId", userLoginId) :
+                new ObjectParameter("UserLoginId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<uspGetSettings_Result>("uspGetSettings", userLoginIdParameter);
         }
     }
 }

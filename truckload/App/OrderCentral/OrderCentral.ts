@@ -12,7 +12,7 @@ import { Startup } from "./Modules/Startup"
 
 
 
-$("#containerBody").css("width",Globals.bodyWidth);
+//$("#containerBody").css("width",Globals.bodyWidth);
 
 export var module: Main;
 

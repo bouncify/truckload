@@ -18,10 +18,13 @@
         <EntityTypeShape EntityType="truckloadModel.Order" Width="1.5" PointX="8.625" PointY="3.875" />
         <AssociationConnector Association="truckloadModel.FK__simple_Or__UnitO__49DA9BFE" />
         <AssociationConnector Association="truckloadModel.FK__simple_Or__Wareh__4ACEC037" />
-        <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="truckloadModel.Setting" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="truckloadModel.UserLogin" Width="1.5" PointX="0.5" PointY="12.75" />
         <AssociationConnector Association="truckloadModel.FK__UserLogin__Acces__160F4887" />
         <AssociationConnector Association="truckloadModel.FK__Order__CreatedBy__0697FACD" />
         <AssociationConnector Association="truckloadModel.FK__Order__ModifiedB__078C1F06" />
+        <EntityTypeShape EntityType="truckloadModel.UserSetting" Width="1.5" PointX="2.75" PointY="13.375" />
+        <AssociationConnector Association="truckloadModel.FK__UserSetti__UserL__373B3228" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

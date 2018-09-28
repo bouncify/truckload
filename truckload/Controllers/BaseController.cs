@@ -41,6 +41,7 @@ namespace truckload.Controllers
                     .Where(x => x.UserId == currentUserId)
                     .Select(n => new VmUser()
                     {
+                        UserLoginId = n.UserLoginId,
                         DisplayName = n.UserName,
                         EmailAddress = n.Email,
                         IsAdmin = n.AccessLevelId == 3,

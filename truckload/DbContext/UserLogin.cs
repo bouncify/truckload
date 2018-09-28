@@ -19,6 +19,7 @@ namespace truckload.DbContext
         {
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
+            this.UserSettings = new HashSet<UserSetting>();
         }
     
         public int UserLoginId { get; set; }
@@ -29,13 +30,13 @@ namespace truckload.DbContext
         public byte[] HashPassword { get; set; }
         public System.Guid Salt { get; set; }
         public bool IsActive { get; set; }
-        public int OrderRowsVisible { get; set; }
-        public int LoadDaysVisible { get; set; }
     
         public virtual AccessLevel AccessLevel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserSetting> UserSettings { get; set; }
     }
 }

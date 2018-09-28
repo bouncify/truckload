@@ -64,6 +64,14 @@
           <Property Name="ModifiedByUserLoginId" Type="int" />
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
         </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SettingCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SettingValue" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Trailer">
           <Key>
             <PropertyRef Name="TrailerId" />
@@ -113,8 +121,15 @@
           <Property Name="HashPassword" Type="binary" MaxLength="64" Nullable="false" />
           <Property Name="Salt" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
-          <Property Name="OrderRowsVisible" Type="int" Nullable="false" />
-          <Property Name="LoadDaysVisible" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserSetting">
+          <Key>
+            <PropertyRef Name="UserSettingId" />
+          </Key>
+          <Property Name="UserSettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserLoginId" Type="int" Nullable="false" />
+          <Property Name="SettingCode" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SettingValue" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Warehouse">
           <Key>
@@ -209,6 +224,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__UserSetti__UserL__373B3228">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="UserSetting" Type="Self.UserSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserLoginId" />
+            </Principal>
+            <Dependent Role="UserSetting">
+              <PropertyRef Name="UserLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="username" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
@@ -221,16 +248,21 @@
           <Parameter Name="responseMessage" Type="nvarchar" Mode="InOut" />
           <Parameter Name="newId" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="uspGetSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserLoginId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="truckloadModelStoreContainer">
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrailerType" EntityType="Self.TrailerType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Truck" EntityType="Self.Truck" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitOfMeasure" EntityType="Self.UnitOfMeasure" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSetting" EntityType="Self.UserSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Order__CreatedBy__0697FACD" Association="Self.FK__Order__CreatedBy__0697FACD">
             <End Role="UserLogin" EntitySet="UserLogin" />
@@ -259,6 +291,10 @@
           <AssociationSet Name="FK__UserLogin__Acces__160F4887" Association="Self.FK__UserLogin__Acces__160F4887">
             <End Role="AccessLevel" EntitySet="AccessLevel" />
             <End Role="UserLogin" EntitySet="UserLogin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserSetti__UserL__373B3228" Association="Self.FK__UserSetti__UserL__373B3228">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="UserSetting" EntitySet="UserSetting" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -311,6 +347,7 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <EntitySet Name="Settings" EntityType="truckloadModel.Setting" />
           <EntitySet Name="UserLogins" EntityType="truckloadModel.UserLogin" />
           <AssociationSet Name="FK__UserLogin__Acces__160F4887" Association="truckloadModel.FK__UserLogin__Acces__160F4887">
             <End Role="AccessLevel" EntitySet="AccessLevels" />
@@ -323,6 +360,14 @@
           <AssociationSet Name="FK__Order__ModifiedB__078C1F06" Association="truckloadModel.FK__Order__ModifiedB__078C1F06">
             <End Role="UserLogin" EntitySet="UserLogins" />
             <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <FunctionImport Name="uspGetSettings" ReturnType="Collection(truckloadModel.uspGetSettings_Result)">
+          <Parameter Name="UserLoginId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="UserSettings" EntityType="truckloadModel.UserSetting" />
+          <AssociationSet Name="FK__UserSetti__UserL__373B3228" Association="truckloadModel.FK__UserSetti__UserL__373B3228">
+            <End Role="UserLogin" EntitySet="UserLogins" />
+            <End Role="UserSetting" EntitySet="UserSettings" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
@@ -460,7 +505,7 @@
           <NavigationProperty Name="Warehouse" Relationship="truckloadModel.FK__simple_Or__Wareh__4ACEC037" FromRole="Order" ToRole="Warehouse" />
           <NavigationProperty Name="UserLogin" Relationship="truckloadModel.FK__Order__CreatedBy__0697FACD" FromRole="Order" ToRole="UserLogin" />
           <NavigationProperty Name="UserLogin1" Relationship="truckloadModel.FK__Order__ModifiedB__078C1F06" FromRole="Order" ToRole="UserLogin" />
-        </EntityType>
+          </EntityType>
         <Association Name="FK__simple_Or__UnitO__49DA9BFE">
           <End Type="truckloadModel.UnitOfMeasure" Role="UnitOfMeasure" Multiplicity="0..1" />
           <End Type="truckloadModel.Order" Role="Order" Multiplicity="*" />
@@ -485,6 +530,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="SettingId" />
+          </Key>
+          <Property Name="SettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SettingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SettingValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="UserLogin">
           <Key>
             <PropertyRef Name="UserLoginId" />
@@ -497,11 +550,10 @@
           <Property Name="HashPassword" Type="Binary" Nullable="false" MaxLength="64" FixedLength="true" />
           <Property Name="Salt" Type="Guid" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="OrderRowsVisible" Type="Int32" Nullable="false" />
-          <Property Name="LoadDaysVisible" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AccessLevel" Relationship="truckloadModel.FK__UserLogin__Acces__160F4887" FromRole="UserLogin" ToRole="AccessLevel" />
           <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__Order__CreatedBy__0697FACD" FromRole="UserLogin" ToRole="Order" />
           <NavigationProperty Name="Orders1" Relationship="truckloadModel.FK__Order__ModifiedB__078C1F06" FromRole="UserLogin" ToRole="Order" />
+          <NavigationProperty Name="UserSettings" Relationship="truckloadModel.FK__UserSetti__UserL__373B3228" FromRole="UserLogin" ToRole="UserSetting" />
         </EntityType>
         <Association Name="FK__UserLogin__Acces__160F4887">
           <End Type="truckloadModel.AccessLevel" Role="AccessLevel" Multiplicity="1" />
@@ -536,6 +588,36 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ModifiedByUserLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="usp_GetSettings_Result">
+          <Property Type="String" Name="SettingCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SettingValue" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspGetSettings_Result">
+          <Property Type="String" Name="SettingCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SettingValue" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="UserSetting">
+          <Key>
+            <PropertyRef Name="UserSettingId" />
+          </Key>
+          <Property Name="UserSettingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserLoginId" Type="Int32" Nullable="false" />
+          <Property Name="SettingCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SettingValue" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserLogin" Relationship="truckloadModel.FK__UserSetti__UserL__373B3228" FromRole="UserSetting" ToRole="UserLogin" />
+        </EntityType>
+        <Association Name="FK__UserSetti__UserL__373B3228">
+          <End Type="truckloadModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="truckloadModel.UserSetting" Role="UserSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserLoginId" />
+            </Principal>
+            <Dependent Role="UserSetting">
+              <PropertyRef Name="UserLoginId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -668,11 +750,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="truckloadModel.Setting">
+              <MappingFragment StoreEntitySet="Setting">
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingCode" ColumnName="SettingCode" />
+                <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UserLogins">
             <EntityTypeMapping TypeName="truckloadModel.UserLogin">
               <MappingFragment StoreEntitySet="UserLogin">
-                <ScalarProperty Name="LoadDaysVisible" ColumnName="LoadDaysVisible" />
-                <ScalarProperty Name="OrderRowsVisible" ColumnName="OrderRowsVisible" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="HashPassword" ColumnName="HashPassword" />
@@ -681,6 +770,24 @@
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspGetSettings" FunctionName="truckloadModel.Store.uspGetSettings">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="truckloadModel.uspGetSettings_Result">
+                <ScalarProperty Name="SettingCode" ColumnName="SettingCode" />
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="UserSettings">
+            <EntityTypeMapping TypeName="truckloadModel.UserSetting">
+              <MappingFragment StoreEntitySet="UserSetting">
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingCode" ColumnName="SettingCode" />
+                <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
+                <ScalarProperty Name="UserSettingId" ColumnName="UserSettingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

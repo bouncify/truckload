@@ -7,6 +7,8 @@ namespace truckload.Helpers.Vm
 {
     public class VmUser
     {
+        public int UserLoginId { get; set; }
+
         public int TimezoneOffset { get; set; }
 
         public string EmailAddress { get; set; }

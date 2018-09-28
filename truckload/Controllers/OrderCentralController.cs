@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using truckload.Helpers;
+using truckload.Helpers.Vm;
 
 namespace truckload.Controllers
 {
@@ -18,6 +20,20 @@ namespace truckload.Controllers
         {
             //ViewBag.IsCustomContainer = true;
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetSettings()
+        {
+            var settings = Db.uspGetSettings(CurrentUser.UserLoginId).Select(s => new VmNameValue()
+            {
+                Value = s.SettingValue,
+                Name = s.SettingCode
+            }).ToList();
+
+            var newDropDownDataJson = Json(settings.ToJsonString(), JsonRequestBehavior.AllowGet);
+
+            return newDropDownDataJson;
         }
     }
 }
