@@ -406,7 +406,6 @@
     <TypeScriptCompile Include="App\OrderCentral\Models\SharedModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\OrderModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Modules\OrderPanel.ts" />
-    <TypeScriptCompile Include="App\OrderCentral\Modules\Startup.ts" />
     <TypeScriptCompile Include="App\OrderCentral\OrderCentral.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\CrudScreenAutoSave.ts" />
