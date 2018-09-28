@@ -2,8 +2,8 @@
 import { Globals } from "../../Shared/Global"
 import { OrderModel } from "../Models/OrderModel"
 import { SharedModel } from "../Models/SharedModel"
-import { AjaxHelper } from "../../Shared/Classes/AjaxHelper"
 import { OrderPanel } from "../Modules/OrderPanel"
+import { Setting } from "./Setting"
 
 import 'knockout-kendo/build/knockout-kendo';
 
@@ -12,15 +12,10 @@ export class Main {
     viewModelOrders: OrderModel;
 
 
-
-    constructor() {
-        this.sharedModel = new SharedModel();
+    constructor(settings: Setting[]) {
+        this.sharedModel = new SharedModel(settings);
         this.viewModelOrders = new OrderModel(this.sharedModel);
 
-        this.sharedModel.populateSettings(() => {
-            OrderPanel.init(this.sharedModel, this.viewModelOrders);
-
-        });
-
+        OrderPanel.init(this.sharedModel, this.viewModelOrders);
     }
 }

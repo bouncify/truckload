@@ -1,7 +1,6 @@
 ﻿import { AjaxHelper } from "../../Shared/Classes/AjaxHelper"
 import { Setting } from "../Classes/Setting"
 
-
 export class SharedModel {
     public ajaxHelper: AjaxHelper;
 
@@ -9,7 +8,7 @@ export class SharedModel {
     public load1GridName = "#koLoadsDay1";
     public load2GridName = "#koLoadsDay2";
     public load3GridName = "#koLoadsDay3";
-    
+
     public ordersPageSize = 8;
     public bodyWidth = 1452;
     public orderCellHeight = 90;
@@ -20,18 +19,18 @@ export class SharedModel {
 
     setWaitSpinner = (isLoading: boolean, gridName: string) => {
         switch (gridName) {
-        case this.orderGridName:
-            this.gridArray[0] = isLoading;
-            break;
-        case this.load1GridName:
-            this.gridArray[1] = isLoading;
-            break;
-        case this.load2GridName:
-            this.gridArray[2] = isLoading;
-            break;
-        case this.load3GridName:
-            this.gridArray[3] = isLoading;
-            break;
+            case this.orderGridName:
+                this.gridArray[0] = isLoading;
+                break;
+            case this.load1GridName:
+                this.gridArray[1] = isLoading;
+                break;
+            case this.load2GridName:
+                this.gridArray[2] = isLoading;
+                break;
+            case this.load3GridName:
+                this.gridArray[3] = isLoading;
+                break;
         }
 
         var isSetSpinning = false;
@@ -51,26 +50,16 @@ export class SharedModel {
         }
     };
 
-    public populateSettings(promise: Function) {
-        this.ajaxHelper.get("/OrderCentral/GetSettings", (data: any) => {
-            var settings: Setting[] = JSON.parse(data);
-
-            for (let setting of settings) {
-                if (setting.name === "OrderGridName") this.orderGridName = setting.value;
-                if (setting.name === "LoadGridName") this.load1GridName = setting.value;
-                if (setting.name === "OrdersPageSize") this.ordersPageSize = Number(setting.value);
-                if (setting.name === "OrderCellHeight") this.orderCellHeight = Number(setting.value);
-                if (setting.name === "LoadsVisible") this.visibleLoads = Number(setting.value);
-                if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
-            }
-
-            promise();
-        }, undefined);
-    }
-
-    constructor() {
+    constructor(settings: Setting[]) {
         this.ajaxHelper = new AjaxHelper;
 
-
+        for (let setting of settings) {
+            if (setting.name === "OrderGridName") this.orderGridName = setting.value;
+            if (setting.name === "LoadGridName") this.load1GridName = setting.value;
+            if (setting.name === "OrdersPageSize") this.ordersPageSize = Number(setting.value);
+            if (setting.name === "OrderCellHeight") this.orderCellHeight = Number(setting.value);
+            if (setting.name === "LoadsVisible") this.visibleLoads = Number(setting.value);
+            if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
+        }
     }
 }
