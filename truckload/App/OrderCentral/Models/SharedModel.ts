@@ -13,6 +13,8 @@ export class SharedModel {
     public ordersPageSize = 8;
     public bodyWidth = 1452;
     public orderCellHeight = 90;
+    public visibleLoads = 3;
+    public orderPanelSeedHeight = 0;
 
     gridArray: boolean[] = [false, false, false, false];
 
@@ -49,16 +51,26 @@ export class SharedModel {
         }
     };
 
+    public populateSettings(promise: Function) {
+        this.ajaxHelper.get("/OrderCentral/GetSettings", (data: any) => {
+            var settings: Setting[] = JSON.parse(data);
+
+            for (let setting of settings) {
+                if (setting.name === "OrderGridName") this.orderGridName = setting.value;
+                if (setting.name === "LoadGridName") this.load1GridName = setting.value;
+                if (setting.name === "OrdersPageSize") this.ordersPageSize = Number(setting.value);
+                if (setting.name === "OrderCellHeight") this.orderCellHeight = Number(setting.value);
+                if (setting.name === "LoadsVisible") this.visibleLoads = Number(setting.value);
+                if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
+            }
+
+            promise();
+        }, undefined);
+    }
 
     constructor() {
         this.ajaxHelper = new AjaxHelper;
 
-        var settings:Setting[];
 
-        //ajax.get("/OrderCentral/GetSettings", (data: any) => {
-
-        //    settings = data;
-
-        //}, undefined);
     }
 }
