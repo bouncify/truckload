@@ -5,16 +5,19 @@ import * as ko from 'knockout';
 export module Startup {
     export function init():Main {
         var orderCentral = new Main();
+        var gridHeight = Globals.orderCellHeight * Globals.ordersPageSize;
+        $("#gridHeight").text(gridHeight);
+        //alert(gridHeight);
 
         ko.bindingHandlers.kendoGrid.options = {
-            height: Globals.gridHeight,
-            scrollable: false,
+            height: gridHeight,
+            scrollable: true,
             columns: [{
                     field: "OrderID",
                     title: "Orders", headerAttributes: {
                         style: "display: none"
                     }
-                }
+                } 
             ],
             pageable: { alwaysVisible: false, pageSize: Globals.ordersPageSize }
         };

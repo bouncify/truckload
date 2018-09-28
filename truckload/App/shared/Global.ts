@@ -6,9 +6,10 @@ export module Globals {
     export var load1GridName = "#koLoadsDay1";
     export var load2GridName = "#koLoadsDay2";
     export var load3GridName = "#koLoadsDay3";
-    export var gridHeight = 680;
+    //export var gridHeight = 680;
     export var ordersPageSize = 8;
     export var bodyWidth = 1452;
+    export var orderCellHeight = 90;
 }
 
 export enum DbOperation {
