@@ -12,6 +12,7 @@ export class OrderModel {
     //private orderGridName: string;
     private sharedModel:SharedModel;
     private orders = ko.observableArray([] as KoOrder[]);
+    private editOrder = ko.observable(new KoOrder);
 
     private orderNumberFilterText = "";
 
@@ -19,7 +20,7 @@ export class OrderModel {
         this.sharedModel.setWaitSpinner(true, this.sharedModel.orderGridName);
         this.orders.removeAll();
         var dataToSend = JSON.parse("{ \"orderNumberFilter\" : \"" + orderNumberFilter + "\"}");
-        this.sharedModel.ajaxHelper.get("/Orders/GetOrders", (data: any) => {
+        this.sharedModel.ajax.get("/Orders/GetOrders", (data: any) => {
             ko.mapping.fromJSON(data, {}, this.orders);
 
             $.each(this.orders(), (index, order) => {
@@ -67,6 +68,10 @@ export class OrderModel {
                 }
             }
         }, "Order Filter", this.orderNumberFilterText);
+    }
+    
+    public addOrder() {
+        alert("add!");
     }
 
     constructor(sharedModel:SharedModel) {

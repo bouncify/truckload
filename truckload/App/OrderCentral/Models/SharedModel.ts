@@ -2,7 +2,7 @@
 import { Setting } from "../Classes/Setting"
 
 export class SharedModel {
-    public ajaxHelper: AjaxHelper;
+    public ajax: AjaxHelper;
 
     public orderGridName = "#koOrderGrid";
     public load1GridName = "#koLoadsDay1";
@@ -51,7 +51,7 @@ export class SharedModel {
     };
 
     constructor(settings: Setting[]) {
-        this.ajaxHelper = new AjaxHelper;
+        this.ajax = new AjaxHelper;
 
         for (let setting of settings) {
             if (setting.name === "OrderGridName") this.orderGridName = setting.value;

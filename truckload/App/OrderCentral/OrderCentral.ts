@@ -20,6 +20,3 @@ export function initMainModule() {
     }, undefined);
 
 }
-
-
-

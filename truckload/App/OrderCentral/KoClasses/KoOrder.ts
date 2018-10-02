@@ -1,4 +1,5 @@
-﻿
+﻿import * as ko from 'knockout';
+
 export class KoOrder {
     orderId = ko.observable(0);
     orderNumber = ko.observable("");
@@ -20,4 +21,5 @@ export class KoOrder {
     pickupDateText = "";
     deliveryDateText = "";
     orderColor = "";
+
 }

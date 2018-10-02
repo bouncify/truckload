@@ -1,13 +1,24 @@
 ﻿
-<div id="koOrderModel" style="width: 357px">
-    <button type="button" title="Filter Orders" class="btn btn-default day-nav-button" style="float: left"
-            data-bind="click: setOrderFilter">
-        <span id="orderFilterIcon" class="k-icon k-i-filter"></span>
-    </button>
-    <span>
-        <strong>Order Central</strong>
-    </span>
-    <span id="gridHeight"></span>
+<div id="koOrderModel" style="width: 357px">    
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 25%">
+                <button type="button" title="Filter Orders" class="btn btn-default day-nav-button" style="float: left"
+                        data-bind="click: setOrderFilter">
+                    <span id="orderFilterIcon" class="k-icon k-i-filter"></span>
+                </button>
+            </td>
+            <td style="text-align: center">
+                <strong>Order Central</strong>
+            </td>
+            <td style="width: 25%">
+                <button type="button" title="Add Order" class="btn btn-default day-nav-button" style="float: right"
+                        data-bind="click: addOrder">
+                    <span class="k-icon k-i-plus"></span>
+                </button>
+            </td>
+        </tr>
+    </table>  
     <div id="koOrderGrid" style="background: rgb(236, 255, 251)"
          ondragover="OrderCentral.allowDropOrder(event)"
          ondrop="OrderCentral.dropOrderOnOrders(event)"

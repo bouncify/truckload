@@ -398,6 +398,7 @@
     <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDays.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDropDownData.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoEditOrder.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoad.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoOrder.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Setting.ts" />
