@@ -3,8 +3,12 @@ import { DateFunctions } from "../../Shared/DateFunctions"
 import { SharedModel } from "../Models/SharedModel"
 import * as ko from 'knockout';
 
+import { ControlHelper } from "../../Shared/ControlHelper"
+import { KoOrder } from "./KoOrder"
+
 export class KoEditOrder {
-    private sharedModel: SharedModel;
+    public shared: SharedModel;
+    private isNewOrder = false;
 
     orderId = ko.observable(0);
     warehouseId = ko.observable(0);
@@ -38,22 +42,61 @@ export class KoEditOrder {
     }
 
     public new() {
-        alert("new new");
+        this.isNewOrder = true;
+
+        ControlHelper.lbPrompt("Enter Order Number", (isOk: boolean, orderNumber: string) => {
+            if (isOk) {
+                this.resetFields();
+                this.orderNumber(orderNumber);
+                this.save();
+            }
+        }, 'Add Order');
     }
 
-    load(orderId: number) {
-        if (orderId) {
-            var dataToSend = JSON.parse("{ \"orderId\" : " + orderId + "}");
+    public edit(data:KoOrder) {
+        this.orderId(data.orderId());
+        this.warehouseId(data.warehouseId());
+        this.orderNumber(data.orderNumber());
+        this.customerName(data.customerName());
+        this.customerAddress(data.customerAddress());
+        this.destination(data.destination());
+        this.volume(data.volume());
+        this.unitOfMeasureId(data.unitOfMeasureId());
+        this.weightKg(data.weightKg());
+        this.pickupDate(data.pickupDate());
+        this.deliveryDate(data.deliveryDate());
+        this.isDangerousGoods(data.isDangerousGoods());
+        this.isCustomerPickup(data.isCustomerPickup());
+        this.notes(data.notes());
+        this.lastChangeDate(data.lastChangeDate());
+        this.userName(data.userName());
+        this.actionResultMessage("");
 
-            this.sharedModel.ajax.get("/Orders/GetOrder", (data: any) => {
-                ko.mapping.fromJSON(data, {}, this);
-                $("#koModalOrderDetailEdit").modal("show");
-            }, dataToSend);
-        }
+        $("#koModalOrderEdit").modal("show");
+    }
+    
+    private resetFields() {
+        this.orderId(0);
+        this.warehouseId(0);
+        this.orderNumber("");
+        this.customerName("");
+        this.customerAddress("");
+        this.destination("");
+        this.volume(0);
+        this.unitOfMeasureId(0);
+        this.weightKg(0);
+        this.pickupDate(new Date());
+        this.deliveryDate(new Date());
+        this.isDangerousGoods(false);
+        this.isCustomerPickup(false);
+        this.notes("");
+        this.lastChangeDate(new Date());
+        this.userName("");
+        this.actionResultMessage("");
     }
 
     public save = () => {
-        this.sharedModel.ajax.post("/Orders/SaveOrder", (dataResult: any) => {
+        this.shared.ajax.post("/Orders/SaveOrder", (dataResult: any) => {
             ko.mapping.fromJSON(dataResult, {}, this);
 
             var message = this.actionResultMessage();
@@ -62,13 +105,19 @@ export class KoEditOrder {
             if (!isSaved) {
                 alert(message);
             } else {
-                $("#koModalOrderDetailEdit").modal("hide");
+                if (this.isNewOrder) {
+                    $("#koModalOrderEdit").modal("show");
+                    this.isNewOrder = false;
+                } else {
+                    $("#koModalOrderEdit").modal("hide");
+                }
             }
         }, ko.toJSON(this));
     }
 
-
     constructor(sharedModel: SharedModel) {
-        this.sharedModel = sharedModel;
+        this.shared = sharedModel;
+
+        ko.applyBindings(this, $("#koModalOrderEdit")[0]);
     }
 }

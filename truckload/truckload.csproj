@@ -218,6 +218,9 @@
     <Compile Include="DbContext\Error.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\LoadStatu.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\LoginByUsernamePassword_Result.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
@@ -274,11 +277,13 @@
     </Compile>
     <Compile Include="Helpers\Admin\VmUserLogin.cs" />
     <Compile Include="Helpers\CustomExtensions.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\GetDataSourceResults.cs" />
     <Compile Include="Helpers\OrderCentral\OrderHelper.cs" />
     <Compile Include="Helpers\ServerError.cs" />
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
     <Compile Include="Helpers\Vm\VmDriver.cs" />
+    <Compile Include="Helpers\Vm\VmKoDropDownData.cs" />
     <Compile Include="Helpers\Vm\VmKoOrder.cs" />
     <Compile Include="Helpers\Vm\VmKoSelectListItem.cs" />
     <Compile Include="Helpers\Vm\VmLogin.cs" />
@@ -383,6 +388,7 @@
     <Content Include="Views\OrderCentral\Index.cshtml" />
     <Content Include="Views\Orders\_Orders.cshtml" />
     <Content Include="Views\Orders\_OrderGridCell.cshtml" />
+    <Content Include="Views\Orders\_EditOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />

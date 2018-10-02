@@ -16,6 +16,13 @@ export class KoOrder {
     isDraggable = ko.observable(false);
     loadSort = ko.observable(0);
 
+    warehouseId = ko.observable(0);
+    destination = ko.observable("");
+    volume = ko.observable(0);
+    unitOfMeasureId = ko.observable(0);
+    weightKg = ko.observable(0);
+    notes = ko.observable("");
+
     //extra fields
     lastChangeDetail = "";
     pickupDateText = "";

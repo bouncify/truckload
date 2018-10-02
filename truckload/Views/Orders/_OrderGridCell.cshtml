@@ -21,7 +21,7 @@
                     <div style="display: table-cell; width: 25px;">
                         <ul>
                             <li>
-                                <button type="button" title="Edit Order" class="k-button k-button-icontext order-button" data-bind="click: $parent.editOrder">
+                                <button type="button" title="Edit Order" class="k-button k-button-icontext order-button" data-bind="click: $parent.editOrderClick">
                                     <span class="k-icon k-i-edit"></span>
                                 </button>
                             </li>
@@ -32,7 +32,7 @@
                         <ul style="margin-bottom: 0;">
                             <li class="order-col-item order-col-topline" data-bind="text: orderNumber" />
                             <li class="order-col-item" data-bind="text: customerName" />
-                            <li class="order-col-item" data-bind="attr: { title: custAddress } "><span data-bind="text: custAddress"></span></li>
+                            <li class="order-col-item" data-bind="attr: { title: customerAddress } "><span data-bind="text: customerAddress"></span></li>
                             <li class="order-col-item-italic" data-bind="text: lastChangeDetail"></li>
                         </ul>
                     </div>

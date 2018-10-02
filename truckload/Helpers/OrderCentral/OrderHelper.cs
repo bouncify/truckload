@@ -35,7 +35,7 @@ namespace truckload.Helpers.OrderCentral
                 OrderId = d.OrderId,
                 OrderNumber = d.OrderNumber,
                 CustomerName = d.CustomerName,
-                CustAddress = d.CustAddress,
+                CustomerAddress = d.CustAddress,
                 UserName = d.UserLogin1.UserName ?? d.UserLogin.UserName,
                 LastChangeDate = d.ModifiedDate ?? d.CreatedDate,
                 UnitDescription = "" + d.Volume + " " + d.UnitOfMeasure.Description + " / " + d.WeightKg + "KG",
@@ -45,7 +45,13 @@ namespace truckload.Helpers.OrderCentral
                 IsCustomerPickup = d.IsCustomerPickup,
                 IsDangerousGoods = d.IsDangerousGoods,
                 IsDraggable = currentUser.UserLevel > 1,
-                LoadSort = d.LoadSort ?? 0
+                LoadSort = d.LoadSort ?? 0,
+                WarehouseId = d.WarehouseId,
+                UnitOfMeasureId = d.UnitOfMeasureId,
+                Destination = d.Destination,
+                Notes = d.Notes,
+                Volume = d.Volume??0,
+                WeightKg = d.WeightKg
             }).ToList();
 
             return orders;

@@ -22,7 +22,7 @@ export module OrderPanel {
         };
 
         ko.applyBindings(orderModel, $("#koOrderModel")[0]);
-        
+
         console.log("finished order panel setup");
     }
 

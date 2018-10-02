@@ -39,6 +39,13 @@
           <Property Name="utcLogdate" Type="datetime2" Precision="7" />
           <Property Name="GlobalId" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="LoadStatus">
+          <Key>
+            <PropertyRef Name="LoadStatusId" />
+          </Key>
+          <Property Name="LoadStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -255,6 +262,7 @@
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoadStatus" EntityType="Self.LoadStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trailer" EntityType="Self.Trailer" Schema="dbo" store:Type="Tables" />
@@ -369,6 +377,7 @@
             <End Role="UserLogin" EntitySet="UserLogins" />
             <End Role="UserSetting" EntitySet="UserSettings" />
           </AssociationSet>
+          <EntitySet Name="LoadStatus" EntityType="truckloadModel.LoadStatu" />
           </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
           <Property Type="Int32" Name="UserLoginId" Nullable="false" />
@@ -621,6 +630,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LoadStatu">
+          <Key>
+            <PropertyRef Name="LoadStatusId" />
+          </Key>
+          <Property Name="LoadStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -788,6 +804,14 @@
                 <ScalarProperty Name="SettingCode" ColumnName="SettingCode" />
                 <ScalarProperty Name="UserLoginId" ColumnName="UserLoginId" />
                 <ScalarProperty Name="UserSettingId" ColumnName="UserSettingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoadStatus">
+            <EntityTypeMapping TypeName="truckloadModel.LoadStatu">
+              <MappingFragment StoreEntitySet="LoadStatus">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LoadStatusId" ColumnName="LoadStatusId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -1,8 +1,10 @@
 ﻿import { AjaxHelper } from "../../Shared/Classes/AjaxHelper"
 import { Setting } from "../Classes/Setting"
+import { KoDropDownData } from "../KoClasses/KoDropDownData"
 
 export class SharedModel {
     public ajax: AjaxHelper;
+    public dropDownData: KoDropDownData;
 
     public orderGridName = "#koOrderGrid";
     public load1GridName = "#koLoadsDay1";
@@ -14,7 +16,7 @@ export class SharedModel {
     public orderCellHeight = 90;
     public visibleLoads = 3;
     public orderPanelSeedHeight = 0;
-
+    
     gridArray: boolean[] = [false, false, false, false];
 
     setWaitSpinner = (isLoading: boolean, gridName: string) => {
@@ -32,7 +34,7 @@ export class SharedModel {
                 this.gridArray[3] = isLoading;
                 break;
         }
-
+        
         var isSetSpinning = false;
         for (let entry of this.gridArray) {
             if (entry) isSetSpinning = true;
@@ -52,6 +54,7 @@ export class SharedModel {
 
     constructor(settings: Setting[]) {
         this.ajax = new AjaxHelper;
+        this.dropDownData = new KoDropDownData(this.ajax);
 
         for (let setting of settings) {
             if (setting.name === "OrderGridName") this.orderGridName = setting.value;

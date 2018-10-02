@@ -6,11 +6,11 @@ export class KoDropDownData {
     trailerList = ko.observableArray();
     driverList = ko.observableArray();
     loadStatusList = ko.observableArray();
+    unitsOfMeasureList = ko.observableArray();
+    warehouseList = ko.observableArray();
 
-    private ajaxHelper = new AjaxHelper();
-
-    constructor() {
-        this.ajaxHelper.get("/Load/GetDropDownData", (data: any) => {
+    constructor(ajax: AjaxHelper) {
+        ajax.get("/OrderCentral/GetDropDownData", (data: any) => {
             ko.mapping.fromJSON(data, {}, this);
         }, undefined);
     }

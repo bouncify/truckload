@@ -25,6 +25,7 @@
         <AssociationConnector Association="truckloadModel.FK__Order__ModifiedB__078C1F06" />
         <EntityTypeShape EntityType="truckloadModel.UserSetting" Width="1.5" PointX="2.75" PointY="13.375" />
         <AssociationConnector Association="truckloadModel.FK__UserSetti__UserL__373B3228" />
+        <EntityTypeShape EntityType="truckloadModel.LoadStatu" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -75,6 +75,10 @@ export class OrderModel {
         this.editOrder.new();
     }
 
+    public editOrderClick = (data: KoOrder) => {
+        this.editOrder.edit(data);
+    }
+
     constructor(sharedModel:SharedModel) {
         this.sharedModel = sharedModel;
         this.editOrder = new KoEditOrder(sharedModel);

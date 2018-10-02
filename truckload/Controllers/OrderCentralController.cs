@@ -35,5 +35,46 @@ namespace truckload.Controllers
 
             return newDropDownDataJson;
         }
+
+        [HttpGet]
+        public ActionResult GetDropDownData()
+        {
+            var newDropDownData = new VmKoDropDownData()
+            {
+                DriverList = Db.Drivers.Where(d => d.IsActive).Select(r => new VmKoSelectListItem()
+                {
+                    ValueInt = r.DriverId,
+                    Text = r.FirstName + " " + r.LastName
+                }).ToList(),
+                TrailerList = Db.Trailers.Where(t => t.IsActive).Select(r => new VmKoSelectListItem()
+                {
+                    ValueInt = r.TrailerId,
+                    Text = r.TrailerDescription
+                }).ToList(),
+                TruckList = Db.Trucks.Where(t => t.IsActive).Select(r => new VmKoSelectListItem()
+                {
+                    ValueInt = r.TruckId,
+                    Text = r.TruckDescription
+                }).ToList(),
+                LoadStatusList = Db.LoadStatus.Select(r => new VmKoSelectListItem()
+                {
+                    ValueInt = r.LoadStatusId,
+                    Text = r.Description
+                }).ToList(),
+                UnitsOfMeasureList = Db.UnitOfMeasures.Select(r => new VmKoSelectListItem()
+                {
+                    ValueInt = r.UnitOfMeasureId,
+                    Text = r.Description
+                }).ToList(),
+                WarehouseList = Db.Warehouses.Select(r => new VmKoSelectListItem()
+                {
+                    ValueInt = r.WarehouseId,
+                    Text = r.Description
+                }).ToList()
+            };
+
+            var newDropDownDataJson = Json(newDropDownData.ToJsonString(), JsonRequestBehavior.AllowGet);
+            return newDropDownDataJson;
+        }
     }
 }
