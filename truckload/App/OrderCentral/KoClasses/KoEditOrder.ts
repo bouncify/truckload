@@ -1,8 +1,9 @@
 ﻿import { AjaxHelper } from "../../Shared/Classes/AjaxHelper"
 import { DateFunctions } from "../../Shared/DateFunctions"
 import { SharedModel } from "../Models/SharedModel"
+import * as ko from 'knockout';
 
-export class KoOrder {
+export class KoEditOrder {
     private sharedModel: SharedModel;
 
     orderId = ko.observable(0);
@@ -34,6 +35,10 @@ export class KoOrder {
         } else {
             return "";
         }
+    }
+
+    public new() {
+        alert("new new");
     }
 
     load(orderId: number) {

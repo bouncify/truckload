@@ -1,4 +1,5 @@
 ﻿import { KoOrder } from "../KoClasses/KoOrder"
+import { KoEditOrder } from "../KoClasses/KoEditOrder"
 import { SharedModel } from "./SharedModel"
 import { StringFunctions } from "../../Shared/StringFunctions"
 import { DateFunctions } from "../../Shared/DateFunctions"
@@ -6,13 +7,13 @@ import { ControlHelper } from "../../Shared/ControlHelper"
 
 import * as moment from 'moment';
 import * as ko from 'knockout';
-
+ 
 export class OrderModel {
     //private setWaitSpinner: Function;
     //private orderGridName: string;
     private sharedModel:SharedModel;
     private orders = ko.observableArray([] as KoOrder[]);
-    private editOrder = ko.observable(new KoOrder);
+    private editOrder: KoEditOrder;
 
     private orderNumberFilterText = "";
 
@@ -71,11 +72,12 @@ export class OrderModel {
     }
     
     public addOrder() {
-        alert("add!");
+        this.editOrder.new();
     }
 
     constructor(sharedModel:SharedModel) {
         this.sharedModel = sharedModel;
+        this.editOrder = new KoEditOrder(sharedModel);
 
         this.loadAll();
     }
