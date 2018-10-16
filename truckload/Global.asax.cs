@@ -10,17 +10,28 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using truckload.DbContext;
 using truckload.Helpers;
+using truckload.Helpers.Repositories;
 
 namespace truckload
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private OrderRepository _ordersDependency;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+
+            _ordersDependency = new OrderRepository();
+            _ordersDependency.StartDependency();
+        }
+
+        protected void Application_End()
+        {
+            _ordersDependency.StopDependency();
         }
 
         protected void Application_Error(Object sender, EventArgs e)

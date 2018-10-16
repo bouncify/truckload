@@ -19,7 +19,8 @@
     "knockout": "^3.4.2",
     "knockout-kendo": "^0.9.8",
     "knockout-mapping": "^2.6.0",
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "signalr": "^2.3.0"
   },
   "devDependencies": {
     "@types/bootstrap": "^4.1.2",
