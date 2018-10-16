@@ -13,28 +13,28 @@ namespace truckload.Hubs
         public static void RefreshRequest()
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<OrderHub>();
-            context.Clients.All.gridRefreshRequest();
+            context.Clients.All.refreshRequest();
         }
 
         [HubMethodName("update")]
         public static void Update(long orderId)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<OrderHub>();
-            context.Clients.All.gridUpdateRow(orderId);
+            context.Clients.All.update(orderId);
         }
 
         [HubMethodName("delete")]
         public static void Delete(long orderId)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<OrderHub>();
-            context.Clients.All.gridDeleteRow(orderId);
+            context.Clients.All.delete(orderId);
         }
 
         [HubMethodName("add")]
         public static void Add(long orderId)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<OrderHub>();
-            context.Clients.All.gridAddRow(orderId);
+            context.Clients.All.add(orderId);
         }
     }
 }

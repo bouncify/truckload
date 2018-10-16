@@ -20,6 +20,23 @@ namespace truckload.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetOrder(long orderId)
+        {
+            var orders = OrderHelper.GetOrdersList(Db, CurrentUser, orderId, null);
+
+            if (orders != null)
+            {
+                if (orders.Count == 1)
+                {
+                    var order = orders.FirstOrDefault();
+                    return Json(order.ToJsonString(), JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            throw new ServerException($"Cannot find order {orderId}");
+        }
+
+        [HttpGet]
         public ActionResult GetOrders(string orderNumberFilter = "")
         {
             var orders = OrderHelper.GetOrdersList(Db, CurrentUser, null, orderNumberFilter);

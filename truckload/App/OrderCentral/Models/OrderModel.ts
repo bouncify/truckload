@@ -1,5 +1,8 @@
 ﻿import { KoOrder } from "../KoClasses/KoOrder"
 import { KoEditOrder } from "../KoClasses/KoEditOrder"
+import { OrderMessageService } from "../Classes/OrderMessageService"
+import { DbOperation } from "../../Shared/Global"
+import { CrudMessage } from "../../Shared/Global"
 import { SharedModel } from "./SharedModel"
 import { StringFunctions } from "../../Shared/StringFunctions"
 import { DateFunctions } from "../../Shared/DateFunctions"
@@ -14,6 +17,7 @@ export class OrderModel {
     private sharedModel:SharedModel;
     private orders = ko.observableArray([] as KoOrder[]);
     private editOrder: KoEditOrder;
+    private orderService: OrderMessageService;
 
     private orderNumberFilterText = "";
 
@@ -79,10 +83,50 @@ export class OrderModel {
         this.editOrder.edit(data);
     }
 
+    public receiveDbUpdateOrderNotification = (message: CrudMessage) => {
+        var dataToSend = JSON.parse("{ \"orderId\" : " + message.id + "}");
+        console.log(message.id);
+        switch (message.operation) {
+            case DbOperation.Create:
+                this.sharedModel.ajax.get("/Orders/GetOrder", (data: any) => {
+                    var newOrder = ko.mapping.fromJSON(data);
+                    this.populateExtraFields(newOrder);
+                    this.orders.push(newOrder);
+                    this.sharedModel.setWaitSpinner(false,this.sharedModel.orderGridName);
+                }, dataToSend);
+                break;
+            case DbOperation.Read:
+                break;
+            case DbOperation.Update:
+                this.sharedModel.ajax.get("/Orders/GetOrder", (data: any) => {
+                    var newOrder = ko.mapping.fromJSON(data);
+                    this.populateExtraFields(newOrder);
+                    var oldOrder = ko.utils.arrayFirst(this.orders(), item => item.orderId() === message.id);
+                    if (oldOrder) {
+                        this.orders.replace(oldOrder, newOrder);
+                    } else {
+                        this.populateExtraFields(newOrder);
+                        this.orders.push(newOrder);
+                    }
+                    this.sharedModel.setWaitSpinner(false, this.sharedModel.orderGridName);
+                }, dataToSend);
+                break;
+            case DbOperation.Delete:
+                var order = ko.utils.arrayFirst(this.orders(), item => item.orderId() === message.id);
+                if (order) this.orders.remove((x: any) => x.orderId === order.orderId);
+                this.sharedModel.setWaitSpinner(false, this.sharedModel.orderGridName);
+                break;
+        }
+    }
+
     constructor(sharedModel:SharedModel) {
         this.sharedModel = sharedModel;
         this.editOrder = new KoEditOrder(sharedModel);
 
         this.loadAll();
+
+        this.orderService = new OrderMessageService(this.receiveDbUpdateOrderNotification);
+        //var orderGridService = new OrderGridMessageService(viewModelSimpleOrders.receiveDbUpdateOrderNotification);
+
     }
 }

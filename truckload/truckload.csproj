@@ -424,6 +424,7 @@
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Classes\OrderMessageService.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDays.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDropDownData.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoEditOrder.ts" />
