@@ -27,8 +27,6 @@
 
           columns.Bound(r => r.Email);
 
-          columns.Bound(r => r.OrderRowsVisible).Title("Visible Rows").Width(150);
-          columns.Bound(r => r.LoadDaysVisible).Title("Visible Days").Width(150);
 
           columns.Template(e => { }).Title("Delete").Width(40)
               .ClientTemplate("<button type='button' title='Delete User' class='k-button k-button-icontext' style='min-width: auto;' onclick='app.module.btnDeleteClick(this)' ><span class='k-icon k-i-close'></span></button>")
