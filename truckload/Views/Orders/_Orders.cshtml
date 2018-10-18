@@ -22,7 +22,7 @@
     <div id="koOrderGrid" style="background: rgb(236, 255, 251)"
          ondragover="OrderCentral.allowDropOrder(event)"
          ondrop="OrderCentral.dropOrderOnOrders(event)"
-         data-bind="kendoGrid: { data: orders, rowTemplate: 'rowTmpl', useKOTemplates: true }"></div>
+         data-bind="kendoGrid: { data: orders, rowTemplate: 'orderRowTemplate', useKOTemplates: true }"></div>
 
     <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
         <a href="#" class="k-pager-refresh k-link" title="Refresh">

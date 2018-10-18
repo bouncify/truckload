@@ -18,7 +18,6 @@ namespace truckload.Controllers
 
         public ActionResult Index()
         {
-            //ViewBag.IsCustomContainer = true;
             return View();
         }
 

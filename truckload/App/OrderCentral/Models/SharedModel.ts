@@ -12,9 +12,10 @@ export class SharedModel {
     public load3GridName = "#koLoadsDay3";
 
     public ordersPageSize = 8;
-    public bodyWidth = 1452;
+    //public bodyWidth = 1452;
     public orderCellHeight = 90;
-    public visibleLoads = 3;
+    public visibleLoadCols = 3;
+    public loadColWidth = 357;
     public orderPanelSeedHeight = 0;
     
     gridArray: boolean[] = [false, false, false, false];
@@ -61,7 +62,7 @@ export class SharedModel {
             if (setting.name === "LoadGridName") this.load1GridName = setting.value;
             if (setting.name === "OrdersPageSize") this.ordersPageSize = Number(setting.value);
             if (setting.name === "OrderCellHeight") this.orderCellHeight = Number(setting.value);
-            if (setting.name === "LoadsVisible") this.visibleLoads = Number(setting.value);
+            if (setting.name === "LoadsVisible") this.visibleLoadCols = Number(setting.value);
             if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
         }
     }
