@@ -29,8 +29,6 @@ export module MainScreen {
             //newCol.text("Load Col" + colNo);
 
             newCol.insertAfter("div.loadCol:last");
-
-
         }
 
 

@@ -19,6 +19,8 @@ export class SharedModel {
     public visibleLoadCols = 3;
     public loadColWidth = 357;
     public orderPanelSeedHeight = 0;
+
+    public loadCol1Date = new Date();//Start With today's date
     
     gridArray: boolean[] = [false, false, false, false];
 
@@ -67,7 +69,7 @@ export class SharedModel {
             if (setting.name === "LoadsVisible") this.visibleLoadCols = Number(setting.value);
             if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
 
-            this.gridHeight =  (this.orderCellHeight * this.ordersPageSize) + this.orderPanelSeedHeight;
+            this.gridHeight = (this.orderCellHeight * this.ordersPageSize) + this.orderPanelSeedHeight;            
         }
     }
 }
