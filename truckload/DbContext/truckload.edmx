@@ -39,6 +39,22 @@
           <Property Name="utcLogdate" Type="datetime2" Precision="7" />
           <Property Name="GlobalId" Type="varchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Load">
+          <Key>
+            <PropertyRef Name="LoadId" />
+          </Key>
+          <Property Name="LoadId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LoadDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UnitOfMeasureId" Type="int" />
+          <Property Name="TruckId" Type="int" />
+          <Property Name="TrailerId" Type="int" />
+          <Property Name="DriverId" Type="int" />
+          <Property Name="LoadStatusId" Type="int" Nullable="false" />
+          <Property Name="CreatedByUserLoginId" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedByUserLoginId" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+        </EntityType>
         <EntityType Name="LoadStatus">
           <Key>
             <PropertyRef Name="LoadStatusId" />
@@ -147,6 +163,90 @@
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="WarehouseCode" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Load__CreatedByU__147C05D0">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserLoginId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="CreatedByUserLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__DriverId__3CCAB9A3">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__LoadStatus__7267B045">
+          <End Role="LoadStatus" Type="Self.LoadStatus" Multiplicity="1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadStatus">
+              <PropertyRef Name="LoadStatusId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="LoadStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__ModifiedBy__15702A09">
+          <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserLoginId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ModifiedByUserLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TrailerId__62BB5861">
+          <End Role="Trailer" Type="Self.Trailer" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TrailerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TruckId__3BD6956A">
+          <End Role="Truck" Type="Self.Truck" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__UnitOfMeas__6F212F46">
+          <End Role="UnitOfMeasure" Type="Self.UnitOfMeasure" Multiplicity="0..1" />
+          <End Role="Load" Type="Self.Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Order__CreatedBy__0697FACD">
           <End Role="UserLogin" Type="Self.UserLogin" Multiplicity="0..1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
@@ -168,6 +268,18 @@
             </Principal>
             <Dependent Role="Order">
               <PropertyRef Name="ModifiedByUserLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__LoadI__46FE2F53">
+          <End Role="Load" Type="Self.Load" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Load">
+              <PropertyRef Name="LoadId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="LoadId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -262,6 +374,7 @@
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Error" EntityType="Self.Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Load" EntityType="Self.Load" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoadStatus" EntityType="Self.LoadStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
@@ -272,12 +385,44 @@
           <EntitySet Name="UserLogin" EntityType="Self.UserLogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSetting" EntityType="Self.UserSetting" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Load__CreatedByU__147C05D0" Association="Self.FK__Load__CreatedByU__147C05D0">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__DriverId__3CCAB9A3" Association="Self.FK__Load__DriverId__3CCAB9A3">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__LoadStatus__7267B045" Association="Self.FK__Load__LoadStatus__7267B045">
+            <End Role="LoadStatus" EntitySet="LoadStatus" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__ModifiedBy__15702A09" Association="Self.FK__Load__ModifiedBy__15702A09">
+            <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TrailerId__62BB5861" Association="Self.FK__Load__TrailerId__62BB5861">
+            <End Role="Trailer" EntitySet="Trailer" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TruckId__3BD6956A" Association="Self.FK__Load__TruckId__3BD6956A">
+            <End Role="Truck" EntitySet="Truck" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__UnitOfMeas__6F212F46" Association="Self.FK__Load__UnitOfMeas__6F212F46">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasure" />
+            <End Role="Load" EntitySet="Load" />
+          </AssociationSet>
           <AssociationSet Name="FK__Order__CreatedBy__0697FACD" Association="Self.FK__Order__CreatedBy__0697FACD">
             <End Role="UserLogin" EntitySet="UserLogin" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK__Order__ModifiedB__078C1F06" Association="Self.FK__Order__ModifiedB__078C1F06">
             <End Role="UserLogin" EntitySet="UserLogin" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__LoadI__46FE2F53" Association="Self.FK__simple_Or__LoadI__46FE2F53">
+            <End Role="Load" EntitySet="Load" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
           <AssociationSet Name="FK__simple_Or__UnitO__49DA9BFE" Association="Self.FK__simple_Or__UnitO__49DA9BFE">
@@ -378,6 +523,39 @@
             <End Role="UserSetting" EntitySet="UserSettings" />
           </AssociationSet>
           <EntitySet Name="LoadStatus" EntityType="truckloadModel.LoadStatu" />
+          <EntitySet Name="Loads" EntityType="truckloadModel.Load" />
+          <AssociationSet Name="FK__Load__DriverId__3CCAB9A3" Association="truckloadModel.FK__Load__DriverId__3CCAB9A3">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__CreatedByU__147C05D0" Association="truckloadModel.FK__Load__CreatedByU__147C05D0">
+            <End Role="UserLogin" EntitySet="UserLogins" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__LoadStatus__7267B045" Association="truckloadModel.FK__Load__LoadStatus__7267B045">
+            <End Role="LoadStatu" EntitySet="LoadStatus" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__ModifiedBy__15702A09" Association="truckloadModel.FK__Load__ModifiedBy__15702A09">
+            <End Role="UserLogin" EntitySet="UserLogins" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TrailerId__62BB5861" Association="truckloadModel.FK__Load__TrailerId__62BB5861">
+            <End Role="Trailer" EntitySet="Trailers" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__TruckId__3BD6956A" Association="truckloadModel.FK__Load__TruckId__3BD6956A">
+            <End Role="Truck" EntitySet="Trucks" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Load__UnitOfMeas__6F212F46" Association="truckloadModel.FK__Load__UnitOfMeas__6F212F46">
+            <End Role="UnitOfMeasure" EntitySet="UnitOfMeasures" />
+            <End Role="Load" EntitySet="Loads" />
+          </AssociationSet>
+          <AssociationSet Name="FK__simple_Or__LoadI__46FE2F53" Association="truckloadModel.FK__simple_Or__LoadI__46FE2F53">
+            <End Role="Load" EntitySet="Loads" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="LoginByUsernamePassword_Result">
           <Property Type="Int32" Name="UserLoginId" Nullable="false" />
@@ -409,6 +587,7 @@
           <Property Name="WhmisTrainingDate" Type="DateTime" Precision="3" />
           <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__DriverId__3CCAB9A3" FromRole="Driver" ToRole="Load" />
         </EntityType>
         <EntityType Name="Trailer">
           <Key>
@@ -424,6 +603,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="TrailerType" Relationship="truckloadModel.FK__Trailer__Trailer__4BD7F309" FromRole="Trailer" ToRole="TrailerType" />
           <NavigationProperty Name="UnitOfMeasure" Relationship="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" FromRole="Trailer" ToRole="UnitOfMeasure" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__TrailerId__62BB5861" FromRole="Trailer" ToRole="Load" />
         </EntityType>
         <EntityType Name="TrailerType">
           <Key>
@@ -442,6 +622,7 @@
           <Property Name="NextMaintenanceDate" Type="DateTime" Precision="3" />
           <Property Name="NextInspectionDate" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__TruckId__3BD6956A" FromRole="Truck" ToRole="Load" />
         </EntityType>
         <EntityType Name="UnitOfMeasure">
           <Key>
@@ -451,6 +632,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Trailers" Relationship="truckloadModel.FK__Trailer__UnitOfM__4CCC1742" FromRole="UnitOfMeasure" ToRole="Trailer" />
           <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__simple_Or__UnitO__49DA9BFE" FromRole="UnitOfMeasure" ToRole="Order" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__UnitOfMeas__6F212F46" FromRole="UnitOfMeasure" ToRole="Load" />
         </EntityType>
         <Association Name="FK__Trailer__Trailer__4BD7F309">
           <End Type="truckloadModel.TrailerType" Role="TrailerType" Multiplicity="1" />
@@ -514,6 +696,7 @@
           <NavigationProperty Name="Warehouse" Relationship="truckloadModel.FK__simple_Or__Wareh__4ACEC037" FromRole="Order" ToRole="Warehouse" />
           <NavigationProperty Name="UserLogin" Relationship="truckloadModel.FK__Order__CreatedBy__0697FACD" FromRole="Order" ToRole="UserLogin" />
           <NavigationProperty Name="UserLogin1" Relationship="truckloadModel.FK__Order__ModifiedB__078C1F06" FromRole="Order" ToRole="UserLogin" />
+          <NavigationProperty Name="Load" Relationship="truckloadModel.FK__simple_Or__LoadI__46FE2F53" FromRole="Order" ToRole="Load" />
           </EntityType>
         <Association Name="FK__simple_Or__UnitO__49DA9BFE">
           <End Type="truckloadModel.UnitOfMeasure" Role="UnitOfMeasure" Multiplicity="0..1" />
@@ -563,6 +746,8 @@
           <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__Order__CreatedBy__0697FACD" FromRole="UserLogin" ToRole="Order" />
           <NavigationProperty Name="Orders1" Relationship="truckloadModel.FK__Order__ModifiedB__078C1F06" FromRole="UserLogin" ToRole="Order" />
           <NavigationProperty Name="UserSettings" Relationship="truckloadModel.FK__UserSetti__UserL__373B3228" FromRole="UserLogin" ToRole="UserSetting" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__CreatedByU__147C05D0" FromRole="UserLogin" ToRole="Load" />
+          <NavigationProperty Name="Loads1" Relationship="truckloadModel.FK__Load__ModifiedBy__15702A09" FromRole="UserLogin" ToRole="Load" />
         </EntityType>
         <Association Name="FK__UserLogin__Acces__160F4887">
           <End Type="truckloadModel.AccessLevel" Role="AccessLevel" Multiplicity="1" />
@@ -636,7 +821,128 @@
           </Key>
           <Property Name="LoadStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Loads" Relationship="truckloadModel.FK__Load__LoadStatus__7267B045" FromRole="LoadStatu" ToRole="Load" />
         </EntityType>
+        <EntityType Name="Load">
+          <Key>
+            <PropertyRef Name="LoadId" />
+          </Key>
+          <Property Name="LoadId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LoadDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UnitOfMeasureId" Type="Int32" />
+          <Property Name="TruckId" Type="Int32" />
+          <Property Name="TrailerId" Type="Int32" />
+          <Property Name="DriverId" Type="Int32" />
+          <Property Name="LoadStatusId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedByUserLoginId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedByUserLoginId" Type="Int32" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Driver" Relationship="truckloadModel.FK__Load__DriverId__3CCAB9A3" FromRole="Load" ToRole="Driver" />
+          <NavigationProperty Name="UserLogin" Relationship="truckloadModel.FK__Load__CreatedByU__147C05D0" FromRole="Load" ToRole="UserLogin" />
+          <NavigationProperty Name="LoadStatu" Relationship="truckloadModel.FK__Load__LoadStatus__7267B045" FromRole="Load" ToRole="LoadStatu" />
+          <NavigationProperty Name="UserLogin1" Relationship="truckloadModel.FK__Load__ModifiedBy__15702A09" FromRole="Load" ToRole="UserLogin" />
+          <NavigationProperty Name="Trailer" Relationship="truckloadModel.FK__Load__TrailerId__62BB5861" FromRole="Load" ToRole="Trailer" />
+          <NavigationProperty Name="Truck" Relationship="truckloadModel.FK__Load__TruckId__3BD6956A" FromRole="Load" ToRole="Truck" />
+          <NavigationProperty Name="UnitOfMeasure" Relationship="truckloadModel.FK__Load__UnitOfMeas__6F212F46" FromRole="Load" ToRole="UnitOfMeasure" />
+          <NavigationProperty Name="Orders" Relationship="truckloadModel.FK__simple_Or__LoadI__46FE2F53" FromRole="Load" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK__Load__DriverId__3CCAB9A3">
+          <End Type="truckloadModel.Driver" Role="Driver" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="DriverId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="DriverId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__CreatedByU__147C05D0">
+          <End Type="truckloadModel.UserLogin" Role="UserLogin" Multiplicity="1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserLoginId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="CreatedByUserLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__LoadStatus__7267B045">
+          <End Type="truckloadModel.LoadStatu" Role="LoadStatu" Multiplicity="1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoadStatu">
+              <PropertyRef Name="LoadStatusId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="LoadStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__ModifiedBy__15702A09">
+          <End Type="truckloadModel.UserLogin" Role="UserLogin" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserLogin">
+              <PropertyRef Name="UserLoginId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="ModifiedByUserLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TrailerId__62BB5861">
+          <End Type="truckloadModel.Trailer" Role="Trailer" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trailer">
+              <PropertyRef Name="TrailerId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TrailerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__TruckId__3BD6956A">
+          <End Type="truckloadModel.Truck" Role="Truck" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Truck">
+              <PropertyRef Name="TruckId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="TruckId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Load__UnitOfMeas__6F212F46">
+          <End Type="truckloadModel.UnitOfMeasure" Role="UnitOfMeasure" Multiplicity="0..1" />
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UnitOfMeasure">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Principal>
+            <Dependent Role="Load">
+              <PropertyRef Name="UnitOfMeasureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__simple_Or__LoadI__46FE2F53">
+          <End Type="truckloadModel.Load" Role="Load" Multiplicity="0..1" />
+          <End Type="truckloadModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Load">
+              <PropertyRef Name="LoadId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="LoadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -812,6 +1118,23 @@
               <MappingFragment StoreEntitySet="LoadStatus">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="LoadStatusId" ColumnName="LoadStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loads">
+            <EntityTypeMapping TypeName="truckloadModel.Load">
+              <MappingFragment StoreEntitySet="Load">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedByUserLoginId" ColumnName="ModifiedByUserLoginId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedByUserLoginId" ColumnName="CreatedByUserLoginId" />
+                <ScalarProperty Name="LoadStatusId" ColumnName="LoadStatusId" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="TrailerId" ColumnName="TrailerId" />
+                <ScalarProperty Name="TruckId" ColumnName="TruckId" />
+                <ScalarProperty Name="UnitOfMeasureId" ColumnName="UnitOfMeasureId" />
+                <ScalarProperty Name="LoadDate" ColumnName="LoadDate" />
+                <ScalarProperty Name="LoadId" ColumnName="LoadId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

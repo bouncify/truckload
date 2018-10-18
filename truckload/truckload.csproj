@@ -239,6 +239,9 @@
     <Compile Include="DbContext\Error.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\Load.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\LoadStatu.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
@@ -306,6 +309,7 @@
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
     <Compile Include="Helpers\Vm\VmDriver.cs" />
     <Compile Include="Helpers\Vm\VmKoDropDownData.cs" />
+    <Compile Include="Helpers\Vm\VmKoLoad.cs" />
     <Compile Include="Helpers\Vm\VmKoOrder.cs" />
     <Compile Include="Helpers\Vm\VmKoSelectListItem.cs" />
     <Compile Include="Helpers\Vm\VmLogin.cs" />
@@ -367,9 +371,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="tsconfig.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Loads\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="App\Content\css\Site.less" />
     <EntityDeploy Include="DbContext\truckload.edmx">
@@ -411,6 +413,7 @@
     <Content Include="Views\Orders\_Orders.cshtml" />
     <Content Include="Views\Orders\_OrderGridCell.cshtml" />
     <Content Include="Views\Orders\_EditOrder.cshtml" />
+    <Content Include="Views\Loads\_LoadCol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
@@ -425,16 +428,16 @@
     <TypeScriptCompile Include="App\Home.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\OrderMessageService.ts" />
-    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDays.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDropDownData.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoEditOrder.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoad.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoadCol.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoOrder.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Setting.ts" />
-    <TypeScriptCompile Include="App\OrderCentral\Models\DayModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\LoadModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\SharedModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\OrderModel.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Modules\LoadPanels.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Modules\OrderPanel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\OrderCentral.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />

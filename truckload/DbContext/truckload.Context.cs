@@ -40,6 +40,7 @@ namespace truckload.DbContext
         public virtual DbSet<UserLogin> UserLogins { get; set; }
         public virtual DbSet<UserSetting> UserSettings { get; set; }
         public virtual DbSet<LoadStatu> LoadStatus { get; set; }
+        public virtual DbSet<Load> Loads { get; set; }
     
         public virtual ObjectResult<LoginByUsernamePassword_Result> LoginByUsernamePassword(string username, string password)
         {

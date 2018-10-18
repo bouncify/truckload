@@ -20,6 +20,8 @@ namespace truckload.DbContext
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
             this.UserSettings = new HashSet<UserSetting>();
+            this.Loads = new HashSet<Load>();
+            this.Loads1 = new HashSet<Load>();
         }
     
         public int UserLoginId { get; set; }
@@ -38,5 +40,9 @@ namespace truckload.DbContext
         public virtual ICollection<Order> Orders1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserSetting> UserSettings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Load> Loads { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Load> Loads1 { get; set; }
     }
 }

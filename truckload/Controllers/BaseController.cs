@@ -60,7 +60,6 @@ namespace truckload.Controllers
                 }
             }
 
-            //ViewBag.IsCustomContainer = false;
             ViewBag.MenuOrderCentral = tabMenu == TabMenu.OrderCentral ? "active" : "";
             ViewBag.MenuViews = tabMenu == TabMenu.Views ? "active" : "";
             ViewBag.MenuAdmin = tabMenu == TabMenu.Admin ? "active" : "";

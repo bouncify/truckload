@@ -39,5 +39,6 @@ namespace truckload.DbContext
         public virtual Warehouse Warehouse { get; set; }
         public virtual UserLogin UserLogin { get; set; }
         public virtual UserLogin UserLogin1 { get; set; }
+        public virtual Load Load { get; set; }
     }
 }

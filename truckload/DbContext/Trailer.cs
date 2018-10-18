@@ -14,6 +14,12 @@ namespace truckload.DbContext
     
     public partial class Trailer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Trailer()
+        {
+            this.Loads = new HashSet<Load>();
+        }
+    
         public int TrailerId { get; set; }
         public string TrailerDescription { get; set; }
         public int TrailerTypeId { get; set; }
@@ -25,5 +31,7 @@ namespace truckload.DbContext
     
         public virtual TrailerType TrailerType { get; set; }
         public virtual UnitOfMeasure UnitOfMeasure { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Load> Loads { get; set; }
     }
 }

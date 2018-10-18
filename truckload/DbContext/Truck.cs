@@ -14,10 +14,19 @@ namespace truckload.DbContext
     
     public partial class Truck
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Truck()
+        {
+            this.Loads = new HashSet<Load>();
+        }
+    
         public int TruckId { get; set; }
         public string TruckDescription { get; set; }
         public Nullable<System.DateTime> NextMaintenanceDate { get; set; }
         public Nullable<System.DateTime> NextInspectionDate { get; set; }
         public bool IsActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Load> Loads { get; set; }
     }
 }
