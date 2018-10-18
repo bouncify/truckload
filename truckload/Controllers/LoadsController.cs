@@ -6,13 +6,15 @@ using System.Web.Mvc;
 
 namespace truckload.Controllers
 {
-    public class LoadsController : Controller
+    [Authorize]
+    public class LoadsController : BaseController
     {
-        // GET: Loads
-        public ActionResult Index()
+        protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            return View();
+            InitViewData(TabMenu.Admin);
         }
+
+
 
 
     }

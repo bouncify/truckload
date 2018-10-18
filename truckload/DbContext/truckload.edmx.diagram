@@ -26,6 +26,15 @@
         <EntityTypeShape EntityType="truckloadModel.UserSetting" Width="1.5" PointX="2.75" PointY="13.375" />
         <AssociationConnector Association="truckloadModel.FK__UserSetti__UserL__373B3228" />
         <EntityTypeShape EntityType="truckloadModel.LoadStatu" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="truckloadModel.Load" Width="1.5" PointX="11.75" PointY="6.25" />
+        <AssociationConnector Association="truckloadModel.FK__Load__DriverId__3CCAB9A3" />
+        <AssociationConnector Association="truckloadModel.FK__Load__CreatedByU__147C05D0" />
+        <AssociationConnector Association="truckloadModel.FK__Load__LoadStatus__7267B045" />
+        <AssociationConnector Association="truckloadModel.FK__Load__ModifiedBy__15702A09" />
+        <AssociationConnector Association="truckloadModel.FK__Load__TrailerId__62BB5861" />
+        <AssociationConnector Association="truckloadModel.FK__Load__TruckId__3BD6956A" />
+        <AssociationConnector Association="truckloadModel.FK__Load__UnitOfMeas__6F212F46" />
+        <AssociationConnector Association="truckloadModel.FK__simple_Or__LoadI__46FE2F53" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -19,6 +19,7 @@ namespace truckload.DbContext
         {
             this.Trailers = new HashSet<Trailer>();
             this.Orders = new HashSet<Order>();
+            this.Loads = new HashSet<Load>();
         }
     
         public int UnitOfMeasureId { get; set; }
@@ -28,5 +29,7 @@ namespace truckload.DbContext
         public virtual ICollection<Trailer> Trailers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Load> Loads { get; set; }
     }
 }

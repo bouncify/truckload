@@ -239,6 +239,9 @@
     <Compile Include="DbContext\Error.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
+    <Compile Include="DbContext\Load.cs">
+      <DependentUpon>truckload.tt</DependentUpon>
+    </Compile>
     <Compile Include="DbContext\LoadStatu.cs">
       <DependentUpon>truckload.tt</DependentUpon>
     </Compile>
@@ -306,6 +309,7 @@
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
     <Compile Include="Helpers\Vm\VmDriver.cs" />
     <Compile Include="Helpers\Vm\VmKoDropDownData.cs" />
+    <Compile Include="Helpers\Vm\VmKoLoad.cs" />
     <Compile Include="Helpers\Vm\VmKoOrder.cs" />
     <Compile Include="Helpers\Vm\VmKoSelectListItem.cs" />
     <Compile Include="Helpers\Vm\VmLogin.cs" />

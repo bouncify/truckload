@@ -14,6 +14,12 @@ namespace truckload.DbContext
     
     public partial class Driver
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Driver()
+        {
+            this.Loads = new HashSet<Load>();
+        }
+    
         public int DriverId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,5 +30,8 @@ namespace truckload.DbContext
         public Nullable<System.DateTime> WhmisTrainingDate { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Load> Loads { get; set; }
     }
 }
