@@ -20,7 +20,7 @@ export class SharedModel {
     public loadColWidth = 357;
     public orderPanelSeedHeight = 0;
 
-    public loadCol1Date = new Date();//Start With today's date
+    //public loadCol1Date = new Date();//Start With today's date
     
     gridArray: boolean[] = [false, false, false, false];
 

@@ -16,24 +16,20 @@ export class LoadModel {
     //private setWaitSpinner: Function;
     //private orderGridName: string;
     private sharedModel: SharedModel;
-    private loadCols = ko.observableArray([] as KoLoadCol[]);
+    public loadCols = ko.observableArray([] as KoLoadCol[]);
+    day1Date = ko.observable(new Date());
 
     private totalLoadCols = 0;
     //private editOrder: KoEditOrder;
     //private orderService: OrderMessageService;
 
+    public nextDay = () => {
+        this.day1Date(moment(this.day1Date()).add(1, "day").toDate());
+    }
 
-    //private populateDates() {
-    //    this.loadCols.push(new KoLoadCol(this.sharedModel.loadCol1Date,1));
-    //    var totalLoadCols = this.sharedModel.visibleLoadCols;
-
-    //    for (let i = 1; i < totalLoadCols; i++) {
-    //        var newLoadCol = new KoLoadCol(moment(this.sharedModel.loadCol1Date).add(i, "day").toDate(),i+1);
-
-    //        if (i === totalLoadCols - 1) newLoadCol.isLastDay = true;
-    //        this.loadCols.push(newLoadCol);
-    //    }
-    //}
+    public previousDay = () => {
+        this.day1Date(moment(this.day1Date()).add(-1, "day").toDate());
+    }
 
 
     constructor(sharedModel: SharedModel) {
@@ -41,10 +37,16 @@ export class LoadModel {
 
         this.totalLoadCols = this.sharedModel.visibleLoadCols;
         for (let i = 1; i < this.totalLoadCols +1; i++) {
-            this.loadCols.push(new KoLoadCol(sharedModel,i));
+            this.loadCols.push(new KoLoadCol(sharedModel,this.day1Date(),i));
         }
+        
+        this.day1Date.subscribe(() => {
 
-        //this.populateDates();
+            ko.utils.arrayForEach(this.loadCols(), col => {
+                col.initDay(this.day1Date());
+            });
+        });
+
         //this.orderService = new OrderMessageService(this.receiveDbUpdateOrderNotification);
     }
 }
