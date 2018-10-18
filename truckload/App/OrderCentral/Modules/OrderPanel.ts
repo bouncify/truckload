@@ -5,7 +5,7 @@ import * as ko from 'knockout';
 export module OrderPanel {
     export function init(sharedModel: SharedModel, orderModel: OrderModel) {
 
-        var gridHeight = (sharedModel.orderCellHeight * sharedModel.ordersPageSize) + sharedModel.orderPanelSeedHeight;
+        var gridHeight = sharedModel.gridHeight;
         //$("#gridHeight").text(gridHeight);
 
         ko.bindingHandlers.kendoGrid.options = {

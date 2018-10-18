@@ -6,6 +6,8 @@ export class SharedModel {
     public ajax: AjaxHelper;
     public dropDownData: KoDropDownData;
 
+    public gridHeight = 1000;
+
     public orderGridName = "#koOrderGrid";
     public load1GridName = "#koLoadsDay1";
     public load2GridName = "#koLoadsDay2";
@@ -64,6 +66,8 @@ export class SharedModel {
             if (setting.name === "OrderCellHeight") this.orderCellHeight = Number(setting.value);
             if (setting.name === "LoadsVisible") this.visibleLoadCols = Number(setting.value);
             if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
+
+            this.gridHeight =  (this.orderCellHeight * this.ordersPageSize) + this.orderPanelSeedHeight;
         }
     }
 }
