@@ -1,26 +1,28 @@
-﻿
-<div id="loadCol1" class="loadCol" style="width: 357px; float: left;">
-    <div style="float: left">
-        <button type="button" title="Previous Day" class="btn btn-default day-nav-button" style="float: left"
-                @*data-bind="click: previousDay"*@>
-            <span class="k-icon k-i-undo"></span>
-        </button>
-    </div>
-    <div style="float: left">
-        <input id="miniLoadDateButton" class="miniKendoDatePicker"
-               @*data-bind="kendoDatePicker: startDay"*@ />
-    </div>
-    <div style="float: left; margin-left: 10px">Some text</div>
-    <div style="float: right">
-        <button type="button" title="Next Day" class="btn btn-default day-nav-button" style="float: right"
-                @*data-bind="click: nextDay"*@>
-            <span class="k-icon k-i-redo"></span>
-        </button>
-    </div>
-    <div style="float: right">
-        <button type="button" title="Create Load" class="k-button k-button-icontext create-load-button"
-                @*data-bind="click: function() { newLoadClick($data.day3()) }"*@>
-            <span class="k-icon k-i-plus"></span>
-        </button>
+﻿<div id="loadPanels" data-bind='foreach: { data: loadCols }'>
+    <div @*class="loadCol"*@ style="width: 357px; height: 1000px; float: left;">
+        <div style="float: left">
+            <button type="button" title="Previous Day" class="btn btn-default day-nav-button" style="float: left"
+                    data-bind="click: previousDay, visible: dayNumber===1">
+                <span class="k-icon k-i-undo"></span>
+            </button>
+        </div>
+        <div style="float: left" data-bind="visible: dayNumber===1">
+            <input class="miniKendoDatePicker"
+                   data-bind="attr: {id: 'miniLoadDateButton' + dayNumber }, kendoDatePicker: loadDate" />
+        </div>
+        <div style="float: left; margin-left: 10px" data-bind="text: textDate"></div>
+        <div style="float: right">
+            <button type="button" title="Next Day" class="btn btn-default day-nav-button" style="float: right"
+                    data-bind="click: nextDay, visible: isLastDay">
+                <span class="k-icon k-i-redo"></span>
+            </button>
+        </div>
+        <div style="float: right">
+            <button type="button" title="Create Load" class="k-button k-button-icontext create-load-button"
+                    data-bind="click: createLoad">
+                <span class="k-icon k-i-plus"></span>
+            </button>
+        </div>
     </div>
 </div>
+

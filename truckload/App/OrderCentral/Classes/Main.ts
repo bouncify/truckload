@@ -4,7 +4,7 @@ import { OrderModel } from "../Models/OrderModel"
 import { LoadModel } from "../Models/LoadModel"
 import { SharedModel } from "../Models/SharedModel"
 import { OrderPanel } from "../Modules/OrderPanel"
-import { MainScreen } from "../Modules/MainScreen"
+import { LoadPanels } from "../Modules/LoadPanels"
 import { Setting } from "./Setting"
 
 import 'knockout-kendo/build/knockout-kendo';
@@ -21,7 +21,7 @@ export class Main {
         this.viewModelLoads = new LoadModel(this.sharedModel);
 
         
-        MainScreen.init(this.sharedModel);
+        LoadPanels.init(this.sharedModel,this.viewModelLoads);
         OrderPanel.init(this.sharedModel, this.viewModelOrders);
     }
 }

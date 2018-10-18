@@ -437,7 +437,7 @@
     <TypeScriptCompile Include="App\OrderCentral\Models\LoadModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\SharedModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\OrderModel.ts" />
-    <TypeScriptCompile Include="App\OrderCentral\Modules\MainScreen.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Modules\LoadPanels.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Modules\OrderPanel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\OrderCentral.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\AjaxHelper.ts" />
