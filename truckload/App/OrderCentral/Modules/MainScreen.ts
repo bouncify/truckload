@@ -11,10 +11,16 @@ export module MainScreen {
 
         $("#containerBody").width(screenWidth);
 
-        for (let i = 0; i < totalLoadCols -1; i++) {
-            //$("name='loadCol'").clone().insertAfter("loadCol:last");
+        for (let i = 1; i < totalLoadCols ; i++) {
+            var colNo = i + 1;
 
-            $("#loadCol1").clone().insertAfter("div.loadCol:last");
+            var newCol = $("#loadCol1").clone();
+            newCol.attr("id", `loadCol${colNo}`);
+            newCol.text("Load Col" + colNo);
+
+            newCol.insertAfter("div.loadCol:last");
+
+            //.insertAfter("div.loadCol:last");
             //console.log(i);
         }
 
