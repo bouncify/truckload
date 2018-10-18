@@ -21,7 +21,7 @@ export class SharedModel {
     public orderPanelSeedHeight = 0;
 
     //public loadCol1Date = new Date();//Start With today's date
-    
+
     gridArray: boolean[] = [false, false, false, false];
 
     setWaitSpinner = (isLoading: boolean, gridName: string) => {
@@ -39,7 +39,7 @@ export class SharedModel {
                 this.gridArray[3] = isLoading;
                 break;
         }
-        
+
         var isSetSpinning = false;
         for (let entry of this.gridArray) {
             if (entry) isSetSpinning = true;
@@ -68,8 +68,8 @@ export class SharedModel {
             if (setting.name === "OrderCellHeight") this.orderCellHeight = Number(setting.value);
             if (setting.name === "LoadsVisible") this.visibleLoadCols = Number(setting.value);
             if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
-
-            this.gridHeight = (this.orderCellHeight * this.ordersPageSize) + this.orderPanelSeedHeight;            
         }
+
+        this.gridHeight = (this.orderCellHeight * this.ordersPageSize) + this.orderPanelSeedHeight;
     }
 }
