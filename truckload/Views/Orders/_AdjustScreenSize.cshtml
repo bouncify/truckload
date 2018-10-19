@@ -1,0 +1,45 @@
+﻿
+<div id="koModalScreenSizeEdit" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm" style="width: 759px">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header k-window-titlebar k-dialog-titlebar k-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Adjust Screen Size </h4>
+            </div>
+
+            <div class="modal-body" style="margin-left: 50px">
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        Order Rows
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control" data-bind="
+                        options: shared.dropDownData.ordersVisibleList,
+                        optionsText: 'text',
+                        optionsValue: 'valueInt',
+                       value: ordersPageSize"></select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3">
+                        Load Columns
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control" data-bind="
+                        options: shared.dropDownData.loadColsVisibleList,
+                        optionsText: 'text',
+                        optionsValue: 'valueInt',
+                       value: visibleLoadCols"></select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modal_btnApply" type="button" class="k-button k-primary" data-bind="click: save">Apply</button>
+                <button id="modal_btnCancel" type="button" class="k-button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

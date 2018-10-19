@@ -28,8 +28,8 @@ export class KoEditOrder {
     userName = ko.observable("");
     actionResultMessage = ko.observable("");
 
-    warehouseList = ko.observableArray();
-    unitOfMeasureList = ko.observableArray();
+    //warehouseList = ko.observableArray();
+    //unitOfMeasureList = ko.observableArray();
 
     get lastChangeDescription(): string {
         const userName = this.userName();

@@ -311,6 +311,7 @@
     <Compile Include="Helpers\Vm\VmKoDropDownData.cs" />
     <Compile Include="Helpers\Vm\VmKoLoad.cs" />
     <Compile Include="Helpers\Vm\VmKoOrder.cs" />
+    <Compile Include="Helpers\Vm\VmKoScreenSize.cs" />
     <Compile Include="Helpers\Vm\VmKoSelectListItem.cs" />
     <Compile Include="Helpers\Vm\VmLogin.cs" />
     <Compile Include="Helpers\Vm\VmNameValue.cs" />
@@ -414,6 +415,7 @@
     <Content Include="Views\Orders\_OrderGridCell.cshtml" />
     <Content Include="Views\Orders\_EditOrder.cshtml" />
     <Content Include="Views\Loads\_LoadCol.cshtml" />
+    <Content Include="Views\Orders\_AdjustScreenSize.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
@@ -434,6 +436,7 @@
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoadCol.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoOrder.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Setting.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoScreenSize.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\LoadModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\SharedModel.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Models\OrderModel.ts" />

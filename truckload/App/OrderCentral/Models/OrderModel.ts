@@ -1,5 +1,6 @@
 ﻿import { KoOrder } from "../KoClasses/KoOrder"
 import { KoEditOrder } from "../KoClasses/KoEditOrder"
+import { KoScreenSize } from "../KoClasses/KoScreenSize"
 import { OrderMessageService } from "../Classes/OrderMessageService"
 import { DbOperation } from "../../Shared/Global"
 import { CrudMessage } from "../../Shared/Global"
@@ -17,6 +18,7 @@ export class OrderModel {
     private sharedModel:SharedModel;
     private orders = ko.observableArray([] as KoOrder[]);
     private editOrder: KoEditOrder;
+    private screenSize: KoScreenSize;
     private orderService: OrderMessageService;
 
     private orderNumberFilterText = "";
@@ -74,7 +76,20 @@ export class OrderModel {
             }
         }, "Order Filter", this.orderNumberFilterText);
     }
-    
+
+    public setScreenSize() {
+        //alert("screen size");
+        //$("#koModalScreenSizeEdit").modal("show");
+        this.screenSize.edit();
+    }
+
+    //public applyScreenSize() {
+    //    //alert("screen size");
+    //    $("#koModalScreenSizeEdit").modal("hide");
+    //}
+
+
+
     public addOrder() {
         this.editOrder.new();
     }
@@ -122,6 +137,7 @@ export class OrderModel {
     constructor(sharedModel:SharedModel) {
         this.sharedModel = sharedModel;
         this.editOrder = new KoEditOrder(sharedModel);
+        this.screenSize = new KoScreenSize(sharedModel);
 
         this.loadAll();
 

@@ -13,6 +13,8 @@ namespace truckload.Helpers.Vm
         public List<VmKoSelectListItem> LoadStatusList { get; set; }
         public List<VmKoSelectListItem> UnitsOfMeasureList { get; set; }
         public List<VmKoSelectListItem> WarehouseList { get; set; }
+        public List<VmKoSelectListItem> OrdersVisibleList { get; set; }
+        public List<VmKoSelectListItem> LoadColsVisibleList { get; set; }
         public string ActionResultMessage { get; set; }
     }
 }

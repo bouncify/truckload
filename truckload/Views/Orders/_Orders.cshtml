@@ -1,11 +1,15 @@
 ﻿
-<div id="koOrderModel" style="width: 357px; float:left">    
+<div id="koOrderModel" style="width: 357px; float:left">
     <table style="width: 100%">
         <tr>
             <td style="width: 25%">
                 <button type="button" title="Filter Orders" class="btn btn-default day-nav-button" style="float: left"
                         data-bind="click: setOrderFilter">
                     <span id="orderFilterIcon" class="k-icon k-i-filter"></span>
+                </button>
+                <button type="button" title="Screen Size" class="btn btn-default day-nav-button" style="float: left"
+                        data-bind="click: setScreenSize">
+                    <span class="k-icon k-i-image-resize"></span>
                 </button>
             </td>
             <td style="text-align: center">
@@ -18,7 +22,7 @@
                 </button>
             </td>
         </tr>
-    </table>  
+    </table>
     <div id="koOrderGrid" style="background: rgb(236, 255, 251)"
          ondragover="OrderCentral.allowDropOrder(event)"
          ondrop="OrderCentral.dropOrderOnOrders(event)"
@@ -28,6 +32,7 @@
         <a href="#" class="k-pager-refresh k-link" title="Refresh">
         </a><span class="pager-info k-label"><span data-bind="text: orders().length"></span> Orders Waiting</span>
     </div>
-
-    @Html.Partial("../Orders/_OrderGridCell")
 </div>
+
+@Html.Partial("../Orders/_AdjustScreenSize")
+@Html.Partial("../Orders/_OrderGridCell")

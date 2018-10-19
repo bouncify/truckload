@@ -8,6 +8,8 @@ export class KoDropDownData {
     loadStatusList = ko.observableArray();
     unitsOfMeasureList = ko.observableArray();
     warehouseList = ko.observableArray();
+    ordersVisibleList = ko.observableArray();
+    loadColsVisibleList = ko.observableArray();
 
     constructor(ajax: AjaxHelper) {
         ajax.get("/OrderCentral/GetDropDownData", (data: any) => {
