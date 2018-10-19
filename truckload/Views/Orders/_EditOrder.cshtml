@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="row form-group">
-                    <div class="col-xs-3"><input type="number" class="form-control" placeholder="Volume *" data-bind="value: volume, style: { background: volume()>0 ? '#fff' : '#FF0' }"></div>
+                    <div class="col-xs-3"><input type="number" min="0" class="form-control" placeholder="Volume *" data-bind="value: volume, style: { background: volume()>0 ? '#fff' : '#FF0' }"></div>
                     <div class="col-xs-3">
                         <select class="form-control" data-bind="
                         options: shared.dropDownData.unitsOfMeasureList,
@@ -48,7 +48,7 @@
                         optionsCaption: 'Select Unit Type...',
                        value: unitOfMeasureId, style: { background: unitOfMeasureId() ? '#fff' : '#FF0' }"></select>
                     </div>
-                    <div class="col-xs-2"><input type="number" class="form-control" placeholder="Weight  *" data-bind="value: weightKg, style: { background: weightKg()>0 ? '#fff' : '#FF0' }"></div>
+                    <div class="col-xs-2"><input type="number" min="0" class="form-control" placeholder="Weight  *" data-bind="value: weightKg, style: { background: weightKg()>0 ? '#fff' : '#FF0' }"></div>
                 </div>
 
                 <div class="row form-group">
