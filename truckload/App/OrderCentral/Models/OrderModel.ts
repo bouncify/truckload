@@ -2,8 +2,7 @@
 import { KoEditOrder } from "../KoClasses/KoEditOrder"
 import { KoScreenSize } from "../KoClasses/KoScreenSize"
 import { OrderMessageService } from "../Classes/OrderMessageService"
-import { DbOperation } from "../../Shared/Global"
-import { CrudMessage } from "../../Shared/Global"
+import { DbOperation, CrudMessage } from "../../Shared/Global"
 import { SharedModel } from "./SharedModel"
 import { StringFunctions } from "../../Shared/StringFunctions"
 import { DateFunctions } from "../../Shared/DateFunctions"
@@ -23,6 +22,14 @@ export class OrderModel {
 
     private orderNumberFilterText = "";
 
+    private sortOrders() {
+        this.orders.sort(function (left, right) {
+            return left.deliveryDate() === right.deliveryDate()
+                ? (left.orderId() < right.orderId() ? 1 : -1)
+                : (left.deliveryDate() < right.deliveryDate() ? -1 : 1);
+        });
+    }
+
     public loadAll(orderNumberFilter: string = "") {
         this.sharedModel.setWaitSpinner(true, this.sharedModel.orderGridName);
         this.orders.removeAll();
@@ -34,7 +41,7 @@ export class OrderModel {
                 this.populateExtraFields(order);
             });
 
-            //this.sortOrders();
+            this.sortOrders();
             this.sharedModel.setWaitSpinner(false, this.sharedModel.orderGridName);
         }, dataToSend);
     }
@@ -78,17 +85,8 @@ export class OrderModel {
     }
 
     public setScreenSize() {
-        //alert("screen size");
-        //$("#koModalScreenSizeEdit").modal("show");
         this.screenSize.edit();
     }
-
-    //public applyScreenSize() {
-    //    //alert("screen size");
-    //    $("#koModalScreenSizeEdit").modal("hide");
-    //}
-
-
 
     public addOrder() {
         this.editOrder.new();
@@ -107,6 +105,7 @@ export class OrderModel {
                     var newOrder = ko.mapping.fromJSON(data);
                     this.populateExtraFields(newOrder);
                     this.orders.push(newOrder);
+                    this.sortOrders();
                     this.sharedModel.setWaitSpinner(false,this.sharedModel.orderGridName);
                 }, dataToSend);
                 break;
@@ -123,12 +122,14 @@ export class OrderModel {
                         this.populateExtraFields(newOrder);
                         this.orders.push(newOrder);
                     }
+                    this.sortOrders();
                     this.sharedModel.setWaitSpinner(false, this.sharedModel.orderGridName);
                 }, dataToSend);
                 break;
             case DbOperation.Delete:
                 var order = ko.utils.arrayFirst(this.orders(), item => item.orderId() === message.id);
                 if (order) this.orders.remove((x: any) => x.orderId === order.orderId);
+                this.sortOrders();
                 this.sharedModel.setWaitSpinner(false, this.sharedModel.orderGridName);
                 break;
         }
@@ -142,7 +143,6 @@ export class OrderModel {
         this.loadAll();
 
         this.orderService = new OrderMessageService(this.receiveDbUpdateOrderNotification);
-        //var orderGridService = new OrderGridMessageService(viewModelSimpleOrders.receiveDbUpdateOrderNotification);
 
     }
 }
