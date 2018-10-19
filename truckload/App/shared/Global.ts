@@ -12,6 +12,12 @@ export enum DbOperation {
     Delete = 4
 }
 
+export enum LoadStatus {
+    Unlocked = 1,
+    Locked = 2,
+    Dispatched = 4
+}
+
 export class CrudMessage {
     id: number;
     operation: DbOperation;

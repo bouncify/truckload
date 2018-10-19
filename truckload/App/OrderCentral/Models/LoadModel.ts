@@ -19,7 +19,7 @@ export class LoadModel {
     public loadCols = ko.observableArray([] as KoLoadCol[]);
     day1Date = ko.observable(new Date());
 
-    private totalLoadCols = 0;
+    private totalLoadCols:number;
     //private editOrder: KoEditOrder;
     //private orderService: OrderMessageService;
 
