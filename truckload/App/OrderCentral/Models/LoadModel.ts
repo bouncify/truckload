@@ -13,7 +13,7 @@ import * as moment from 'moment';
 import * as ko from 'knockout';
 
 export class LoadModel {
-    private sharedModel: SharedModel;
+    private shared: SharedModel;
     public loadCols = ko.observableArray([] as KoLoadCol[]);
     day1Date = ko.observable(new Date());
 
@@ -38,9 +38,9 @@ export class LoadModel {
     }
 
     constructor(sharedModel: SharedModel) {
-        this.sharedModel = sharedModel;
+        this.shared = sharedModel;
 
-        this.totalLoadCols = this.sharedModel.visibleLoadCols;
+        this.totalLoadCols = this.shared.visibleLoadCols;
         for (let i = 1; i < this.totalLoadCols +1; i++) {
             this.loadCols.push(new KoLoadCol(sharedModel,this.day1Date(),i));
         }

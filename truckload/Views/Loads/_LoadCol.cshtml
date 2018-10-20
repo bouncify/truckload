@@ -19,94 +19,23 @@
         </div>
         <div style="float: right">
             <button type="button" style="margin-bottom: 2px;" title="Create Load" class="k-button k-button-icontext create-load-button"
-                    data-bind="click: createLoad">
+                    data-bind="click: newLoad.createLoad">
                 <span class="k-icon k-i-plus"></span>
             </button>
         </div>
 
-        <div style="background: rgb(226, 244, 255);clear: both" 
+        <div style="background: rgb(226, 244, 255);clear: both"
              data-bind="kendoGrid: { data: loads, rowTemplate: 'rowTemplateLoad', useKOTemplates: true }
-             ,attr: { id: 'koLoadGrid_' + dayNumber }             
-             "> </div>        
+             ,attr: { id: 'koLoadGrid_' + dayNumber }
+             "></div>
 
         <div name="gridCountInfo" class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
             <a href="#" class="k-pager-refresh k-link" title="Refresh">
             </a><span class="pager-info k-label" style="margin-left: 40px">( <span data-bind="text: fullLoadsCount"></span> ) Full Loads ( <span data-bind="text: partialLoadsCount"></span> ) Partial Loads</span>
-        </div>             
+        </div>
     </div>
+
+    @Html.Partial("../Loads/_NewLoad")
 </div>
 
-<script id="rowTemplateLoad" type="text/html">
-    <tr role="row">
-        <td role="gridcell" style="width: 100%">                     
-
-            <div class="load-info rounded-top" style=";font-size: 12px;cursor: default"
-                 data-bind="attr: { onDrop: onDropFunction,
-                                    onDragOver: onDragOverFunction,
-                                    id: 'load_' + loadId() + '_' + loadDay},
-                                    style: { background: loadColor } ">
-                <img id="imgLoadStatus" data-bind="attr: {src: statusImagePath, title: statusCaption}">
-                <span id="txtLoadStatus" data-bind="text: loadId()"></span>
-                <div style="color: #000000;padding-top: 5px;padding-left: 3px;">
-                    <button style="float: right;" type="button" title="Delete Load" class="k-button k-button-icontext load-button"
-                            data-bind="click: function() { $parent.deleteLoad($data.loadId()) }, visible: isDeletable">
-                        <span class="k-icon k-i-close"></span>
-                    </button>
-                    <button style="float: right;" type="button" title="Edit Load" class="k-button k-button-icontext load-button"
-                            data-bind="click: function() { $parent.editLoad($data) }">
-                        <span class="k-icon k-i-edit"></span>
-                    </button>
-                    <div style="padding-left: 5px;"><strong>TRUCK:</strong> <span data-bind="text: truckDescription"></span></div>
-                    <div style="padding-left: 5px;"><strong>TRAILER:</strong> <span data-bind="text: trailerDescription"></span></div>
-                    <div style="padding-left: 5px;"><strong>DRIVER:</strong> <span data-bind="text: driverName"></span></div>
-
-                    <div style="padding-left: 5px;text-transform: uppercase;"><strong><span data-bind="text: unitTypeDescription"></span>:</strong> <span data-bind="text: currentUnitCount"></span>/<span data-bind="text: unitCapacity"></span></div>
-                    <div style="padding-left: 5px;"><strong>WEIGHT:</strong> <span data-bind="text: currentLoadWeightKg"></span>/<span data-bind="text: loadCapacityKg"></span>kg (<span data-bind="text: maxLoadWeightLbs"></span>lbs)</div>
-                </div>
-
-                <div data-bind='foreach: { data: ordersList }'>
-                    <div class="individual-order no-borders"
-                         ondragstart="OrderCentral.dragOrder(event)"
-                         data-bind="attr: {id: 'loadOrder_' + orderId() + '_' + $parent.loadDay + '_' + $parent.loadId(), draggable: isDraggable()}, style: { background: $parent.orderColor }">
-                        <span style="
-                        width: 130px;
-                        display: inline-block;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        text-overflow: ellipsis;"
-                              data-bind="text: orderNumber"></span>
-
-                        <span style="
-                              width: 90px;
-                              display: inline-block;
-                              overflow: hidden;
-                              white-space: nowrap;
-                              text-overflow: ellipsis;"
-                              data-bind="text: warehouseDescription"></span>
-
-                        <button style="float: right;display: inline-block" type="button" title="Edit Order" class="k-button k-button-icontext load-button"
-                                data-bind="click: function() { $root.editOrder($data) }, visible: $parent.isEditable ">
-                            <span class="k-icon k-i-edit"></span>
-                        </button>
-
-                        <img id="imgLoadOrderDangerousGoods"
-                             title="Dangerous Goods" data-bind="visible: isDangerousGoods"
-                             src="@ViewBag.AppPath/App/Content/Images/poison_small.png" />
-
-                        <img id="imgLoadOrderCustomerPickup"
-                             title="Customer Pickup" data-bind="visible: isCustomerPickup"
-                             src="@ViewBag.AppPath/App/Content/Images/customer_pickup3_small.png" />
-                        <br>
-
-                        <span style="width: 200px;
-                                display: inline-block;
-                                overflow: hidden;
-                                white-space: nowrap;
-                                text-overflow: ellipsis;"
-                              data-bind="text: unitDescription"></span>
-                    </div>
-                </div>
-            </div>
-        </td>
-    </tr>
-</script>
+@Html.Partial("../Loads/_LoadGridCell")

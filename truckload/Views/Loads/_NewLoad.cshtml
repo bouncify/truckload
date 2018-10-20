@@ -1,0 +1,61 @@
+﻿
+
+<div class="modal" role="dialog" data-bind="attr: {id: 'koModalCreateLoad_' + dayNumber }" >
+    <div class="modal-dialog modal-sm">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="padding-top: 5px; padding-bottom: 0; padding-left: 15px; min-height: 50px;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Create Load</h4>
+                <span style="font-size: 10px;position: absolute;" data-bind="text: textDate"></span>
+
+                @*<h4>Create Load</h4><span ></span>ffx*@
+            </div>
+            <div class="modal-body">
+
+                <div class="row form-group">
+                    <div class="col-md-10">
+                        <select class="form-control"
+                                data-bind="
+                                        options: shared.dropDownData.truckList,
+                                        optionsText: 'text',
+                                        optionsValue: 'valueInt',
+                                        optionsCaption: 'Truck...',
+                                        value: newLoad.truckId"></select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-10">
+                        <select class="form-control"
+                                data-bind="
+                                        options: shared.dropDownData.trailerList,
+                                        optionsText: 'text',
+                                        optionsValue: 'valueInt',
+                                        optionsCaption: 'Trailer...',
+                                        value: newLoad.trailerId"></select>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-10">
+                        <select class="form-control"
+                                data-bind="
+                                        options: shared.dropDownData.driverList,
+                                        optionsText: 'text',
+                                        optionsValue: 'valueInt',
+                                        optionsCaption: 'Driver...',
+                                        value: newLoad.driverId"></select>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-bind="click: newLoad.save">Ok</button>
+                <button type="button" class="btn btn-default" data-bind="click: newLoad.cancel" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>

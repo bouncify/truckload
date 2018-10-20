@@ -3,6 +3,7 @@ import { DateFunctions } from "../../Shared/DateFunctions"
 import { LoadStatus, AccessLevels } from "../../Shared/Global"
 import { SharedModel } from "../Models/SharedModel"
 import { KoLoad } from "./KoLoad"
+import { KoNewLoad } from "./KoNewLoad"
 import { StringFunctions } from "../../Shared/StringFunctions"
 import { Functions } from "../../Shared/Functions"
 
@@ -11,8 +12,9 @@ import Global = require("App/Shared/Global");
 import Globals = Global.Globals;
 
 export class KoLoadCol {
-    private sharedModel: SharedModel;
+    private shared: SharedModel;
 
+    private newLoad:KoNewLoad;
     private loads = ko.observableArray([] as KoLoad[]);
     partialLoadsCount = ko.observable(0);
     fullLoadsCount = ko.observable(0);
@@ -23,11 +25,6 @@ export class KoLoadCol {
     textDate = ko.observable("");
 
     loadGridName = "";
-
-    public createLoad() {
-        alert("create load click! " + this.dayNumber);
-        //this.startDay(moment(this.startDay()).add(1, "day").toDate());
-    }
 
     private updateLoadTotal() {
         var totalLoads = this.loads().length;
@@ -41,10 +38,10 @@ export class KoLoadCol {
     }
 
     public loadAll() {
-        this.sharedModel.setWaitSpinner(true,this.loadGridName);
+        this.shared.setWaitSpinner(true,this.loadGridName);
         var dataToSend = JSON.parse("{ \"loadDate\" : " + JSON.stringify(this.loadDate()) + "}");
 
-        this.sharedModel.ajax.get("/Loads/GetLoadsByDate", (data: any) => {
+        this.shared.ajax.get("/Loads/GetLoadsByDate", (data: any) => {
             ko.mapping.fromJSON(data, {}, this.loads);
 
             this.updateLoadTotal();
@@ -52,7 +49,7 @@ export class KoLoadCol {
                 this.populateExtraFields(load);
             });
 
-            this.sharedModel.setWaitSpinner(false, this.loadGridName);
+            this.shared.setWaitSpinner(false, this.loadGridName);
         }, dataToSend);
     }
 
@@ -66,10 +63,10 @@ export class KoLoadCol {
         if (load.driverId() === null) load.driverName = ko.observable("UNKNOWN");
         if (load.unitOfMeasureId() === null) load.unitTypeDescription = ko.observable("UNKNOWN");
 
-        load.isDeletable = ko.observable(load.loadStatusId() !== LoadStatus.Dispatched && this.sharedModel.accessLevel > AccessLevels.Entry);
-        load.isEditable = ko.observable(load.loadStatusId() === LoadStatus.Unlocked && this.sharedModel.accessLevel > AccessLevels.Entry);
+        load.isDeletable = ko.observable(load.loadStatusId() !== LoadStatus.Dispatched && this.shared.accessLevel > AccessLevels.Entry);
+        load.isEditable = ko.observable(load.loadStatusId() === LoadStatus.Unlocked && this.shared.accessLevel > AccessLevels.Entry);
 
-        load.statusImagePath = this.sharedModel.baseUrl + "/App/Content/Images/";
+        load.statusImagePath = this.shared.baseUrl + "/App/Content/Images/";
         switch (load.loadStatusId()) {
             case LoadStatus.Unlocked:
                 load.statusImagePath += "lock_open.png";
@@ -118,11 +115,12 @@ export class KoLoadCol {
     }
 
     constructor(sharedModel: SharedModel, startDate: Date, dayNum: number) {
-        this.sharedModel = sharedModel;
+        this.shared = sharedModel;
         this.loadGridName = sharedModel.loadGridName + dayNum;
         this.isLastDay = sharedModel.visibleLoadCols === dayNum;
         this.dayNumber = dayNum;
         this.initDay(startDate);
+        this.newLoad = new KoNewLoad(sharedModel, this.loadDate(), this.dayNumber);
         this.loadAll();
         //this.loadDate(moment(sharedModel.loadCol1Date).add(dayNum-1, "day").toDate());
         //this.textDate = DateFunctions.formatLoadDate(this.loadDate());
