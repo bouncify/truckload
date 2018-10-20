@@ -18,6 +18,12 @@ export enum LoadStatus {
     Dispatched = 4
 }
 
+export enum AccessLevels {
+    None = 0,
+    Entry = 1,
+    Dispatcher = 2
+}
+
 export class CrudMessage {
     id: number;
     operation: DbOperation;

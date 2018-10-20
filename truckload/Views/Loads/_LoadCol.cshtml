@@ -38,12 +38,9 @@
 
 <script id="rowTemplateLoad" type="text/html">
     <tr role="row">
-        <td role="gridcell" style="width: 100%">
-            <div>Load Info</div>
-            
-            
+        <td role="gridcell" style="width: 100%">                     
 
-            @*<div class="load-info rounded-top" style=";font-size: 12px;cursor: default"
+            <div class="load-info rounded-top" style=";font-size: 12px;cursor: default"
                  data-bind="attr: { onDrop: onDropFunction,
                                     onDragOver: onDragOverFunction,
                                     id: 'load_' + loadId() + '_' + loadDay},
@@ -94,11 +91,11 @@
 
                         <img id="imgLoadOrderDangerousGoods"
                              title="Dangerous Goods" data-bind="visible: isDangerousGoods"
-                             src="@ViewBag.AppPath/Content/Images/poison_small.png" />
+                             src="@ViewBag.AppPath/App/Content/Images/poison_small.png" />
 
                         <img id="imgLoadOrderCustomerPickup"
                              title="Customer Pickup" data-bind="visible: isCustomerPickup"
-                             src="@ViewBag.AppPath/Content/Images/customer_pickup3_small.png" />
+                             src="@ViewBag.AppPath/App/Content/Images/customer_pickup3_small.png" />
                         <br>
 
                         <span style="width: 200px;
@@ -109,7 +106,7 @@
                               data-bind="text: unitDescription"></span>
                     </div>
                 </div>
-            </div>*@
+            </div>
         </td>
     </tr>
 </script>

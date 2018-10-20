@@ -17,6 +17,8 @@ export class SharedModel {
     public visibleLoadCols = 3;
     public loadColWidth = 357;
     public orderPanelSeedHeight = 0;
+    public accessLevel = 0;
+    public baseUrl = "";
 
     setWaitSpinner = (isLoading: boolean, gridName: string) => {
         var grid = $(this.orderGridName).data("kendoGrid");
@@ -28,6 +30,7 @@ export class SharedModel {
 
     constructor(settings: Setting[]) {
         this.ajax = new AjaxHelper;
+        this.baseUrl = this.ajax.baseUrl;
         this.dropDownData = new KoDropDownData(this.ajax);
 
         for (let setting of settings) {
@@ -37,6 +40,7 @@ export class SharedModel {
             if (setting.name === "OrderCellHeight") this.orderCellHeight = Number(setting.value);
             if (setting.name === "LoadsVisible") this.visibleLoadCols = Number(setting.value);
             if (setting.name === "OrderPanelSeedHeight") this.orderPanelSeedHeight = Number(setting.value);
+            if (setting.name === "AccessLevel") this.accessLevel = Number(setting.value);           
         }
 
         this.gridHeight = (this.orderCellHeight * this.ordersPageSize) + this.orderPanelSeedHeight;

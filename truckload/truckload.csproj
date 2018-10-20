@@ -329,6 +329,9 @@
     <Content Include="App\Content\images\admin_small.png" />
     <Content Include="App\Content\images\app_icon.png" />
     <Content Include="App\Content\images\customer_pickup3_small.png" />
+    <Content Include="App\Content\images\dispatched.png" />
+    <Content Include="App\Content\images\lock_closed.png" />
+    <Content Include="App\Content\images\lock_open.png" />
     <Content Include="App\Content\images\poison_small.png" />
     <Content Include="App\Content\images\siluet-driver_sm.png" />
     <Content Include="App\Content\images\siluet-trailer.png" />
@@ -450,6 +453,7 @@
     <TypeScriptCompile Include="App\Shared\ControlHelper.ts" />
     <TypeScriptCompile Include="App\Shared\Classes\SelectListItem.ts" />
     <TypeScriptCompile Include="App\Shared\DateFunctions.ts" />
+    <TypeScriptCompile Include="App\Shared\Functions.ts" />
     <TypeScriptCompile Include="App\Shared\Global.ts" />
     <TypeScriptCompile Include="App\Shared\StringFunctions.ts" />
     <TypeScriptCompile Include="App\TlViews.ts" />

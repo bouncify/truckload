@@ -1,6 +1,6 @@
 ﻿
 export class AjaxHelper {
-    private baseUrl: string;
+    public baseUrl: string;
 
     public post(url: string, successFunction: any, dataSubmitted: any) {
         var postUrl = this.baseUrl + url;

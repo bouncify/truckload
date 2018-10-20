@@ -31,6 +31,8 @@ namespace truckload.Controllers
                 Name = s.SettingCode
             }).ToList();
 
+            settings.Add(new VmNameValue(){Name = "AccessLevel",Value = CurrentUser.UserLevel.ToString()});
+
             var newDropDownDataJson = Json(settings.ToJsonString(), JsonRequestBehavior.AllowGet);
 
             return newDropDownDataJson;
