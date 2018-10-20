@@ -104,6 +104,8 @@ namespace truckload.Controllers
                     Db.Orders.Add(newOrder);
                     Db.SaveChanges();
                     order.OrderId = newOrder.OrderId;
+                    order.LastChangeDate = newOrder.CreatedDate;
+                    order.UserName = CurrentUser.DisplayName;
                 }
 
             }
@@ -113,6 +115,42 @@ namespace truckload.Controllers
             }
 
             return ReturnOrder(order, $"Order# {order.OrderNumber} has been saved");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteOrder(VmKoOrder order)
+        {
+            try
+            {
+                if (CurrentUser.UserLevel < (int)Enums.AccessLevel.Entry)
+                {
+                    throw new ServerException("Save Order: User does not have permission to save an order");
+                }
+
+                var dbOrder = Db.Orders.FirstOrDefault(o => o.OrderId == order.OrderId);
+
+                if (dbOrder != null)
+                {
+                    if (dbOrder.LoadId != null)
+                    {
+                        var load = Db.Loads.FirstOrDefault(l => l.LoadId == dbOrder.LoadId);
+                        if (load != null)
+                        {
+                            load.ModifiedByUserLoginId = CurrentUser.UserLoginId;
+                            load.ModifiedDate = DateTime.Now;
+                        }
+                    }
+
+                    Db.Orders.Remove(dbOrder);
+                    Db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                return ReturnOrder(order, ServerError.GetErrorFromException(e).ExceptionMsg);
+            }
+
+            return ReturnOrder(order, $"Order# {order.OrderNumber} has been deleted");
         }
 
         private JsonResult ReturnOrder(VmKoOrder order, string actionMessage = "")

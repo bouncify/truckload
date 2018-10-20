@@ -115,6 +115,24 @@ export class KoEditOrder {
         }, ko.toJSON(this));
     }
 
+    public deleteOrder = () => {
+        if (confirm("Are you sure you want to delete this Order?")) {
+
+            this.shared.ajax.post("/Orders/DeleteOrder", (data: any) => {
+                ko.mapping.fromJSON(data, {}, this);
+
+                var message = this.actionResultMessage();
+                var isDeleted = message.indexOf("has been deleted") >= 0;
+
+                if (isDeleted) {
+                    $("#koModalOrderEdit").modal("hide");
+                } else {
+                    alert("Server Error: " + message);
+                }
+            }, ko.toJSON(this));
+        };
+    }
+
     constructor(sharedModel: SharedModel) {
         this.shared = sharedModel;
 
