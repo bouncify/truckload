@@ -303,6 +303,7 @@
     <Compile Include="Helpers\CustomExtensions.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="Helpers\GetDataSourceResults.cs" />
+    <Compile Include="Helpers\OrderCentral\LoadHelper.cs" />
     <Compile Include="Helpers\OrderCentral\OrderHelper.cs" />
     <Compile Include="Helpers\Repositories\OrderRepository.cs" />
     <Compile Include="Helpers\ServerError.cs" />

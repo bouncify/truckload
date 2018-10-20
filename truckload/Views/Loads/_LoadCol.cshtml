@@ -24,7 +24,10 @@
             </button>
         </div>
 
-        <div style="background: rgb(226, 244, 255);clear: both" data-bind="kendoGrid: { data: loads, rowTemplate: 'rowTemplateLoad', useKOTemplates: true }"> </div>        
+        <div style="background: rgb(226, 244, 255);clear: both" 
+             data-bind="kendoGrid: { data: loads, rowTemplate: 'rowTemplateLoad', useKOTemplates: true }
+             ,attr: { id: 'koLoadGrid_' + dayNumber }             
+             "> </div>        
 
         <div name="gridCountInfo" class="k-pager-wrap k-grid-pager k-widget" data-role="pager">
             <a href="#" class="k-pager-refresh k-link" title="Refresh">
@@ -33,9 +36,13 @@
     </div>
 </div>
 
-<script id="rowTmplateLoad" type="text/html">
+<script id="rowTemplateLoad" type="text/html">
     <tr role="row">
         <td role="gridcell" style="width: 100%">
+            <div>Load Info</div>
+            
+            
+
             @*<div class="load-info rounded-top" style=";font-size: 12px;cursor: default"
                  data-bind="attr: { onDrop: onDropFunction,
                                     onDragOver: onDragOverFunction,

@@ -18,8 +18,6 @@ export class KoLoadCol {
     isLastDay:boolean; 
     textDate = ko.observable("");
 
-
-
     public createLoad() {
         alert("create load click! " + this.dayNumber);
         //this.startDay(moment(this.startDay()).add(1, "day").toDate());
@@ -35,7 +33,23 @@ export class KoLoadCol {
         this.partialLoadsCount(totalUnlocked);
         this.fullLoadsCount(totalLoads - totalUnlocked);
     }
-    
+
+    public loadAll() {
+        this.sharedModel.setWaitSpinner(true,this.sharedModel.loadGridName + this.dayNumber);
+        var dataToSend = JSON.parse("{ \"loadDate\" : " + JSON.stringify(this.loadDate()) + "}");
+
+        this.sharedModel.ajax.get("/Loads/GetLoadsByDate", (data: any) => {
+            ko.mapping.fromJSON(data, {}, this.loads);
+
+            this.updateLoadTotal();
+            $.each(this.loads(), (index, load) => {
+                //this.populateExtraFields(load);
+            });
+
+            this.sharedModel.setWaitSpinner(false, "");
+        }, dataToSend);
+    }
+
     public initDay(startDate:Date) {
         //this.dayNumber = dayNum;
         this.loadDate(moment(startDate).add(this.dayNumber - 1, "day").toDate());
@@ -47,6 +61,7 @@ export class KoLoadCol {
         this.isLastDay = sharedModel.visibleLoadCols === dayNum;
         this.dayNumber = dayNum;
         this.initDay(startDate);
+        this.loadAll();
         //this.loadDate(moment(sharedModel.loadCol1Date).add(dayNum-1, "day").toDate());
         //this.textDate = DateFunctions.formatLoadDate(this.loadDate());
 

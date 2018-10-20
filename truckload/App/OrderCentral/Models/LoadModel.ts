@@ -13,8 +13,6 @@ import * as moment from 'moment';
 import * as ko from 'knockout';
 
 export class LoadModel {
-    //private setWaitSpinner: Function;
-    //private orderGridName: string;
     private sharedModel: SharedModel;
     public loadCols = ko.observableArray([] as KoLoadCol[]);
     day1Date = ko.observable(new Date());
