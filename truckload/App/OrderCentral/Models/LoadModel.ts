@@ -23,12 +23,19 @@ export class LoadModel {
 
     public nextDay = () => {
         this.day1Date(moment(this.day1Date()).add(1, "day").toDate());
+        this.refreshLoads();
     }
 
     public previousDay = () => {
         this.day1Date(moment(this.day1Date()).add(-1, "day").toDate());
+        this.refreshLoads();
     }
 
+    private refreshLoads() {
+        ko.utils.arrayForEach(this.loadCols(), loadCol => {
+            loadCol.loadAll();
+        });
+    }
 
     constructor(sharedModel: SharedModel) {
         this.sharedModel = sharedModel;

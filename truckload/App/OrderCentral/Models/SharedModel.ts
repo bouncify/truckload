@@ -21,7 +21,7 @@ export class SharedModel {
     public baseUrl = "";
 
     setWaitSpinner = (isLoading: boolean, gridName: string) => {
-        var grid = $(this.orderGridName).data("kendoGrid");
+        var grid = $(gridName).data("kendoGrid");
 
         if (grid) {
             kendo.ui.progress(grid.element, isLoading);
