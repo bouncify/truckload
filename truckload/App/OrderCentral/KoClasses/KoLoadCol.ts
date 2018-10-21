@@ -1,6 +1,6 @@
 ﻿import * as ko from 'knockout';
 import { DateFunctions } from "../../Shared/DateFunctions"
-import { LoadStatus, AccessLevels } from "../../Shared/Global"
+import { LoadStatus, AccessLevels,DbOperation,CrudMessage } from "../../Shared/Global"
 import { SharedModel } from "../Models/SharedModel"
 import { KoLoad } from "./KoLoad"
 import { KoNewLoad } from "./KoNewLoad"
@@ -130,8 +130,45 @@ export class KoLoadCol {
         load.orderColor = orderColor;
     }
 
+    public receiveRefreshNotification(message: CrudMessage) {
+        var dataToSend = JSON.parse("{ \"loadId\" : " + message.id + "}");
+
+        switch (message.operation) {
+        case DbOperation.Create:
+            this.shared.ajax.get("/Loads/GetLoad", (data: any) => {
+                var newLoad = ko.mapping.fromJSON(data);
+                this.populateExtraFields(newLoad);
+                this.loads.push(newLoad);
+                this.updateLoadTotal();
+                //this.setWaitSpinner(false, this.gridName);
+            }, dataToSend);
+            break;
+        case DbOperation.Read:
+            break;
+        case DbOperation.Update:
+            this.shared.ajax.get("/Loads/GetLoad", (data: any) => {
+                var updateLoad = ko.mapping.fromJSON(data);
+                this.populateExtraFields(updateLoad);
+                var oldLoad = ko.utils.arrayFirst(this.loads(), item => item.loadId() === message.id);
+                if (oldLoad) {
+                    this.loads.replace(oldLoad, updateLoad);
+                } else {// its new or been moved
+                    this.loads.push(updateLoad);
+                }
+                this.updateLoadTotal();
+                //this.setWaitSpinner(false, this.gridName);
+            }, dataToSend);
+            break;
+        case DbOperation.Delete:
+            var load = ko.utils.arrayFirst(this.loads(), item => item.loadId() === message.id);
+            if (load) this.loads.remove((x: any) => x.loadId === load.loadId);
+            this.updateLoadTotal();
+            //this.setWaitSpinner(false, this.gridName);
+            break;
+        }
+    }
+
     public initDay(startDate:Date) {
-        //this.dayNumber = dayNum;
         this.loadDate(moment(startDate).add(this.dayNumber - 1, "day").toDate());
         this.textDate(DateFunctions.formatLoadDate(this.loadDate()));
     }

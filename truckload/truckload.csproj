@@ -305,6 +305,7 @@
     <Compile Include="Helpers\GetDataSourceResults.cs" />
     <Compile Include="Helpers\OrderCentral\LoadHelper.cs" />
     <Compile Include="Helpers\OrderCentral\OrderHelper.cs" />
+    <Compile Include="Helpers\Repositories\LoadRepository.cs" />
     <Compile Include="Helpers\Repositories\OrderRepository.cs" />
     <Compile Include="Helpers\ServerError.cs" />
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
@@ -319,6 +320,7 @@
     <Compile Include="Helpers\Vm\VmTrailer.cs" />
     <Compile Include="Helpers\Vm\VmTruck.cs" />
     <Compile Include="Helpers\Vm\VmWarehouse.cs" />
+    <Compile Include="Hubs\LoadHub.cs" />
     <Compile Include="Hubs\OrderHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Vm\VmUser.cs" />
@@ -434,6 +436,7 @@
     <TypeScriptCompile Include="App\Admin\Modules\Warehouse.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Classes\LoadMessageService.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\OrderMessageService.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDropDownData.ts" />

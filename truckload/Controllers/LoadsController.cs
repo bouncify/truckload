@@ -94,6 +94,23 @@ namespace truckload.Controllers
         }
 
         [HttpGet]
+        public ActionResult GetLoad(long loadId)
+        {
+            var loads = GetLoadsList(null, loadId);
+
+            if (loads != null)
+            {
+                if (loads.Count == 1)
+                {
+                    var load = loads.FirstOrDefault();
+                    return Json(load.ToJsonString(), JsonRequestBehavior.AllowGet);
+                }
+            }
+
+            throw new ServerException($"Cannot find load {loadId}");
+        }
+
+        [HttpGet]
         public ActionResult GetLoadsByDate(DateTime loadDate)
         {
             var orders = GetLoadsList(loadDate.Date);

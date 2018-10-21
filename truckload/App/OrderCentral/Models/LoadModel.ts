@@ -1,19 +1,16 @@
-﻿//import { KoOrder } from "../KoClasses/KoOrder"
-import { KoLoadCol } from "../KoClasses/KoLoadCol"
-//import { KoEditOrder } from "../KoClasses/KoEditOrder"
-//import { OrderMessageService } from "../Classes/OrderMessageService"
-//import { DbOperation,CrudMessage } from "../../Shared/Global"
+﻿import { KoLoadCol } from "../KoClasses/KoLoadCol"
+import { LoadMessageService } from "../Classes/LoadMessageService"
+import { CrudMessage } from "../../Shared/Global"
+import { DateFunctions } from "../../Shared/DateFunctions"
 
 import { SharedModel } from "./SharedModel"
-//import { StringFunctions } from "../../Shared/StringFunctions"
-//import { DateFunctions } from "../../Shared/DateFunctions"
-//import { ControlHelper } from "../../Shared/ControlHelper"
 
 import * as moment from 'moment';
 import * as ko from 'knockout';
 
 export class LoadModel {
     private shared: SharedModel;
+    private loadService: LoadMessageService;
     public loadCols = ko.observableArray([] as KoLoadCol[]);
     day1Date = ko.observable(new Date());
 
@@ -37,6 +34,14 @@ export class LoadModel {
         });
     }
 
+    public receiveDbUpdateLoadNotification = (message: CrudMessage) => {
+        ko.utils.arrayForEach(this.loadCols(), loadCol => {
+            if (DateFunctions.isDateEqual(loadCol.loadDate(), message.theDate)) {
+                loadCol.receiveRefreshNotification(message);
+            }
+        });
+    }
+
     constructor(sharedModel: SharedModel) {
         this.shared = sharedModel;
 
@@ -52,6 +57,6 @@ export class LoadModel {
             });
         });
 
-        //this.orderService = new OrderMessageService(this.receiveDbUpdateOrderNotification);
+        this.loadService = new LoadMessageService(this.receiveDbUpdateLoadNotification);
     }
 }

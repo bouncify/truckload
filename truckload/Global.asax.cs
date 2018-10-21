@@ -17,6 +17,7 @@ namespace truckload
     public class MvcApplication : System.Web.HttpApplication
     {
         private OrderRepository _ordersDependency;
+        private LoadRepository _loadsDependency;
 
         protected void Application_Start()
         {
@@ -27,11 +28,14 @@ namespace truckload
 
             _ordersDependency = new OrderRepository();
             _ordersDependency.StartDependency();
+            _loadsDependency = new LoadRepository();
+            _loadsDependency.StartDependency();
         }
 
         protected void Application_End()
         {
             _ordersDependency.StopDependency();
+            _loadsDependency.StopDependency();
         }
 
         protected void Application_Error(Object sender, EventArgs e)

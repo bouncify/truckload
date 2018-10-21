@@ -1,10 +1,4 @@
-﻿
-
-import { DbOperation } from "../../Shared/Global"
-import { CrudMessage } from "../../Shared/Global"
-
-//import "signalR";
-//import * as signalR from "signalr";
+﻿import { DbOperation, CrudMessage } from "../../Shared/Global"
 
 export class OrderMessageService {
     //signalR connection reference
