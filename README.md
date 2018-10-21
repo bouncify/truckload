@@ -13,5 +13,6 @@ It uses the following technologies:
 * Knockout
 * Bootstrap
 * jQuery
+* SQL Service Broker with SQL Table dependency 
 
 The solution includes everythinhg including the local Db database
