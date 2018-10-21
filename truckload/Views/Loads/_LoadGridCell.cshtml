@@ -28,7 +28,7 @@
 
                 <div data-bind='foreach: { data: ordersList }'>
                     <div class="individual-order no-borders"
-                         ondragstart="OrderCentral.dragOrder(event)"
+                         ondragstart="app.main.dragOrder(event)"
                          data-bind="attr: {id: 'loadOrder_' + orderId() + '_' + $parent.loadDay + '_' + $parent.loadId(), draggable: isDraggable()}, style: { background: $parent.orderColor }">
                         <span style="
                         width: 130px;

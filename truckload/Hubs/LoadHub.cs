@@ -34,7 +34,7 @@ namespace truckload.Hubs
         public static void Add(long loadId, DateTime loadDate)
         {
             IHubContext context = GlobalHost.ConnectionManager.GetHubContext<LoadHub>();
-            context.Clients.All.add(loadId);
+            context.Clients.All.add(loadId, loadDate);
         }
     }
 }

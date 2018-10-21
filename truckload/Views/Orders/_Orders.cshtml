@@ -24,8 +24,8 @@
         </tr>
     </table>
     <div id="koOrderGrid" style="background: rgb(236, 255, 251)"
-         ondragover="OrderCentral.allowDropOrder(event)"
-         ondrop="OrderCentral.dropOrderOnOrders(event)"
+         ondragover="app.main.allowDropOrder(event)"
+         ondrop="app.main.dropOrderOnOrders(event)"
          data-bind="kendoGrid: { data: orders, rowTemplate: 'orderRowTemplate', useKOTemplates: true }"></div>
 
     <div class="k-pager-wrap k-grid-pager k-widget" data-role="pager">

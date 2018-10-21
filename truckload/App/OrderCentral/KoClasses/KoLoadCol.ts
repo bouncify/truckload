@@ -93,8 +93,8 @@ export class KoLoadCol {
             case LoadStatus.Unlocked:
                 load.statusImagePath += "lock_open.png";
                 load.statusCaption = "Unlocked";
-                load.onDropFunction = "OrderCentral.dropOrder(event)";
-                load.onDragOverFunction = "OrderCentral.allowDropOrder(event)";
+                load.onDropFunction = "app.main.dropOrder(event)";
+                load.onDragOverFunction = "app.main.allowDropOrder(event)";
                 break;
             case LoadStatus.Locked:
                 load.statusImagePath += "lock_closed.png";

@@ -309,6 +309,7 @@
     <Compile Include="Helpers\Repositories\OrderRepository.cs" />
     <Compile Include="Helpers\ServerError.cs" />
     <Compile Include="Helpers\Vm\DropDownItem.cs" />
+    <Compile Include="Helpers\Vm\VmDragDropResult.cs" />
     <Compile Include="Helpers\Vm\VmDriver.cs" />
     <Compile Include="Helpers\Vm\VmKoDropDownData.cs" />
     <Compile Include="Helpers\Vm\VmKoLoad.cs" />

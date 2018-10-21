@@ -1,11 +1,10 @@
 ﻿
-
 <script id="orderRowTemplate" type="text/html">
     <tr role="row">
         <td role="gridcell" style="width: 100%;">
             <div class="order rounded"
                  style="background-color:#0169a1;display: table;padding-top: 4px;"
-                 ondragstart="OrderCentral.dragOrder(event)"
+                 ondragstart="app.main.dragOrder(event)"
                  data-bind="attr: {id: 'orderDrag_' + orderId(), draggable: isDraggable()},
                                    style: {cursor: isDraggable() ? 'pointer' : 'default', background: orderColor }
                  ">

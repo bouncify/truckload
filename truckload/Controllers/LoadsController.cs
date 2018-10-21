@@ -175,5 +175,114 @@ namespace truckload.Controllers
 
             return loads;
         }
+
+        [HttpPost]
+        public ActionResult DropOrder(long orderId, long loadId)
+        {
+            var result = new VmDragDropResult()
+            {
+                LoadId = loadId,
+                OrderId = orderId
+            };
+
+            try
+            {
+                if (CurrentUser.UserLevel < (int)Enums.AccessLevel.Dispatcher)
+                {
+                    throw new ServerException("Drop Order: User does not have permission to move orders.");
+                }
+
+                var dbOrder = Db.Orders.FirstOrDefault(o => o.OrderId == orderId);
+
+                if (dbOrder != null)
+                {
+                    var isFromOrderList = dbOrder.LoadId == null;
+                    var isMovedFromAnotherLoad = !isFromOrderList && dbOrder.LoadId != loadId;
+
+                    if (isMovedFromAnotherLoad)
+                    {
+                        var previousLoad = Db.Loads.Find(dbOrder.LoadId);
+
+                        if (previousLoad != null)
+                        {
+                            previousLoad.ModifiedDate = DateTime.Now;
+                            previousLoad.ModifiedByUserLoginId = CurrentUser.UserLoginId;
+                        }
+                    }
+
+                    if (isFromOrderList || isMovedFromAnotherLoad)
+                    {
+                        var dbLoad = Db.Loads.Find(loadId);
+                        if (dbLoad != null)
+                        {
+                            if (dbLoad.LoadStatusId == 1)
+                            {
+                                dbOrder.LoadId = loadId;
+
+                                dbLoad.ModifiedDate = DateTime.Now;
+                                dbLoad.ModifiedByUserLoginId = CurrentUser.UserLoginId;
+
+                                var maxLoadSortNum = Db.Orders.Where(o => o.LoadId == dbOrder.LoadId).Max(o => o.LoadSort) ?? 0;
+                                dbOrder.LoadSort = maxLoadSortNum + 1;
+                            }
+                        }
+                    }
+
+                    Db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                result.Message = ServerError.GetErrorFromException(e).ExceptionMsg;
+                return Json(result.ToJsonString(), JsonRequestBehavior.AllowGet);
+            }
+
+            result.Message = $"OrderId {orderId} has been moved to loadId {loadId}";
+            return Json(result.ToJsonString(), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ResetOrder(long orderId)
+        {
+            long oldLoadId = 0;
+            var result = new VmDragDropResult();
+
+            try
+            {
+                if (CurrentUser.UserLevel < (int)Enums.AccessLevel.Dispatcher)
+                {
+                    throw new ServerException("Reset Order: User does not have permission to move orders.");
+                }
+
+                var dbOrder = Db.Orders.FirstOrDefault(o => o.OrderId == orderId);
+
+                if (dbOrder != null)
+                {
+                    oldLoadId = dbOrder.LoadId ?? 0;
+
+                    var previousLoad = Db.Loads.Find(oldLoadId);
+
+                    if (previousLoad != null)
+                    {
+                        previousLoad.ModifiedDate = DateTime.Now;
+                        previousLoad.ModifiedByUserLoginId = CurrentUser.UserLoginId;
+                    }
+
+                    dbOrder.LoadId = null;
+                    Db.SaveChanges();
+
+                    result.LoadId = oldLoadId;
+                    result.OrderId = orderId;
+                }
+            }
+            catch (Exception e)
+            {
+                result.Message = ServerError.GetErrorFromException(e).ExceptionMsg;
+                return Json(result.ToJsonString(), JsonRequestBehavior.AllowGet);
+            }
+
+            result.Message = $"OrderId {orderId} has been removed from loadId {oldLoadId}";
+            return Json(result.ToJsonString(), JsonRequestBehavior.AllowGet);
+        }
     }
 }
