@@ -39,16 +39,16 @@ namespace truckload.Helpers.Repositories
                 case ChangeType.None:
                     return;
                 case ChangeType.Update:
-                    LoadHub.Update(e.Entity.LoadId, e.Entity.LoadDate);
+                    OrderCentralHub.Update(e.Entity.LoadId, e.Entity.LoadDate, true);
                     break;
                 case ChangeType.Delete:
-                    LoadHub.Delete(e.Entity.LoadId, e.Entity.LoadDate);
+                    OrderCentralHub.Delete(e.Entity.LoadId, e.Entity.LoadDate, true);
                     break;
                 case ChangeType.Insert:
-                    LoadHub.Add(e.Entity.LoadId, e.Entity.LoadDate);
+                    OrderCentralHub.Add(e.Entity.LoadId, e.Entity.LoadDate, true);
                     break;
                 default:
-                    LoadHub.RefreshRequest();
+                    OrderCentralHub.RefreshRequest();
                     break;
             }
         }

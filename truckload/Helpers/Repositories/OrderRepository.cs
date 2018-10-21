@@ -42,21 +42,21 @@ namespace truckload.Helpers.Repositories
                 case ChangeType.Update:
                     if (e.Entity.LoadId != null)
                     {
-                        OrderHub.Delete(e.Entity.OrderId);
+                        OrderCentralHub.Delete(e.Entity.OrderId,DateTime.Now, false);
                     }
                     else
                     {
-                        OrderHub.Update(e.Entity.OrderId);
+                        OrderCentralHub.Update(e.Entity.OrderId, DateTime.Now, false);
                     }
                     break;
                 case ChangeType.Delete:
-                    OrderHub.Delete(e.Entity.OrderId);
+                    OrderCentralHub.Delete(e.Entity.OrderId, DateTime.Now, false);
                     break;
                 case ChangeType.Insert:
-                    OrderHub.Add(e.Entity.OrderId);
+                    OrderCentralHub.Add(e.Entity.OrderId, DateTime.Now, false);
                     break;
                 default:
-                    OrderHub.RefreshRequest();
+                    OrderCentralHub.RefreshRequest();
                     break;
             }
         }

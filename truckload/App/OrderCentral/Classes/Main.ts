@@ -6,6 +6,8 @@ import { SharedModel } from "../Models/SharedModel"
 import { OrderPanel } from "../Modules/OrderPanel"
 import { LoadPanels } from "../Modules/LoadPanels"
 import { Setting } from "./Setting"
+import { MessageService } from "../Classes/MessageService"
+import { CrudMessage } from "../../Shared/Global"
 
 import 'knockout-kendo/build/knockout-kendo';
 
@@ -13,7 +15,7 @@ export class Main {
     private shared: SharedModel;
     viewModelOrders: OrderModel;
     viewModelLoads: LoadModel;
-
+    private messageService: MessageService;
 
     public dragOrder(ev: DragEvent) {
         if (ev.srcElement) {
@@ -108,13 +110,29 @@ export class Main {
         return result;
     }
 
+    public receiveDbUpdateNotification = (message: CrudMessage) => {
+
+        if (message.isLoad) {
+            this.viewModelLoads.receiveDbUpdateLoadNotification(message);
+        } else {
+            this.viewModelOrders.receiveDbUpdateOrderNotification(message);
+        }
+
+        //ko.utils.arrayForEach(this.loadCols(), loadCol => {
+        //    if (DateFunctions.isDateEqual(loadCol.loadDate(), message.theDate)) {
+        //        loadCol.receiveRefreshNotification(message);
+        //    }
+        //});
+    }
+
     constructor(settings: Setting[]) {
         this.shared = new SharedModel(settings);
         this.viewModelOrders = new OrderModel(this.shared);
         this.viewModelLoads = new LoadModel(this.shared, this.viewModelOrders.editOrderClick);
-
         
         LoadPanels.init(this.shared,this.viewModelLoads);
         OrderPanel.init(this.shared, this.viewModelOrders);
+
+        this.messageService = new MessageService(this.receiveDbUpdateNotification);
     }
 }

@@ -321,8 +321,7 @@
     <Compile Include="Helpers\Vm\VmTrailer.cs" />
     <Compile Include="Helpers\Vm\VmTruck.cs" />
     <Compile Include="Helpers\Vm\VmWarehouse.cs" />
-    <Compile Include="Hubs\LoadHub.cs" />
-    <Compile Include="Hubs\OrderHub.cs" />
+    <Compile Include="Hubs\OrderCentralHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\Vm\VmUser.cs" />
   </ItemGroup>
@@ -437,9 +436,8 @@
     <TypeScriptCompile Include="App\Admin\Modules\Warehouse.ts" />
     <TypeScriptCompile Include="App\Admin\TestGrid.ts" />
     <TypeScriptCompile Include="App\Home.ts" />
-    <TypeScriptCompile Include="App\OrderCentral\Classes\LoadMessageService.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\Classes\MessageService.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
-    <TypeScriptCompile Include="App\OrderCentral\Classes\OrderMessageService.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDropDownData.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoEditOrder.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoad.ts" />

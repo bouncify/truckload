@@ -28,9 +28,11 @@ export class CrudMessage {
     id: number;
     operation: DbOperation;
     theDate: Date;
-    constructor(id: number, operation: DbOperation, theDate: Date = new Date()) {
+    isLoad:boolean;
+    constructor(id: number, operation: DbOperation, theDate: Date = new Date(), isLoad:boolean) {
         this.id = id;
         this.operation = operation;
         this.theDate = theDate;
+        this.isLoad = isLoad;
     }
 }

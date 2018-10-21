@@ -1,7 +1,7 @@
 ﻿import { KoOrder } from "../KoClasses/KoOrder"
 import { KoEditOrder } from "../KoClasses/KoEditOrder"
 import { KoScreenSize } from "../KoClasses/KoScreenSize"
-import { OrderMessageService } from "../Classes/OrderMessageService"
+//import { OrderMessageService } from "../Classes/OrderMessageService"
 import { DbOperation, CrudMessage } from "../../Shared/Global"
 import { SharedModel } from "./SharedModel"
 import { StringFunctions } from "../../Shared/StringFunctions"
@@ -16,7 +16,7 @@ export class OrderModel {
     private orders = ko.observableArray([] as KoOrder[]);
     private editOrder: KoEditOrder;
     private screenSize: KoScreenSize;
-    private orderService: OrderMessageService;
+    //private orderService: OrderMessageService;
 
     private orderNumberFilterText = "";
 
@@ -140,7 +140,7 @@ export class OrderModel {
 
         this.loadAll();
 
-        this.orderService = new OrderMessageService(this.receiveDbUpdateOrderNotification);
+        //this.orderService = new OrderMessageService(this.receiveDbUpdateOrderNotification);
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿import { KoLoadCol } from "../KoClasses/KoLoadCol"
 import { KoOrder } from "../KoClasses/KoOrder"
-import { LoadMessageService } from "../Classes/LoadMessageService"
+//import { LoadMessageService } from "../Classes/LoadMessageService"
 import { CrudMessage } from "../../Shared/Global"
 import { DateFunctions } from "../../Shared/DateFunctions"
 
@@ -11,7 +11,7 @@ import * as ko from 'knockout';
 
 export class LoadModel {
     private shared: SharedModel;
-    private loadService: LoadMessageService;
+//    private loadService: LoadMessageService;
     public loadCols = ko.observableArray([] as KoLoadCol[]);
     day1Date = ko.observable(new Date());
 
@@ -65,6 +65,6 @@ export class LoadModel {
             });
         });
 
-        this.loadService = new LoadMessageService(this.receiveDbUpdateLoadNotification);
+        //this.loadService = new LoadMessageService(this.receiveDbUpdateLoadNotification);
     }
 }
