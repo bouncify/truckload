@@ -14,5 +14,6 @@ It uses the following technologies:
 * Bootstrap
 * jQuery
 * SQL Service Broker with SQL Table dependency 
+* Microsoft Identity Security
 
 The solution includes everythinhg including the local Db database
