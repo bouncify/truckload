@@ -6,6 +6,7 @@ import { KoLoad } from "./KoLoad"
 import { KoNewLoad } from "./KoNewLoad"
 import { StringFunctions } from "../../Shared/StringFunctions"
 import { Functions } from "../../Shared/Functions"
+import { ControlHelper } from "../../Shared/ControlHelper"
 
 import * as moment from 'moment';
 import Global = require("App/Shared/Global");
@@ -51,6 +52,27 @@ export class KoLoadCol {
 
             this.shared.setWaitSpinner(false, this.loadGridName);
         }, dataToSend);
+    }
+
+    public deleteLoad(loadId: number) {
+        var dataToSend = JSON.stringify({ loadId: loadId });
+
+        ControlHelper.lbConfirm("Are you sure you want to delete this load?", (result: boolean) => {
+            if (result) {
+                //this.setWaitSpinner(true, this.gridName);
+                this.shared.ajax.post("/Loads/DeleteLoad",
+                    (dataResult: any) => {
+                        var resultObject = new KoLoad();
+                        ko.mapping.fromJSON(dataResult, {}, resultObject);
+                        var message = resultObject.actionResultMessage();
+                        var isDeleted = message.indexOf("has been deleted") >= 0;
+
+                        if (!isDeleted) {
+                            alert(message);
+                        }
+                    }, dataToSend);
+            }
+        });
     }
 
     private populateExtraFields(load: KoLoad) {

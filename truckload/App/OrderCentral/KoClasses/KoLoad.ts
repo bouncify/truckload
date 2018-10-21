@@ -45,4 +45,5 @@ export class KoLoad {
     onDragOverFunction = "";
     isDeletable = ko.observable(false);
     isEditable = ko.observable(false);
+
 }

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Web;
 using System.Web.Mvc;
+using truckload.DbContext;
 using truckload.Helpers;
 using truckload.Helpers.Vm;
 
@@ -17,6 +19,79 @@ namespace truckload.Controllers
             InitViewData(TabMenu.Admin);
         }
 
+        [HttpPost]
+        public ActionResult CreateNewLoad(VmKoLoad load)
+        {
+            long newLoadId = 0;
+            try
+            {
+                if (CurrentUser.UserLevel < (int)Enums.AccessLevel.Dispatcher)
+                {
+                    throw new ServerException("Create Load: User does not have permission to create a load");
+                }
+
+                int? unitOfMeasure = null;
+
+                var dbTrailer = Db.Trailers.Find(load.TrailerId);
+                if (dbTrailer != null)
+                {
+                    unitOfMeasure = dbTrailer.UnitOfMeasureId;
+                }
+
+                var dbLoad = new Load
+                {
+                    CreatedByUserLoginId = CurrentUser.UserLoginId,
+                    DriverId = load.DriverId,
+                    LoadStatusId = 1,
+                    CreatedDate = DateTime.Now,
+                    LoadDate = load.LoadDate.Date,
+                    TrailerId = load.TrailerId,
+                    TruckId = load.TruckId,
+                    UnitOfMeasureId = unitOfMeasure
+                };
+
+                Db.Loads.Add(dbLoad);
+                Db.SaveChanges();
+
+                newLoadId = dbLoad.LoadId;
+            }
+            catch (Exception e)
+            {
+                return ReturnLoad(load, ServerError.GetErrorFromException(e).ExceptionMsg);
+            }
+
+            return ReturnLoad(load, $"Load {newLoadId} has been saved");
+        }
+
+        [HttpPost]
+        public ActionResult DeleteLoad(long loadId)
+        {
+            try
+            {
+                if (CurrentUser.UserLevel < (int)Enums.AccessLevel.Dispatcher)
+                {
+                    throw new ServerException("Delete Load: User does not have permission to delete a load");
+                }
+
+                var dbLoad = Db.Loads.Find(loadId) ?? throw new InvalidOperationException();
+
+                foreach (var order in dbLoad.Orders)
+                {
+                    order.LoadId = null;
+                }
+
+                Db.SaveChanges();//Remove orders from load
+
+                Db.Loads.Remove(dbLoad);
+                Db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return ReturnLoad(new VmKoLoad(), ServerError.GetErrorFromException(e).ExceptionMsg);
+            }
+
+            return ReturnLoad(new VmKoLoad(), $"Load {loadId} has been deleted");
+        }
 
         [HttpGet]
         public ActionResult GetLoadsByDate(DateTime loadDate)

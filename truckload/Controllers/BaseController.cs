@@ -92,5 +92,13 @@ namespace truckload.Controllers
             return siteUrl;
         }
 
+        public JsonResult ReturnLoad(VmKoLoad load, string actionMessage = "")
+        {
+            load.ActionResultMessage = actionMessage;
+
+            var rtnLoad = Json(load.ToJsonString(), JsonRequestBehavior.AllowGet);
+
+            return rtnLoad;
+        }
     }
 }
