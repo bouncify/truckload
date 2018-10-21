@@ -62,16 +62,16 @@ namespace truckload.Controllers
                 {
                     var isOnLoad = dbOrder.LoadId != null;
 
-                    //if (isOnLoad)
-                    //{
-                    //    var dbLoad = Db.Loads.Find(dbOrder.LoadId);
+                    if (isOnLoad)
+                    {
+                        var dbLoad = Db.Loads.Find(dbOrder.LoadId);
 
-                    //    if (dbLoad != null)
-                    //    {
-                    //        dbLoad.ModifiedDate = DateTime.Now;
-                    //        dbLoad.ModifiedByGlobalId = _currentUser.GlobalId;
-                    //    }
-                    //}
+                        if (dbLoad != null)
+                        {
+                            dbLoad.ModifiedDate = DateTime.Now;
+                            dbLoad.ModifiedByUserLoginId = CurrentUser.UserLoginId;
+                        }
+                    }
 
                     dbOrder.CustAddress = order.CustomerAddress;
                     dbOrder.CustomerName = order.CustomerName;

@@ -169,7 +169,13 @@ namespace truckload.Controllers
                     IsCustomerPickup = s.IsCustomerPickup,
                     IsDangerousGoods = s.IsDangerousGoods,
                     IsDraggable = CurrentUser.UserLevel > 1 && d.LoadStatusId == 1,
-                    LoadSort = s.LoadSort ?? 0
+                    LoadSort = s.LoadSort ?? 0,
+                    WarehouseId = s.WarehouseId,
+                    UnitOfMeasureId = s.UnitOfMeasureId,
+                    Destination = s.Destination,
+                    Notes = s.Notes,
+                    Volume = s.Volume ?? 0,
+                    WeightKg = s.WeightKg
                 }).OrderBy(o => o.LoadSort).ToList()
             }).ToList();
 

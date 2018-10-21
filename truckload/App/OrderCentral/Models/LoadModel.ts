@@ -1,4 +1,5 @@
 ﻿import { KoLoadCol } from "../KoClasses/KoLoadCol"
+import { KoOrder } from "../KoClasses/KoOrder"
 import { LoadMessageService } from "../Classes/LoadMessageService"
 import { CrudMessage } from "../../Shared/Global"
 import { DateFunctions } from "../../Shared/DateFunctions"
@@ -14,8 +15,10 @@ export class LoadModel {
     public loadCols = ko.observableArray([] as KoLoadCol[]);
     day1Date = ko.observable(new Date());
 
-    private totalLoadCols:number;
-    //private editOrder: KoEditOrder;
+    private totalLoadCols: number;
+
+
+    private editOrderFunction: Function;
     //private orderService: OrderMessageService;
 
     public nextDay = () => {
@@ -42,8 +45,13 @@ export class LoadModel {
         });
     }
 
-    constructor(sharedModel: SharedModel) {
+    public editOrder(data: KoOrder) {
+        this.editOrderFunction(data);
+    }
+
+    constructor(sharedModel: SharedModel, editOrderFunction: Function) {
         this.shared = sharedModel;
+        this.editOrderFunction = editOrderFunction;
 
         this.totalLoadCols = this.shared.visibleLoadCols;
         for (let i = 1; i < this.totalLoadCols +1; i++) {

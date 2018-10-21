@@ -111,7 +111,7 @@ export class Main {
     constructor(settings: Setting[]) {
         this.shared = new SharedModel(settings);
         this.viewModelOrders = new OrderModel(this.shared);
-        this.viewModelLoads = new LoadModel(this.shared);
+        this.viewModelLoads = new LoadModel(this.shared, this.viewModelOrders.editOrderClick);
 
         
         LoadPanels.init(this.shared,this.viewModelLoads);
