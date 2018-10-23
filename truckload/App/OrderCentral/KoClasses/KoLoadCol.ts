@@ -4,18 +4,21 @@ import { LoadStatus, AccessLevels,DbOperation,CrudMessage } from "../../Shared/G
 import { SharedModel } from "../Models/SharedModel"
 import { KoLoad } from "./KoLoad"
 import { KoNewLoad } from "./KoNewLoad"
+import { KoEditLoad } from "./KoEditLoad"
 import { StringFunctions } from "../../Shared/StringFunctions"
 import { Functions } from "../../Shared/Functions"
 import { ControlHelper } from "../../Shared/ControlHelper"
 
 import * as moment from 'moment';
-import Global = require("App/Shared/Global");
-import Globals = Global.Globals;
+//import Global = require("App/Shared/Global");
+//import Globals = Global.Globals;
 
 export class KoLoadCol {
     private shared: SharedModel;
 
     private newLoad:KoNewLoad;
+    private editLoad: KoEditLoad;
+
     private loads = ko.observableArray([] as KoLoad[]);
     partialLoadsCount = ko.observable(0);
     fullLoadsCount = ko.observable(0);
@@ -73,6 +76,10 @@ export class KoLoadCol {
                     }, dataToSend);
             }
         });
+    }
+
+    public editLoadClick = (load:KoLoad) => {
+        this.editLoad.editLoadClick(load);
     }
 
     private populateExtraFields(load: KoLoad) {
@@ -180,6 +187,7 @@ export class KoLoadCol {
         this.dayNumber = dayNum;
         this.initDay(startDate);
         this.newLoad = new KoNewLoad(sharedModel, this.loadDate(), this.dayNumber);
+        this.editLoad = new KoEditLoad(sharedModel, this.loadDate(), this.dayNumber);
         this.loadAll();
         //this.loadDate(moment(sharedModel.loadCol1Date).add(dayNum-1, "day").toDate());
         //this.textDate = DateFunctions.formatLoadDate(this.loadDate());

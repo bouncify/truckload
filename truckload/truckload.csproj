@@ -424,6 +424,7 @@
     <Content Include="Views\Orders\_AdjustScreenSize.cshtml" />
     <Content Include="Views\Loads\_NewLoad.cshtml" />
     <Content Include="Views\Loads\_LoadGridCell.cshtml" />
+    <Content Include="Views\Loads\_EditLoad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="App\Admin\Admin.ts" />
@@ -439,6 +440,7 @@
     <TypeScriptCompile Include="App\OrderCentral\Classes\MessageService.ts" />
     <TypeScriptCompile Include="App\OrderCentral\Classes\Main.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoDropDownData.ts" />
+    <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoEditLoad.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoEditOrder.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoad.ts" />
     <TypeScriptCompile Include="App\OrderCentral\KoClasses\KoLoadCol.ts" />
