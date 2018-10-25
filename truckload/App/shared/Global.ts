@@ -15,7 +15,7 @@ export enum DbOperation {
 export enum LoadStatus {
     Unlocked = 1,
     Locked = 2,
-    Dispatched = 4
+    Dispatched = 3
 }
 
 export enum AccessLevels {

@@ -64,6 +64,79 @@ namespace truckload.Controllers
         }
 
         [HttpPost]
+        public ActionResult SaveEditedLoad(VmKoLoad load)
+        {
+            try
+            {
+                if (CurrentUser.UserLevel < (int)Enums.AccessLevel.Dispatcher)
+                {
+                    throw new ServerException($"Save Load: User does not have permission to save load {load.LoadId}");
+                }
+
+                var dbLoad = Db.Loads.Find(load.LoadId);
+
+                if (dbLoad == null) throw new ServerException($"SaveEditedLoad: Cannot find load {load.LoadId}");
+
+                dbLoad.DriverId = load.DriverId;
+                dbLoad.TruckId = load.TruckId;
+                dbLoad.LoadStatusId = load.LoadStatusId;
+                dbLoad.LoadDate = load.LoadDate;
+
+                var isChangeTrailer = dbLoad.TrailerId != load.TrailerId;
+
+                //var isReOrderItems = false;
+
+                //if (load.NewOrderSequence != null)
+                //{
+                //    var currentOrderSequence = dbLoad.simple_Order.OrderBy(r => r.LoadSort).Select(o => o.OrderId).ToArray();
+                //    isReOrderItems = !currentOrderSequence.SequenceEqual(load.NewOrderSequence);
+                //}
+
+                //if (isReOrderItems)
+                //{
+                //    var position = 1;
+                //    foreach (var orderId in load.NewOrderSequence)
+                //    {
+                //        var dbOrder = dbLoad.simple_Order.FirstOrDefault(o => o.OrderId == orderId);
+
+                //        if (dbOrder != null)
+                //        {
+                //            dbOrder.LoadSort = position;
+                //            position++;
+                //        }
+                //    }
+                //}
+
+                if (isChangeTrailer)
+                {
+                    int? unitOfMeasure = null;
+
+                    var dbTrailer = Db.Trailers.Find(load.TrailerId);
+                    if (dbTrailer != null)
+                    {
+                        unitOfMeasure = dbTrailer.UnitOfMeasureId;
+                    }
+
+                    dbLoad.UnitOfMeasureId = unitOfMeasure;
+                }
+
+                dbLoad.TrailerId = load.TrailerId;
+
+                dbLoad.ModifiedByUserLoginId = CurrentUser.UserLoginId;
+                dbLoad.ModifiedDate = DateTime.Now;
+
+                Db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                return ReturnLoad(load, ServerError.GetErrorFromException(e).ExceptionMsg);
+            }
+
+            return ReturnLoad(load, $"Load {load.LoadId} has been saved");
+        }
+
+        [HttpPost]
         public ActionResult DeleteLoad(long loadId)
         {
             try

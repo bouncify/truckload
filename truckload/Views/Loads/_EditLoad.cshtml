@@ -4,10 +4,10 @@
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header" style="padding-top: 5px; padding-bottom: 0; padding-left: 15px; min-height: 50px;">
+            <div class="modal-header k-window-titlebar k-dialog-titlebar k-header" style="padding-top: 15px; padding-bottom: 0; padding-left: 15px; min-height: 75px;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Edit Load <span data-bind="text: editLoad.loadId"></span></h4>
-                <span style="font-size: 10px; position: absolute;" data-bind="text: editLoad.textDate"></span>
+                <span style="font-size: 10px; position: absolute;" data-bind="text: editLoad.loadDateText"></span>
             </div>
             <div class="modal-body" style="height: 470px">
                 <div class="row form-group">
@@ -44,7 +44,7 @@
                                         value: editLoad.trailerId"></select>
                     </div>
                     <div class="col-md-5">
-                        <input data-bind="kendoDateTimePicker: {value: loadDate, enabled: editLoad.isEditable}" />
+                        <input data-bind="kendoDateTimePicker: {value: editLoad.loadDate, enabled: editLoad.isEditable}" />
                     </div>
                 </div>
 

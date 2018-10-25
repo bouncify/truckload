@@ -137,7 +137,7 @@ export class KoLoadCol {
         load.orderColor = orderColor;
     }
 
-    public receiveRefreshNotification(message: CrudMessage) {
+    public receiveRefreshNotification = (message: CrudMessage) => {
         var dataToSend = JSON.parse("{ \"loadId\" : " + message.id + "}");
 
         switch (message.operation) {
@@ -187,7 +187,7 @@ export class KoLoadCol {
         this.dayNumber = dayNum;
         this.initDay(startDate);
         this.newLoad = new KoNewLoad(sharedModel, this.loadDate(), this.dayNumber);
-        this.editLoad = new KoEditLoad(sharedModel, this.loadDate(), this.dayNumber);
+        this.editLoad = new KoEditLoad(sharedModel, this.loadDate(), this.dayNumber, this.receiveRefreshNotification);
         this.loadAll();
         //this.loadDate(moment(sharedModel.loadCol1Date).add(dayNum-1, "day").toDate());
         //this.textDate = DateFunctions.formatLoadDate(this.loadDate());
