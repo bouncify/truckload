@@ -10,14 +10,11 @@ import { Functions } from "../../Shared/Functions"
 import { ControlHelper } from "../../Shared/ControlHelper"
 
 import * as moment from 'moment';
-//import Global = require("App/Shared/Global");
-//import Globals = Global.Globals;
 
 export class KoLoadCol {
     private shared: SharedModel;
 
     private newLoad:KoNewLoad;
-    //private editLoad: KoEditLoad;
 
     private loads = ko.observableArray([] as KoLoad[]);
     partialLoadsCount = ko.observable(0);
@@ -77,10 +74,6 @@ export class KoLoadCol {
             }
         });
     }
-
-    //public editLoadClick = (load:KoLoad) => {
-    //    this.editLoad.editLoadClick(load);
-    //}
 
     private populateExtraFields(load: KoLoad) {
         const changeDetail = StringFunctions.getInitialsFromName(load.userName()) + " - " + DateFunctions.formatDateTime(load.lastChangeDate());
@@ -188,8 +181,6 @@ export class KoLoadCol {
         this.initDay(startDate);
         this.newLoad = new KoNewLoad(sharedModel, this.loadDate(), this.dayNumber);        
         this.loadAll();
-        //this.loadDate(moment(sharedModel.loadCol1Date).add(dayNum-1, "day").toDate());
-        //this.textDate = DateFunctions.formatLoadDate(this.loadDate());
 
     }
 }

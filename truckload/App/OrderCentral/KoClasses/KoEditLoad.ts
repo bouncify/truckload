@@ -8,7 +8,6 @@ import { ControlHelper } from "../../Shared/ControlHelper"
 import { KoOrder } from "./KoOrder"
 import { KoLoad } from "./KoLoad"
 import * as moment from 'moment';
-import "jqueryui/jquery-ui.js"
 
 export class KoEditLoad {
     private shared: SharedModel;
@@ -119,11 +118,10 @@ export class KoEditLoad {
     };
 
     constructor(sharedModel: SharedModel, refreshLoad: Function) {
-        //this.loadDate(loadDate);
         this.shared = sharedModel;
-        //this.editLoadModalName = "#koModalEditLoad_" + loadDayNumber;
         this.refreshLoad = refreshLoad;
 
         ko.applyBindings(this, $(this.editLoadModalName)[0]);
+        $(this.editLoadModalName).draggable({ handle: ".modal-header" });
     }
 }

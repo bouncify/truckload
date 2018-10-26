@@ -26,6 +26,10 @@ export module LoadPanels {
 
         ko.applyBindings(loadModel, $("#loadPanels")[0]);
 
+        for (var i = 1; i < totalLoadCols + 1; i++) {
+            $("#koModalCreateLoad_"+i).draggable({ handle: ".modal-header" });
+        }
+
         var calendarButton = $("#miniLoadDateButton1")[0].offsetParent.children[1].childNodes[0] as HTMLSpanElement;
 
         calendarButton.style.position = "absolute";

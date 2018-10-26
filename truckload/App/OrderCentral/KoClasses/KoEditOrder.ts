@@ -53,7 +53,7 @@ export class KoEditOrder {
         }, 'Add Order');
     }
 
-    public edit(data:KoOrder) {
+    public edit(data: KoOrder) {
         this.orderId(data.orderId());
         this.warehouseId(data.warehouseId());
         this.orderNumber(data.orderNumber());
@@ -74,7 +74,7 @@ export class KoEditOrder {
 
         $("#koModalOrderEdit").modal("show");
     }
-    
+
     private resetFields() {
         this.orderId(0);
         this.warehouseId(0);
@@ -137,5 +137,6 @@ export class KoEditOrder {
         this.shared = sharedModel;
 
         ko.applyBindings(this, $("#koModalOrderEdit")[0]);
+        $("#koModalOrderEdit").draggable({ handle: ".modal-header" });
     }
 }

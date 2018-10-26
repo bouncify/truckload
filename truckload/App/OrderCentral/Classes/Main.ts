@@ -10,6 +10,7 @@ import { MessageService } from "../Classes/MessageService"
 import { CrudMessage } from "../../Shared/Global"
 
 import 'knockout-kendo/build/knockout-kendo';
+import "jqueryui/jquery-ui.js"
 
 export class Main {
     private shared: SharedModel;
