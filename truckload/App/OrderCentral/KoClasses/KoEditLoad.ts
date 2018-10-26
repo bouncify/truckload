@@ -35,14 +35,14 @@ export class KoEditLoad {
 
     public save = () => {
         if (this.shared.accessLevel > AccessLevels.Entry && this.currentStatusId !== LoadStatus.Dispatched) {
-            //var listOrders = $("#sortableList li");
+            var listOrders = $("#sortableList li");
 
             var newOrderSequence: number[] = [];
 
-            //listOrders.each((idx, li) => {
-            //    var line = $(li)[0].childNodes[1];
-            //    newOrderSequence.push(Number((line as any).children[0].innerHTML));
-            //});
+            listOrders.each((idx, li) => {
+                var line = $(li)[0].childNodes[1];
+                newOrderSequence.push(Number((line as any).children[0].innerHTML));
+            });
 
             var isChangeDate = "" + moment(this.oldLoadDate).startOf("day") !==
                 "" + moment(this.loadDate()).startOf("day");

@@ -84,28 +84,28 @@ namespace truckload.Controllers
 
                 var isChangeTrailer = dbLoad.TrailerId != load.TrailerId;
 
-                //var isReOrderItems = false;
+                var isReOrderItems = false;
 
-                //if (load.NewOrderSequence != null)
-                //{
-                //    var currentOrderSequence = dbLoad.simple_Order.OrderBy(r => r.LoadSort).Select(o => o.OrderId).ToArray();
-                //    isReOrderItems = !currentOrderSequence.SequenceEqual(load.NewOrderSequence);
-                //}
+                if (load.NewOrderSequence != null)
+                {
+                    var currentOrderSequence = dbLoad.Orders.OrderBy(r => r.LoadSort).Select(o => o.OrderId).ToArray();
+                    isReOrderItems = !currentOrderSequence.SequenceEqual(load.NewOrderSequence);
+                }
 
-                //if (isReOrderItems)
-                //{
-                //    var position = 1;
-                //    foreach (var orderId in load.NewOrderSequence)
-                //    {
-                //        var dbOrder = dbLoad.simple_Order.FirstOrDefault(o => o.OrderId == orderId);
+                if (isReOrderItems)
+                {
+                    var position = 1;
+                    foreach (var orderId in load.NewOrderSequence)
+                    {
+                        var dbOrder = dbLoad.Orders.FirstOrDefault(o => o.OrderId == orderId);
 
-                //        if (dbOrder != null)
-                //        {
-                //            dbOrder.LoadSort = position;
-                //            position++;
-                //        }
-                //    }
-                //}
+                        if (dbOrder != null)
+                        {
+                            dbOrder.LoadSort = position;
+                            position++;
+                        }
+                    }
+                }
 
                 if (isChangeTrailer)
                 {
