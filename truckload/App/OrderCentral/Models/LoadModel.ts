@@ -1,4 +1,6 @@
 ﻿import { KoLoadCol } from "../KoClasses/KoLoadCol"
+import { KoLoad } from "../KoClasses/KoLoad"
+import { KoEditLoad } from "../KoClasses/KoEditLoad"
 import { KoOrder } from "../KoClasses/KoOrder"
 //import { LoadMessageService } from "../Classes/LoadMessageService"
 import { CrudMessage } from "../../Shared/Global"
@@ -16,7 +18,7 @@ export class LoadModel {
     day1Date = ko.observable(new Date());
 
     private totalLoadCols: number;
-
+    private editLoad: KoEditLoad;
 
     private editOrderFunction: Function;
     //private orderService: OrderMessageService;
@@ -49,6 +51,11 @@ export class LoadModel {
         this.editOrderFunction(data);
     }
 
+    public editLoadClick(data: KoLoad) {
+        //alert("edit load");
+        this.editLoad.editLoadClick(data);
+    }
+
     constructor(sharedModel: SharedModel, editOrderFunction: Function) {
         this.shared = sharedModel;
         this.editOrderFunction = editOrderFunction;
@@ -64,6 +71,8 @@ export class LoadModel {
                 col.initDay(this.day1Date());
             });
         });
+
+        this.editLoad = new KoEditLoad(sharedModel, this.receiveDbUpdateLoadNotification);
 
         //this.loadService = new LoadMessageService(this.receiveDbUpdateLoadNotification);
     }

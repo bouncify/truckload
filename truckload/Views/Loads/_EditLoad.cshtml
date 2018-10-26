@@ -1,34 +1,33 @@
 ﻿
-
-<div  class="modal" role="dialog" data-bind="attr: {id: 'koModalEditLoad_' + dayNumber }">
+<div class="modal" id="koModalEditLoad" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header k-window-titlebar k-dialog-titlebar k-header" style="padding-top: 15px; padding-bottom: 0; padding-left: 15px; min-height: 75px;">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Edit Load <span data-bind="text: editLoad.loadId"></span></h4>
-                <span style="font-size: 10px; position: absolute;" data-bind="text: editLoad.loadDateText"></span>
+                <h4 class="modal-title">Edit Load <span data-bind="text: loadId"></span></h4>
+                <span style="font-size: 10px; position: absolute;" data-bind="text: loadDateText"></span>
             </div>
             <div class="modal-body" style="height: 470px">
                 <div class="row form-group">
                     <div class="col-md-5">
                         <select class="form-control"
                                 data-bind="
-                                        enable: editLoad.isEditable,
+                                        enable: isEditable,
                                         options: shared.dropDownData.truckList,
                                         optionsText: 'text',
                                         optionsValue: 'valueInt',
                                         optionsCaption: 'Truck...',
-                                        value: editLoad.truckId"></select>
+                                        value: truckId"></select>
                     </div>
                     <div class="col-md-5">
                         <select class="form-control"
                                 data-bind="
-                                        enable: editLoad.isChangeStatusAllowed,
+                                        enable: isChangeStatusAllowed,
                                         options: shared.dropDownData.loadStatusList,
                                         optionsText: 'text',
                                         optionsValue: 'valueInt',
-                                        value: editLoad.loadStatusId"></select>
+                                        value: loadStatusId"></select>
                     </div>
                 </div>
 
@@ -36,15 +35,15 @@
                     <div class="col-md-5">
                         <select class="form-control"
                                 data-bind="
-                                        enable: editLoad.isEditable,
+                                        enable: isEditable,
                                         options: shared.dropDownData.trailerList,
                                         optionsText: 'text',
                                         optionsValue: 'valueInt',
                                         optionsCaption: 'Trailer...',
-                                        value: editLoad.trailerId"></select>
+                                        value: trailerId"></select>
                     </div>
                     <div class="col-md-5">
-                        <input data-bind="kendoDateTimePicker: {value: editLoad.loadDate, enabled: editLoad.isEditable}" />
+                        <input data-bind="kendoDateTimePicker: {value: loadDate, enabled: isEditable}" />
                     </div>
                 </div>
 
@@ -52,24 +51,26 @@
                     <div class="col-md-5">
                         <select class="form-control"
                                 data-bind="
-                                        enable: editLoad.isEditable,
+                                        enable: isEditable,
                                         options: shared.dropDownData.driverList,
                                         optionsText: 'text',
                                         optionsValue: 'valueInt',
                                         optionsCaption: 'Driver...',
-                                        value: editLoad.driverId"></select>
+                                        value: driverId"></select>
                     </div>
+                    <div class="col-xs-6 demo-hint" style="margin-top: 25px">(Drag orders with the mouse to change sort order.)</div>
                 </div>
 
-                @*<script>
+                
+                <script>
                     $(function () {
                         $("#sortableList").sortable();
                         $("#sortableList").sortable("option", "disabled", true);
                         $("#sortableList").disableSelection();
                     });
                 </script>
-
-                <ul id="sortableList" data-bind="foreach: { data: editLoad.ordersList }">
+                
+                <ul id="sortableList" data-bind="foreach: { data: ordersList }">
                     <li class="sortableOrder">
                         <div id="sortOrderListRow">
                             <span name="orderId" style="display: none" data-bind="text: orderId"></span>
@@ -80,11 +81,11 @@
                             <img class="listItemImage" title="Customer Pickup" data-bind="visible: isCustomerPickup" src="@ViewBag.AppPath/App/Content/Images/customer_pickup3_small.png" />
                         </div>
                     </li>
-                </ul>*@
+                </ul>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-bind="click: editLoad.save">Ok</button>
-                <button type="button" class="btn btn-default" data-bind="click: editLoad.cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-bind="click: save">Ok</button>
+                <button type="button" class="btn btn-default" data-bind="click: cancel" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

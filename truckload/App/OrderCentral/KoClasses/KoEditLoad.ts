@@ -8,6 +8,7 @@ import { ControlHelper } from "../../Shared/ControlHelper"
 import { KoOrder } from "./KoOrder"
 import { KoLoad } from "./KoLoad"
 import * as moment from 'moment';
+import "jqueryui/jquery-ui.js"
 
 export class KoEditLoad {
     private shared: SharedModel;
@@ -25,7 +26,7 @@ export class KoEditLoad {
     driverId = ko.observable(0);
     loadStatusId = ko.observable(0);
     currentStatusId = 0;
-    editLoadModalName = "";
+    editLoadModalName = "#koModalEditLoad";
 
     ordersList = ko.observableArray([] as KoOrder[]);
 
@@ -80,17 +81,17 @@ export class KoEditLoad {
     }
 
     public cancel() {
-        //this.resetOptions();
+        this.resetOptions();
     }
 
-    //private resetOptions() {
-    //    // ReSharper disable once ExpressionIsAlwaysConst
-    //    this.truckId((null) as any);
-    //    // ReSharper disable once ExpressionIsAlwaysConst
-    //    this.driverId((null) as any);
-    //    // ReSharper disable once ExpressionIsAlwaysConst
-    //    this.trailerId((null) as any);
-    //}
+    private resetOptions() {
+        // ReSharper disable once ExpressionIsAlwaysConst
+        this.truckId((null) as any);
+        // ReSharper disable once ExpressionIsAlwaysConst
+        this.driverId((null) as any);
+        // ReSharper disable once ExpressionIsAlwaysConst
+        this.trailerId((null) as any);
+    }
 
     public editLoadClick = (load: KoLoad) => {
         this.loadId(load.loadId());
@@ -107,8 +108,8 @@ export class KoEditLoad {
         this.isChangeStatusAllowed(this.loadStatusId() !== LoadStatus.Dispatched && this.shared.accessLevel > AccessLevels.Entry);
         this.isEditable(this.loadStatusId() === LoadStatus.Unlocked && this.shared.accessLevel > AccessLevels.Entry);
 
-        //$("#sortableList").sortable("option", "disabled", !this.isEditable());
-
+        $("#sortableList").sortable("option", "disabled", !this.isEditable());
+        
         var orders = ko.mapping.toJSON(load.ordersList());
 
         this.ordersList.removeAll();
@@ -117,11 +118,12 @@ export class KoEditLoad {
         $(this.editLoadModalName).modal("show");
     };
 
-
-    constructor(sharedModel: SharedModel, loadDate: Date, loadDayNumber: number, refreshLoad: Function) {
-        this.loadDate(loadDate);
+    constructor(sharedModel: SharedModel, refreshLoad: Function) {
+        //this.loadDate(loadDate);
         this.shared = sharedModel;
-        this.editLoadModalName = "#koModalEditLoad_" + loadDayNumber;
+        //this.editLoadModalName = "#koModalEditLoad_" + loadDayNumber;
         this.refreshLoad = refreshLoad;
+
+        ko.applyBindings(this, $(this.editLoadModalName)[0]);
     }
 }
