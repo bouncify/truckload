@@ -16,7 +16,7 @@ It uses the following technologies:
 * SQL Service Broker with SQL Table dependency 
 * Microsoft Identity Security
 
-The solution includes everythinhg including the local Db database, 
+The solution includes everything including the local Db database, 
 
 ## Prerequisites To Run Solution
 
@@ -32,8 +32,8 @@ The solution includes everythinhg including the local Db database,
 * login=demouser and password=password123
 * Admin menu on the right hand side, includes CRUD screens for logins, trucks, trailers and drivers
 * Order Central is the main part of the app where loads can be created by hitting the + sign on the load columns
-* Orders from the left hand pannel can be dragged onto a load, between loads or back to order panel
-* Life cycle of a load is, orders are created, dragged to a load to match the trailer setup. Load will go red if too heavy or Purple if the load quanity is too high. Once a load is configured it can be locked, so it can no longer be edited. The load can then be set to dispatched, which means the load has gone and permanently locked.
+* Orders from the left-hand panel can be dragged onto a load, between loads or back to order panel
+* Life cycle of a load is, orders are created, dragged to a load to match the trailer setup. Load will go red if too heavy or purple if the load quantity is too high. Once a load is configured it can be locked, so it can no longer be edited. The load can then be set to dispatched, which means the load has gone and permanently locked.
 
 ## Troubleshooting
 * Current Windows user might not have owner rights on the local db truckload database. Use SQL Management studio to give the current windows user owner rights on the DB.
