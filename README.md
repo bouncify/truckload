@@ -11,9 +11,10 @@ It uses the following technologies:
 * Typescript 3
 * SignalR 2.3
 * Knockout
-* Bootstrap
+* Bootstrap (Custom)
 * jQuery
 * SQL Service Broker with SQL Table dependency 
 * Microsoft Identity Security
 
-The solution includes everythinhg including the local Db database
+The solution includes everythinhg including the local Db database, login=demouser and password=password123
+
