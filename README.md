@@ -32,7 +32,7 @@ The solution includes everything including the local Db database,
 * login=demouser and password=password123
 * Admin menu on the right hand side, includes CRUD screens for logins, trucks, trailers and drivers
 * Order Central is the main part of the app where loads can be created by hitting the + sign on the load columns
-* Orders from the left-hand panel can be dragged onto a load, between loads or back to order panel
+* Orders from the left-hand panel can be dragged onto a load, between loads or back to the order panel
 * Life cycle of a load is, orders are created, dragged to a load to match the trailer setup. Load will go red if too heavy or purple if the load quantity is too high. Once a load is configured it can be locked, so it can no longer be edited. The load can then be set to dispatched, which means the load has gone and permanently locked.
 
 ## Troubleshooting
