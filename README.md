@@ -3,7 +3,7 @@
 
 This is a demo web app, it is a real time order dispatching system for a distribution company with multiple warehouses.
 
-It uses the following technologies:
+Developed using the following technologies:
 
 * MVC 5, Entity Framework
 * Kendo UI Controls (Progress)
