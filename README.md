@@ -1,7 +1,7 @@
 # truckload
-## Dispatch manager
+## Dispatch Manager
 
-This is a demo app, it is a real time order dispatching system for a distribution company with multiple warehouses.
+This is a demo web app, it is a real time order dispatching system for a distribution company with multiple warehouses.
 
 It uses the following technologies:
 
@@ -18,12 +18,12 @@ It uses the following technologies:
 
 The solution includes everything including the local Db database, 
 
-## Prerequisites To Run Solution
+## Prerequisites to run the solution
 
 * Visual Studio 2017 (15.8.1)+
 * .NET framework 4.7.1
 
-## Additional Prerequisites To Develop Solution
+## Additional prerequisites to develop the solution
 * NPM 6+
 * Github (Visual Studio Extension)
 * Webpack Task Runner (Visual Studio Extension)
