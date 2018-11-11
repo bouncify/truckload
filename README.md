@@ -20,11 +20,12 @@ The solution includes everything including the local Db database,
 
 ## Prerequisites to run the solution
 
-* Visual Studio 2017 (15.8.1)+
-* .NET framework 4.7.1
-* Right click package.json and click restore packages
-* Build the solution
-* Build Client Bundle by executing command "npm run build-prod" from the project folder
+1. Visual Studio 2017 (15.8.1)+
+2. .NET framework 4.7.1
+3. Right click package.json and click restore packages
+4. Build the solution
+5. Build Client Bundle by executing command "npm run build-prod" from the project folder
+6. Add the current windows user to db_owner role in the truckload database, expand server exporer> data connections> right click on "truckloadEntities" then click "New Query" execute the query e.g. exec sp_addrolemember 'db_owner', 'desktop-pc\james' ( replace the username with the currenlty logged in user name this can be found by executing "whoami" from the command prompt
 
 ## Additional prerequisites to develop the solution
 * NPM 6+
