@@ -20,8 +20,20 @@ The solution includes everything including the local Db database,
 
 ## How to run the solution
 
-1. Visual Studio 2017 (15.8.1)+
+1. Ensure Visual Studio 2017 (15.8.1)+ is installed
 2. Ensure .NET framework 4.7.1 dev pack is installed
+3. Ensure npm is installed ( can be installed from https://nodejs.org/en/ )
+4. Ensure Git is installed ( can be installed from https://git-scm.com/download/win )
+5. Open a command prompt window and navigate to repos folder e.g. c:\dev\repos\
+6. Execute command "git clone https://github.com/bouncify/truckload"
+7. Navigate to the project folder e.g. c:\dev\repos\truckload\truckload
+8. execute "npm install" to install packages
+9. execute "npm run build-prod" to build the client bundle
+10. Open the truckload solution in Visual Studio e.g. (open file c:\dev\repos\truckload\truckload.sln)
+11. Build the solution (ctrl + shift + b)
+
+
+
 3. Open solution, right click package.json and click restore packages
 4. Build the solution
 5. Build the client side bundle by executing command "npm run build-prod" from the project folder command prompt
@@ -43,5 +55,6 @@ The solution includes everything including the local Db database,
 * Life cycle of a load is, orders are created, dragged to a load to match the trailer setup. Load will go red if too heavy or purple if the load quantity is too high. Once a load is configured it can be locked, so it can no longer be edited. The load can then be set to dispatched, which means the load has gone and permanently locked.
 
 ## Troubleshooting
-* Current Windows user might not have owner rights on the local db truckload database. Use SQL Management studio to give the current windows user owner rights on the DB.
+* Could not find a part of the path … bin\roslyn\csc.exe this seems intermitand on first build, clicking build and clicking rebuild solution should resolve this
+* Current Windows user might not have owner rights on the local db truckload database. See step in how to run to resolve this.
 * Service broker might not be enabled on the database. ALTER DATABASE truckload SET ENABLE_BROKER should fix this.
