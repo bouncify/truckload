@@ -30,22 +30,19 @@ The solution includes everything including the local Db database,
 8. execute "npm install" to install packages
 9. execute "npm run build-prod" to build the client bundle
 10. Open the truckload solution in Visual Studio e.g. (open file c:\dev\repos\truckload\truckload.sln)
-11. Build the solution (ctrl + shift + b)
-
-
-
-3. Open solution, right click package.json and click restore packages
-4. Build the solution
-5. Build the client side bundle by executing command "npm run build-prod" from the project folder command prompt
-6. Add the current windows user to db_owner role in the truckload database, expand server exporer> data connections> right click on "truckloadEntities" and then click "New Query" execute the query e.g. exec sp_addrolemember 'db_owner', 'desktop-pc\james' ( replace the username with the currenlty logged in user name this can be found by executing "whoami" from the command prompt
-7. Run the solution with "F5" at the login screen use demouser and password123
+11. ReBuild the solution (click build> rebuild)
+12. Run the solution (F5) this should produce "User without permissions" issue
+13. To resolve the issue stop running
+14. Expand server exporer> data connections> right click on "truckloadEntities" and then click "New Query"
+15  At the command prompte type "whoami" this will display the current user e.g. desktop-pc\james
+15. Execute the query e.g. exec sp_addrolemember 'db_owner', 'desktop-pc\james'  ( with the current user!)
+16. Run the solution (F5)
+17. Login with demouser and password123
 
 ## Useful components to install to develop the solution
-* NPM 6+
 * Git for Windows
 * Github (Visual Studio Extension)
 * Webpack Task Runner (Visual Studio Extension) 
-* Webpack 4 (npm install --global webpack)
 
 ## Brief User Guide
 * login=demouser and password=password123
