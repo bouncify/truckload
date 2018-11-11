@@ -34,7 +34,7 @@ The solution includes everything including the local Db database,
 12. Run the solution (F5) this should produce "User without permissions" issue
 13. To resolve the issue stop running
 14. Expand server exporer> data connections> right click on "truckloadEntities" and then click "New Query"
-15  At the command prompte type "whoami" this will display the current user e.g. desktop-pc\james
+15. At the command prompte type "whoami" this will display the current user e.g. desktop-pc\james
 15. Execute the query e.g. exec sp_addrolemember 'db_owner', 'desktop-pc\james'  ( with the current user!)
 16. Run the solution (F5)
 17. Login with demouser and password123
