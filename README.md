@@ -23,12 +23,15 @@ The solution includes everything including the local Db database,
 * Visual Studio 2017 (15.8.1)+
 * .NET framework 4.7.1
 * Right click package.json and click restore packages
+* Build the solution
+* Build Client Bundle by executing command "npm run build-prod" from the project folder
 
 ## Additional prerequisites to develop the solution
 * NPM 6+
 * Git for Windows
 * Github (Visual Studio Extension)
-* Webpack Task Runner (Visual Studio Extension)
+* Webpack Task Runner (Visual Studio Extension) 
+* Webpack 4 (npm install --global webpack)
 
 ## Brief User Guide
 * login=demouser and password=password123
