@@ -25,6 +25,7 @@ The solution includes everything including the local Db database,
 
 ## Additional prerequisites to develop the solution
 * NPM 6+
+* Git for Windows
 * Github (Visual Studio Extension)
 * Webpack Task Runner (Visual Studio Extension)
 
