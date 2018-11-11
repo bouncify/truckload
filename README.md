@@ -22,6 +22,7 @@ The solution includes everything including the local Db database,
 
 * Visual Studio 2017 (15.8.1)+
 * .NET framework 4.7.1
+* Right click package.json and click restore packages
 
 ## Additional prerequisites to develop the solution
 * NPM 6+
