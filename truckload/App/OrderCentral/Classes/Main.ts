@@ -11,6 +11,7 @@ import { CrudMessage } from "../../Shared/Global"
 
 import 'knockout-kendo/build/knockout-kendo';
 import "jqueryui/jquery-ui.js"
+import "jquery-ui-touch-punch/jquery.ui.touch-punch.js"
 
 export class Main {
     private shared: SharedModel;
@@ -135,5 +136,7 @@ export class Main {
         OrderPanel.init(this.shared, this.viewModelOrders);
 
         this.messageService = new MessageService(this.receiveDbUpdateNotification);
+        
+        //$("div.draggable").draggable();
     }
 }
