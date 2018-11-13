@@ -136,7 +136,5 @@ export class Main {
         OrderPanel.init(this.shared, this.viewModelOrders);
 
         this.messageService = new MessageService(this.receiveDbUpdateNotification);
-        
-        //$("div.draggable").draggable();
     }
 }

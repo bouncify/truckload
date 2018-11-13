@@ -6,7 +6,6 @@ export module OrderPanel {
     export function init(sharedModel: SharedModel, orderModel: OrderModel) {
 
         var gridHeight = sharedModel.gridHeight;
-        //$("#gridHeight").text(gridHeight);
 
         ko.bindingHandlers.kendoGrid.options = {
             height: gridHeight,
