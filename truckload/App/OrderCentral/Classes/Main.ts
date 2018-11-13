@@ -31,29 +31,40 @@ export class Main {
                 dayNum = divIdbits[2];
                 fromLoadId = divIdbits[3];
             }
+            ev.dataTransfer.setData("text", ev.srcElement.id);
+            //ev.dataTransfer.setData("orderId", orderId);
+            //ev.dataTransfer.setData("isFromLoad", isFromLoad.toString());
+            //ev.dataTransfer.setData("dayNum", dayNum);
+            //ev.dataTransfer.setData("fromLoadId", fromLoadId);
 
-            ev.dataTransfer.setData("orderId", orderId);
-            ev.dataTransfer.setData("isFromLoad", isFromLoad.toString());
-            ev.dataTransfer.setData("dayNum", dayNum);
-            ev.dataTransfer.setData("fromLoadId", fromLoadId);
-
+            //var ieObj = { 'orderId': orderId };
+            //ev.dataTransfer.setData("text", JSON.stringify(ieObj));
             //alert("draggin!");
         }
     }
 
     public dropOrder(ev: any) {
         ev.preventDefault();
-        var orderId = this.getOrderIdFromText(ev.dataTransfer.getData("orderId"));
 
+        var srcData = ev.dataTransfer.getData("text");
+        var divIdBits = srcData.split("_");
+        var srcIsFromLoad = divIdBits[0] === "loadOrder";
+        var srcOrderId = divIdBits[1];
+        var srcDayNum = "";
+        var srcFromLoadId = "";
+
+        if (srcIsFromLoad) {
+            srcDayNum = divIdBits[2];
+            srcFromLoadId = divIdBits[3];
+        }
         const targetLoadData = ev.currentTarget.id.split("_");
         var targetLoadId = targetLoadData[1];
-        var targetLoadDay = targetLoadData[2];
-        var sourceLoadDay = ev.dataTransfer.getData("dayNum");
-        var isFromLoad = ev.dataTransfer.getData("isFromLoad") === "true";
-        var fromLoadId = ev.dataTransfer.getData("fromLoadId");
 
-        if (isFromLoad) {
-            if (targetLoadId === fromLoadId) return;
+        //var srcIsFromLoad = ev.dataTransfer.getData("isFromLoad") === "true";
+        //var srcFromLoadId = ev.dataTransfer.getData("fromLoadId");
+
+        if (srcIsFromLoad) {
+            if (targetLoadId === srcFromLoadId) return;
             //setWaitSpinner(true, `#koLoadsDay${sourceLoadDay}`);
         } else {
             //setWaitSpinner(true, orderGridName);
@@ -61,7 +72,7 @@ export class Main {
 
         //setWaitSpinner(true, `#koLoadsDay${targetLoadDay}`);
 
-        var dataToSend = JSON.stringify({ orderId: orderId, loadId: targetLoadId });
+        var dataToSend = JSON.stringify({ orderId: srcOrderId, loadId: targetLoadId });
 
         this.shared.ajax.post("/Loads/DropOrder",
             (dataResult: any) => {
@@ -76,12 +87,24 @@ export class Main {
     }
 
     public dropOrderOnOrders(ev: any) {
-        var isFromLoad = ev.dataTransfer.getData("isFromLoad") === "true";
-        var orderId = this.getOrderIdFromText(ev.dataTransfer.getData("orderId"));
+        var srcData = ev.dataTransfer.getData("text");
+        var divIdBits = srcData.split("_");
+        var srcIsFromLoad = divIdBits[0] === "loadOrder";
+        var srcOrderId = divIdBits[1];
+        var srcDayNum = "";
+        var srcFromLoadId = "";
 
-        var dataToSend = JSON.stringify({ orderId: orderId });
+        if (srcIsFromLoad) {
+            srcDayNum = divIdBits[2];
+            srcFromLoadId = divIdBits[3];
+        }
 
-        if (isFromLoad) {
+        //var isFromLoad = ev.dataTransfer.getData("isFromLoad") === "true";
+        //var orderId = this.getOrderIdFromText(ev.dataTransfer.getData("orderId"));
+
+        var dataToSend = JSON.stringify({ orderId: srcOrderId });
+
+        if (srcIsFromLoad) {
             //setWaitSpinner(true, orderGridName);
             //setWaitSpinner(true, `#koLoadsDay${ev.dataTransfer.getData("dayNum")}`);
             this.shared.ajax.post("/Loads/ResetOrder",
@@ -131,8 +154,8 @@ export class Main {
         this.shared = new SharedModel(settings);
         this.viewModelOrders = new OrderModel(this.shared);
         this.viewModelLoads = new LoadModel(this.shared, this.viewModelOrders.editOrderClick);
-        
-        LoadPanels.init(this.shared,this.viewModelLoads);
+
+        LoadPanels.init(this.shared, this.viewModelLoads);
         OrderPanel.init(this.shared, this.viewModelOrders);
 
         this.messageService = new MessageService(this.receiveDbUpdateNotification);
