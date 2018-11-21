@@ -52,6 +52,6 @@ The solution includes everything including the local Db database,
 * Life cycle of a load is, orders are created, dragged to a load to match the trailer setup. Load will go red if too heavy or purple if the load quantity is too high. Once a load is configured it can be locked, so it can no longer be edited. The load can then be set to dispatched, which means the load has gone and permanently locked.
 
 ## Troubleshooting
-* Could not find a part of the path … bin\roslyn\csc.exe this seems intermitand on first build, clicking build and clicking rebuild solution should resolve this
+* Could not find a part of the path … bin\roslyn\csc.exe this seems intermitant on first build, clicking build and clicking rebuild solution should resolve this
 * Current Windows user might not have owner rights on the local db truckload database. See step in how to run to resolve this.
 * Service broker might not be enabled on the database. ALTER DATABASE truckload SET ENABLE_BROKER should fix this.
